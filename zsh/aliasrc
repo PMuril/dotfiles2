@@ -1,0 +1,15 @@
+#General Aliases
+alias emacs="emacs -nw"
+alias ls="ls -GH"
+
+alias gdb="sudo gdb"
+
+#sets the tmux source file to ~/.config/tmux/tmux.conf
+alias tmux="tmux -f ~/.config/tmux/tmux.conf"
+
+alias vim="nvim"
+
+#enables perl regex for grep and colored output
+alias grep="grep -P --color=auto"
+alias fgrep="fgrep  --color=auto"
+alias egrep="egrep  --color=auto"
