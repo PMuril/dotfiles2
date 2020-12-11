@@ -46,17 +46,26 @@ zstyle :compinstall filename '/Users/paolobaldan/.zshrc'
 autoload -Uz compinit
 compinit
 
-# Load aliases and shortcuts if existent.
-[ -f "$HOME/.config/zsh/shortcutrc" ] && source "$HOME/.config/zsh/shortcutrc"
-[ -f "$HOME/.config/zsh/aliasrc" ] && source "$HOME/.config/zsh/aliasrc"
+#----------------------#
+# User-defined Options #
+#----------------------#
 
+#disables flow control for vim mapping
+stty -ixon
 
-# setting up custom plugins
+# Load shortcuts if the file exists and TMUX is not set
+if
+[[ -f "$HOME/.config/zsh/shortcutrc" ]] && [[ -z "$TMUX" ]]; then
+source "$HOME/.config/zsh/shortcutrc"
+fi
+[[ -f "$HOME/.config/zsh/aliasrc" ]] && source "$HOME/.config/zsh/aliasrc"
+
 
 # prompt configuration
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# setting up custom plugins
 # Load zsh-syntax-highlighting; should be the last
 source /Users/paolobaldan/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
