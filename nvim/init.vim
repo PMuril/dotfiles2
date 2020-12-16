@@ -29,7 +29,11 @@ inoremap <Right> <Nop>
 let g:airline_powerline_fonts = 1
 let g:airline_theme='bubblegum'
 set t_Co=256
+
+
 " Specify the plugins installation directories
+" clang_complete requires to install nvim with python support
+" the installation can be performed via 'pip3 install neovim'
 call plug#begin('~/.vim/plugged')
 
 Plug 'https://github.com/xavierd/clang_complete'
