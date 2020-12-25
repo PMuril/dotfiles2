@@ -15,6 +15,10 @@ _comp_options+=(globdots)		# Include hidden files.
 setopt appendhistory extendedglob nomatch
 unsetopt autocd beep
 
+# browse history with the up and down keys
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
+
 bindkey -v
 export KEYTIMEOUT=1
 
@@ -67,5 +71,8 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # setting up custom plugins
+# zsh history search
+# zsh history search
+source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 # Load zsh-syntax-highlighting; should be the last
 source /Users/paolobaldan/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
