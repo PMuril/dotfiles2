@@ -11,12 +11,19 @@ stetic
 neofetch
 
 //zsh-related
+//zsh history files
 zsh/.zsh_history
 zsh/.zsh_sessions
+
 zsh/.zcompdump
 zsh/.zshrc
 zsh/.zcompcache
+
+//zsh plugins artifact
 zsh/plugins/zsh-syntax-highlighting/.gitignore
+
+//nvim modifie files history
+nvim/.netrwhist
 
 //yabai windows manager
 yabai
