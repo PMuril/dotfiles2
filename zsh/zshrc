@@ -53,6 +53,12 @@ compinit
 #----------------------#
 # User-defined Options #
 #----------------------#
+#sourcing customized terminal colorsfor more informations look at 
+#https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux
+#Shakiba Moshiri's answer
+if [[ -e .termocolors ]]; then
+  source .termcolors
+fi
 
 #disables flow control for vim mapping
 stty -ixon
