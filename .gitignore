@@ -12,9 +12,11 @@ neofetch
 
 //zsh-related
 zsh/.zsh_history
+zsh/.zsh_sessions
 zsh/.zcompdump
 zsh/.zshrc
 zsh/.zcompcache
+zsh/plugins/zsh-syntax-highlighting/.gitignore
 
 //yabai windows manager
 yabai
