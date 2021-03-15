@@ -1,0 +1,25 @@
+NuGet
+configstore
+eog
+gtk-2.0
+htop
+inkscape
+qBittorrent
+setitc
+xbuild
+stetic
+neofetch
+
+//zsh-related
+zsh/.zsh_history
+zsh/.zcompdump
+zsh/.zshrc
+zsh/.zcompcache
+
+//yabai windows manager
+yabai
+//hotkey daemon for yabai
+skhd    
+
+flameshot
+git
