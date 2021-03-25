@@ -22,8 +22,13 @@ zsh/.zcompcache
 //zsh plugins artifact
 zsh/plugins/zsh-syntax-highlighting/.gitignore
 
-//nvim modifie files history
+//nvim modified files history
 nvim/.netrwhist
+
+//emacs packages installation folder
+emacs/elpa
+//emacs backup configuration file
+emacs/init.el~
 
 //yabai windows manager
 yabai
