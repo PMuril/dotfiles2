@@ -29,6 +29,11 @@ nvim/.netrwhist
 emacs/elpa
 //emacs backup configuration file
 emacs/init.el~
+emacs/transient
+emacs/auto-save-list
+emacs/backups
+emacs/not-elpa
+emacs/projectile-bookmarks.eld
 
 //yabai windows manager
 yabai
