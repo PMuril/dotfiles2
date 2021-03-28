@@ -170,7 +170,45 @@
 ;; as it is now part of the package evil-colleciton
 
 ;; ORGMODE
+(defun efs/org-mode-setup ()
+  (org-indent-mode)
+  (variable-pitch-mode 1)
+  (auto-fill-mode 0)
+  (visual-line-mode 1)
+  (setq evil-auto-indent nil))
 
+(use-package org
+  ;;:config
+  ;;(setq org-ellipsis " ▾")    ;;not required at the moment
+  ;;(efs/org-font-setup)
+)
+
+(use-package org-bullets
+  :after org
+  :hook (org-mode . org-bullets-mode)
+  :custom
+  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+
+
+  ;; Set faces for heading levels
+  (dolist (face '((org-level-1 . 1.2)
+                  (org-level-2 . 1.1)
+                  (org-level-3 . 1.05)
+                  (org-level-4 . 1.0)
+                  (org-level-5 . 1.1)
+                  (org-level-6 . 1.1)
+                  (org-level-7 . 1.1)
+                  (org-level-8 . 1.1)))
+    (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face)))
+
+;;fill-column mode
+(defun efs/org-mode-visual-fill ()
+  (setq visual-fill-column-width 100
+        visual-fill-column-center-text t)
+  (visual-fill-column-mode 1))
+
+(use-package visual-fill-column
+  :hook (org-mode . efs/org-mode-visual-fill))
 
 ;; Disables the double prompt when trying to quit an emacs file
 (setq confirm-kill-emacs nil)
@@ -184,7 +222,7 @@
  '(custom-safe-themes
    '("43f03c7bf52ec64cdf9f2c5956852be18c69b41c38ab5525d0bedfbd73619b6a" default))
  '(package-selected-packages
-   '(evil-embrace rainbow-delimiters evil-collection counsel which-key doom-themes badger-theme command-log-mode material-theme magit evil-surround evil-matchit evil-commentary org-evil monitor dash evil)))
+   '(visual-fill-column org-bullets evil-embrace rainbow-delimiters evil-collection counsel which-key doom-themes badger-theme command-log-mode material-theme magit evil-surround evil-matchit evil-commentary org-evil monitor dash evil)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
