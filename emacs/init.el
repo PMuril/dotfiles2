@@ -73,6 +73,10 @@
   (setq which-key-idle-delay 0.3))
 
 ;; EVIL MODE
+;; N.B. Due to the structure of the operations memory structure
+;; in order to undo a previous operation it is needed first to
+;; execute a non-editing command. E.g. To undo a previous operation
+;; it is possible to use the keybinding C-g u.
 (defun rune/evil-hook ()
   (dolist (mode '(custom-mode
 		  eshell-mode
@@ -92,6 +96,7 @@
   (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
   (setq evil-want-C-i-jump nil)
+  (setq evil-want-fine-undo 'fine)
   (setq evil-normal-state-cursor '("light blue" box))         ;;setting still not applicable in Alacritty
   (setq evil-insert-state-cursor '("medium sea green" box))   ;;setting still not applicable in Alacritty
   (setq evil-visual-state-cursor '("orange" box))             ;;setting still not applicable in Alacritty
@@ -129,7 +134,6 @@
 	     :ensure t
 	     :config
 	     (global-evil-surround-mode 1))
-
 
 ;; Disables the double prompt when trying to quit an emacs file
 (setq confirm-kill-emacs nil)
