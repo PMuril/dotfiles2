@@ -74,6 +74,16 @@
   :config
   (setq which-key-idle-delay 0.3))
 
+;; UndoTree had to be installed manually and the syntax to load the
+;; package is therefore slightly different from the packages
+;; that are hosted on official repositories (elpa, melpa, ecc. )
+;; (add-to-list 'load-path "~/.config/emacs/not-elpa/")
+;; (require 'undo-tree)
+;; (use-package undotree
+;;   :ensure t
+;;   :init
+;;   (global-undo-tree-mode 1))
+
 ;; EVIL MODE
 ;; N.B. Due to the structure of the operations memory structure
 ;; in order to undo a previous operation it is needed first to
