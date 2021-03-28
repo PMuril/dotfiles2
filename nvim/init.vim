@@ -25,6 +25,18 @@ inoremap <Right> <Nop>
 " Disable ex mode
 :nnoremap Q <Nop>
 
+" Undotree settings
+nnoremap <A-t> :UndotreeToggle<CR>
+let g:undotree_RelativeTimestamp = 1
+let g:undotree_ShortIndicators = 1
+let g:undotree_HelpLine = 0
+let g:undotree_WindowLayout = 2
+
+if has("persistent_undo")
+    set undodir=$HOME/.config/nvim/undodir
+    set undofile
+endif
+
 " enables powerline fonts for the airline plugin (see below)
 let g:airline_powerline_fonts = 1
 let g:airline_theme='bubblegum'
@@ -44,5 +56,7 @@ Plug 'https://github.com/christoomey/vim-system-copy'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
+Plug 'mbbill/undotree'
+Plug 'https://github.com/adelarsq/vim-matchit'
 "Plug 'https://github.com/christoomey/vim-tmux-navigator'
 call plug#end()
