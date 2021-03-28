@@ -3,9 +3,9 @@
 ;; silences the default Emacs startup message
 (setq inhibit-startup-message t)
 
-;;(scroll-bar-mode -1)
-;;(tool-bar-mode -1)
-;;(tooltip-mode -1)
+;; scroll-bar-mode -1)
+;; (tool-bar-mode -1)
+;; (tooltip-mode -1)
 
 (indent-for-tab-command)
 
@@ -14,8 +14,6 @@
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
-;; enables material color theme
-(load-theme 'wombat )
 
 ;; Initialize package sources
 (require 'package)
@@ -35,6 +33,25 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+;; APPEARENCE
+;; enables material color theme
+(use-package doom-themes
+  :init (load-theme 'doom-dracula t))
+
+;;Display relative line numbers
+(column-number-mode)
+(setq display-line-numbers 'relative)
+
+;; Disable line numbers for some modes
+(dolist (mode '(org-mode-hook
+		term-mode-hook
+		shell-mode-hook
+		eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+(use-package rainbow-delimiters
+    :hook (prog-mode . rainbow-delimiters-mode))
+
 ;; logs the command run inside emacs
 (use-package command-log-mode)
 
@@ -42,48 +59,63 @@
 ;; (use-package ivy
 ;;   :diminish
 ;;   :bind (("C-s" . swiper)
-;; 	 :map ivy-minibuffer-map))
+;; 	 :map ivy-minibuffer-map
+;; 	 ("TAB" . ivy-alt-done)
+;; 	 ("C-l" . ivy-alt-done)
+
+	
+;; Enables which-key: Display informations on the full-keybindings
+;; that are compatible with 
+(use-package which-key
+  :init (which-key-mode)
+  :diminish which-key-mode
+  :config
+  (setq which-key-idle-delay 0.3))
+
+;; EVIL MODE
+(defun rune/evil-hook ()
+  (dolist (mode '(custom-mode
+		  eshell-mode
+		  git-rebase-mode
+		  erc-mode
+		  circe-server-mode
+		  circe-chat-mode
+		  circed-query-mode
+		  sauron-mode
+		  term-mode))
+    (add-to-list 'evil-emacs-state-modes mode)))
 
 
+(use-package evil
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
+  (setq evil-want-C-i-jump nil)
+  (setq evil-normal-state-cursor '("light blue" box))         ;;setting still not applicable in Alacritty
+  (setq evil-insert-state-cursor '("medium sea green" box))   ;;setting still not applicable in Alacritty
+  (setq evil-visual-state-cursor '("orange" box))             ;;setting still not applicable in Alacritty
+  :hook(evil-mode . rune/evil-hook)
+  :config
+  (evil-mode 1)
+  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+  (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
 
-;; Download Evil
-(unless (package-installed-p 'evil)
-  (package-install 'evil))
+  ;; Use visual line motions even outside of visual-line-mode buffers
+  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
-;; Enable Evil
-(require 'evil)
-(evil-mode 1)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(command-log-mode material-theme magit evil-surround evil-matchit evil-commentary org-evil monitor dash evil)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+  (evil-set-initial-state 'messages-buffer-mode 'normal)
+  (evil-set-initial-state 'dashboard-mode 'normal))
 
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
+  
 ;; evil-mode plugins
 (add-to-list 'load-path "/path/to/org-evil/directory")
 (require 'org-evil)
-
-;; Disables the double prompt when trying to quit an emacs file
-(setq confirm-kill-emacs nil)
-
-;; Enables colored marker to distinguish between the different VIM modes
-(setq evil-normal-state-cursor '(box "light blue")
-      evil-insert-state-cursor '(bar "medium sea green")
-      evil-visual-state-cursor '(hollow "orange"))
-
-;; vim sorround
-;; (use-package evil-surround
-;; 	     :ensure t
-;; 	     :config
-;; 	     (global-evil-sorround-mode 1))
 
 ;; vim commentary
 (evil-commentary-mode)
@@ -92,5 +124,29 @@
 (require 'evil-matchit)
 (global-evil-matchit-mode 1)
 
+;; vim surround
+(use-package evil-surround
+	     :ensure t
+	     :config
+	     (global-evil-surround-mode 1))
+
+
+;; Disables the double prompt when trying to quit an emacs file
+(setq confirm-kill-emacs nil)
 
 (setq backup-directory-alist '(("." . "~/.config/emacs/backups")))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("43f03c7bf52ec64cdf9f2c5956852be18c69b41c38ab5525d0bedfbd73619b6a" default))
+ '(package-selected-packages
+   '(evil-embrace rainbow-delimiters evil-collection counsel which-key doom-themes badger-theme command-log-mode material-theme magit evil-surround evil-matchit evil-commentary org-evil monitor dash evil)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
