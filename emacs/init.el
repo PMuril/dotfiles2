@@ -11,10 +11,6 @@
 
 (menu-bar-mode -1)
 
-;; Make ESC quit prompts
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-
-
 ;; Initialize package sources
 (require 'package)
 
@@ -52,6 +48,12 @@
 (use-package rainbow-delimiters
     :hook (prog-mode . rainbow-delimiters-mode))
 
+;; UTILITIES PLUGINS and settings
+;; remaps Caps Lock to METa
+(setq mac-caps-modifier 'meta)
+
+;; Make ESC quit prompts
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 ;; logs the command run inside emacs
 (use-package command-log-mode)
 
