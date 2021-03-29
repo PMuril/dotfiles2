@@ -1,15 +1,27 @@
 ;; (add-to-list 'load-path "~/.config/emacs/init.el")
 
 ;; silences the default Emacs startup message
+
+;; FUNCTIONAL SPECIFICATIONS
 (setq inhibit-startup-message t)
 
 ;; scroll-bar-mode -1)
 ;; (tool-bar-mode -1)
 ;; (tooltip-mode -1)
+(menu-bar-mode -1)
 
 (indent-for-tab-command)
 
-(menu-bar-mode -1)
+;; Disables the double prompt when trying to quit an emacs file
+(setq confirm-kill-emacs nil)
+
+(setq backup-directory-alist `(("." . "~/.config/emacs/backups")))
+
+(setq delete-old-versions t ;; Don't ask to delete excess backup versions.
+      backup-by-copying t   ;; Copy all files, don't rename them.
+      kept-new-versions 6   ;; Number of newest versions to keep.
+      kept-old-versions 2   ;; Number of oldest versions to keep.
+      version-control t)    ;; Use version numbers for backups. 
 
 ;; Initialize package sources
 (require 'package)
@@ -54,6 +66,7 @@
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
 ;; logs the command run inside emacs
 (use-package command-log-mode)
 
@@ -217,10 +230,6 @@
 (use-package visual-fill-column
   :hook (org-mode . efs/org-mode-visual-fill))
 
-;; Disables the double prompt when trying to quit an emacs file
-(setq confirm-kill-emacs nil)
-
-(setq backup-directory-alist '(("." . "~/.config/emacs/backups")))
 
 ;;CUSTOM
 (custom-set-variables
