@@ -155,8 +155,8 @@
   :bind-keymap
   ("C-c p" . projectile-command-map)
   :init
-  (when (file-directory-p "~/Projects/Code")
-    (setq projectile-project-search-path '("~/Projects/Code")))
+  (when (file-directory-p "~/Dropbox/myannotations")
+    (setq projectile-project-search-path '("~/Dropbox/myannotations")))
   (setq projectile-switch-project-action #'projectile-dired))
 
 (use-package counsel-projectile
@@ -170,6 +170,12 @@
 ;; as it is now part of the package evil-colleciton
 
 ;; ORGMODE
+;;binds the value of the agenda path to that of the orgFolder and makes
+;;and renders both in a system-independent way
+(custom-set-variables
+ '(org-directory "~/Dropbox/myannotations")
+ '(org-agenda-files (list org-directory)))
+
 (defun efs/org-mode-setup ()
   (org-indent-mode)
   (variable-pitch-mode 1)
@@ -181,6 +187,7 @@
   ;;:config
   ;;(setq org-ellipsis " ▾")    ;;not required at the moment
   ;;(efs/org-font-setup)
+  ;; Here it would probably be necessary to setup an environment specific folder
 )
 
 (use-package org-bullets
@@ -214,6 +221,8 @@
 (setq confirm-kill-emacs nil)
 
 (setq backup-directory-alist '(("." . "~/.config/emacs/backups")))
+
+;;CUSTOM
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
