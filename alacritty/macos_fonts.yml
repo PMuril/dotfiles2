@@ -1,0 +1,22 @@
+# Font Customization
+font:
+  normal:
+    family: SourcecodePro+Powerline+Awesome Regular
+    style: Regular
+  bold:
+    family: SourcecodePro+Powerline+Awesome Regular
+    style: Bold
+  italic:
+    family: SourcecodePro+Powerline+Awesome Regular
+    style: Italic
+  size: 12
+  offset:
+    x: 0
+    y: 0
+  glyph_offset:
+    x: 0
+    y: 0
+  use_thin_strokes: false
+  debug:
+    persistent_logging: false
+draw_bold_text_with_bright_colors: true

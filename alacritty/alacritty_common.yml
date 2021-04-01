@@ -1,0 +1,53 @@
+#OS DEPENDENT PART
+
+env:
+    TERM: xterm-256color
+
+# Window Customization
+window:
+  dimensions:
+    columns: 140
+    lines: 38
+  padding:
+    x: 25
+    y: 25
+scrolling:
+  history: 10000
+  multiplier: 3
+background_opacity: 1. 
+window.dynamic_title: true
+
+colors:
+  primary:
+    background: '#263238'
+    foreground: '#FFFFFF'
+
+  normal:
+    black:    '#546E7A'
+    red:      '#FF5252'
+    green:    '#5CF19E'
+    yellow:   '#FFD740'
+    blue:     '#40C4FF'
+    magenta:  '#FF4081'
+    cyan:     '#64FCDA'
+    white:    '#FFFFFF'
+
+  bright:
+    black:    '#B0BEC5'
+    red:      '#FF8A80'
+    green:    '#B9F6CA'
+    yellow:   '#FFE57F'
+    blue:     '#80D8FF'
+    magenta:  '#FF80AB'
+    cyan:     '#A7FDEB'
+    white:    '#FFFFFF'
+
+
+cursor:
+  style: Block
+  unfocused_hollow: true
+
+# disables the remapping of the alt key to esc
+# solves the rendering problem of ~, # and more on MAC
+alt_send_esc: false
+
