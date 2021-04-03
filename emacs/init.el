@@ -204,9 +204,11 @@
 ;; ORGMODE
 ;;binds the value of the agenda path to that of the orgFolder and makes
 ;;and renders both in a system-independent way
-(custom-set-variables
- '(org-directory "~/Dropbox/myannotations")
- '(org-agenda-files (list org-directory)))
+
+;; org-mode keybindings
+(global-set-key (kbd "C-c l")   'org-store-link)
+(global-set-key (kbd "C-c C-l") 'org-insert-link)
+
 
 (defun efs/org-mode-setup ()
   (org-indent-mode)
@@ -216,11 +218,15 @@
   (setq evil-auto-indent nil))
 
 (use-package org
-  ;;:config
+  :config
   ;;(setq org-ellipsis " ▾")    ;;not required at the moment
   ;;(efs/org-font-setup)
   ;; Here it would probably be necessary to setup an environment specific folder
+  (setq org-agenda-start-with-log-mode t)
+  (setq org-log-done 'time)
+  (setq org-log-into-drawer t)
 )
+
 
 (use-package org-bullets
   :after org
