@@ -13,6 +13,22 @@
 ;; Disables the double prompt when trying to quit an emacs file
 (setq confirm-kill-emacs nil)
 
+;; system-specific copy to clipboard
+;; (cond				       
+;; ((string-equal system-type "darwin")
+;;   ;; probably it is possible to use something in the spirit of pbcopy-mode
+;;  (progn
+;;    (setq interprogram-cut-function
+;; 	  (lambda (text &optional push)
+;; 	    (let * ((process-connection-type nil)
+;; 		    (pbproxy (start-process "pbcopy" "pbcopy" "/usr/bin/pbcopy")))
+;; 		 (process-send-string pbproxy text)
+;; 		 (process-send-eof pbproxy))))))
+;; ((string-equal system-type "gnu/linux")
+;;  (progn
+;;    (xclip-mode 1))))
+
+
 (setq backup-directory-alist `(("." . "~/.config/emacs/backups")))
 
 (setq delete-old-versions t ;; Don't ask to delete excess backup versions.
