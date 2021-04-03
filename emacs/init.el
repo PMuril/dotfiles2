@@ -108,7 +108,19 @@
   :config
   (ivy-mode 1))
 
-	
+;; IVY-RICH - additional customization for IVY
+(use-package ivy-rich
+  :init
+  (ivy-rich-mode 1))
+
+;;COUNSEL
+(use-package counsel
+  :bind (("M-x" . counsel-M-x)
+	  ("C-x b" . counsel-ibuffer)
+	  ("C-x C-f" . counsel-find-file)
+	  :map minibuffer-local-map
+	  ("C-r" . 'counsel-minibuffer-history)))
+
 ;; Enables which-key: Display informations on the full-keybindings
 ;; that are compatible with 
 (use-package which-key
@@ -338,3 +350,16 @@
 ;;  ;; Your init file should contain only one such instance.
 ;;  ;; If there is more than one, they won't work right.
 ;;  )
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(ivy-rich which-key visual-fill-column use-package rainbow-delimiters org-web-tools org-roam org-evil org-bullets material-theme magit general evil-matchit evil-embrace evil-commentary evil-collection doom-themes counsel-projectile command-log-mode badger-theme)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
