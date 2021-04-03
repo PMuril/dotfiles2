@@ -89,13 +89,24 @@
 ;; logs the command run inside emacs
 (use-package command-log-mode)
 
-;; enables file-system navigation via ivy
-;; (use-package ivy
-;;   :diminish
-;;   :bind (("C-s" . swiper)
-;; 	 :map ivy-minibuffer-map
-;; 	 ("TAB" . ivy-alt-done)
-;; 	 ("C-l" . ivy-alt-done)
+;; IVY - file-system navigation tool
+(use-package ivy
+  :diminish
+  :bind (("C-s" . swiper)
+	 :map ivy-minibuffer-map
+	 ("TAB" . ivy-alt-done)
+	 ("C-l" . ivy-alt-done)
+	 ("C-j" . ivy-next-line)
+	 ("C-k" . ivy-previous-line)
+	 :map ivy-switch-buffer-map
+	 ("C-k" . ivy-previous-line)
+	 ("C-l" . ivy-done)
+	 ("C-d" . ivy-switch-buffer-kill)
+	 :map ivy-reverse-i-search-map
+	 ("C-k" . ivy-previous-line)
+	 ("C-d" . ivy-reverse-i-search-kill))
+  :config
+  (ivy-mode 1))
 
 	
 ;; Enables which-key: Display informations on the full-keybindings
@@ -311,6 +322,13 @@
 
 (setq org-roam-directory "~/Dropbox/myannotations/org-roam")
 (add-hook 'after-init-hook 'org-roam-mode)
+
+
+;;GENERAL - Keybindings manager
+(use-package general)
+
+(general-define-key
+ "C-M-j" 'counsel-switch-buffer)
 
 ;;CUSTOM
 
