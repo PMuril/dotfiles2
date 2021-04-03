@@ -1,8 +1,6 @@
-;; (add-to-list 'load-path "~/.config/emacs/init.el")
+;; FUNCTIONAL SPECIFICATIONS
 
 ;; silences the default Emacs startup message
-
-;; FUNCTIONAL SPECIFICATIONS
 (setq inhibit-startup-message t)
 
 ;; scroll-bar-mode -1)
@@ -42,12 +40,17 @@
 (setq use-package-always-ensure t)
 
 ;; APPEARENCE
-;; enables material color theme
-(use-package doom-themes
-  :init (load-theme 'doom-dracula t))
+(cond
+ ((string-equal system-type "darwin") 
+  (progn 
+    ;; if system is MacOs enables doom-dracula color theme
+    ;; otherwise load the default theme
+    (use-package doom-themes
+    :init (load-theme 'doom-dracula t)))))
+
 
 ;;Display relative line numbers
-(column-number-mode)
+(global-display-line-numbers-mode)
 (setq display-line-numbers 'relative)
 
 ;; Disable line numbers for some modes
@@ -219,7 +222,56 @@
                   (org-level-6 . 1.1)
                   (org-level-7 . 1.1)
                   (org-level-8 . 1.1)))
-    (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face)))
+    (set-face-attribute (car face) nil :font "PowerLine" :weight 'regular :height (cdr face)))
+
+;; Configure custom agenda views
+  (setq org-agenda-custom-commands
+   '(("d" "Dashboard"
+     ((agenda "" ((org-deadline-warning-days 7)))
+      (todo "NEXT"
+        ((org-agenda-overriding-header "Next Tasks")))
+      (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
+
+    ("n" "Next Tasks"
+     ((todo "NEXT"
+        ((org-agenda-overriding-header "Next Tasks")))))
+
+    ("W" "Work Tasks" tags-todo "+work-email")
+
+    ;; Low-effort next actions
+    ("e" tags-todo "+TODO=\"NEXT\"+Effort<15&+Effort>0"
+     ((org-agenda-overriding-header "Low Effort Tasks")
+      (org-agenda-max-todos 20)
+      (org-agenda-files org-agenda-files)))
+
+    ("w" "Workflow Status"
+     ((todo "WAIT"
+            ((org-agenda-overriding-header "Waiting on External")
+             (org-agenda-files org-agenda-files)))
+      (todo "REVIEW"
+            ((org-agenda-overriding-header "In Review")
+             (org-agenda-files org-agenda-files)))
+      (todo "PLAN"
+            ((org-agenda-overriding-header "In Planning")
+             (org-agenda-todo-list-sublevels nil)
+             (org-agenda-files org-agenda-files)))
+      (todo "BACKLOG"
+            ((org-agenda-overriding-header "Project Backlog")
+             (org-agenda-todo-list-sublevels nil)
+             (org-agenda-files org-agenda-files)))
+      (todo "READY"
+            ((org-agenda-overriding-header "Ready for Work")
+             (org-agenda-files org-agenda-files)))
+      (todo "ACTIVE"
+            ((org-agenda-overriding-header "Active Projects")
+             (org-agenda-files org-agenda-files)))
+      (todo "COMPLETED"
+            ((org-agenda-overriding-header "Completed Projects")
+             (org-agenda-files org-agenda-files)))
+      (todo "CANC"
+            ((org-agenda-overriding-header "Cancelled Projects")
+             (org-agenda-files org-agenda-files)))))))
+
 
 ;;fill-column mode
 (defun efs/org-mode-visual-fill ()
@@ -230,20 +282,19 @@
 (use-package visual-fill-column
   :hook (org-mode . efs/org-mode-visual-fill))
 
+;;ORG-ROAM
+;;finding ORG-ROAM dependency: sqlite3
+(executable-find "sqlite3")
+(add-to-list 'exec-path "path/to/sqlite")
+
+(setq org-roam-directory "~/Dropbox/myannotations/org-roam")
+(add-hook 'after-init-hook 'org-roam-mode)
 
 ;;CUSTOM
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("43f03c7bf52ec64cdf9f2c5956852be18c69b41c38ab5525d0bedfbd73619b6a" default))
- '(package-selected-packages
-   '(visual-fill-column org-bullets evil-embrace rainbow-delimiters evil-collection counsel which-key doom-themes badger-theme command-log-mode material-theme magit evil-surround evil-matchit evil-commentary org-evil monitor dash evil)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  )
