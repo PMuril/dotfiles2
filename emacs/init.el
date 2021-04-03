@@ -13,21 +13,9 @@
 ;; Disables the double prompt when trying to quit an emacs file
 (setq confirm-kill-emacs nil)
 
-;; system-specific copy to clipboard
-;; (cond				       
-;; ((string-equal system-type "darwin")
-;;   ;; probably it is possible to use something in the spirit of pbcopy-mode
-;;  (progn
-;;    (setq interprogram-cut-function
-;; 	  (lambda (text &optional push)
-;; 	    (let * ((process-connection-type nil)
-;; 		    (pbproxy (start-process "pbcopy" "pbcopy" "/usr/bin/pbcopy")))
-;; 		 (process-send-string pbproxy text)
-;; 		 (process-send-eof pbproxy))))))
-;; ((string-equal system-type "gnu/linux")
-;;  (progn
-;;    (xclip-mode 1))))
-
+;; copy to system clipboard
+;;works both on MacOs and Linux
+(xclip-mode 1)
 
 (setq backup-directory-alist `(("." . "~/.config/emacs/backups")))
 
@@ -40,7 +28,7 @@
 ;; Initialize package sources
 (require 'package)
 
-(setq package-archives '(("org" . "http://orgmode.org/elpa/")
+(setq package-archives '(("org" . "https://elpa.gnu.org/packages/")
 			 ("melpa" . "http://melpa.org/packages/")
 			 ("melpa-stable" . "http://stable.melpa.org/packages/")))
 
@@ -53,6 +41,8 @@
   (package-install 'use-package))
 
 (require 'use-package)
+;;enforces package manager to download a package
+;;whenever this is require but not already installed
 (setq use-package-always-ensure t)
 
 ;; APPEARENCE
@@ -356,7 +346,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(ivy-rich which-key visual-fill-column use-package rainbow-delimiters org-web-tools org-roam org-evil org-bullets material-theme magit general evil-matchit evil-embrace evil-commentary evil-collection doom-themes counsel-projectile command-log-mode badger-theme)))
+   '(xclip ivy-rich which-key visual-fill-column use-package rainbow-delimiters org-web-tools org-roam org-evil org-bullets material-theme magit general evil-matchit evil-embrace evil-commentary evil-collection doom-themes counsel-projectile command-log-mode badger-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
