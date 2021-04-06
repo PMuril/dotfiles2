@@ -242,6 +242,10 @@
   (setq org-agenda-start-with-log-mode t)
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
+  (setq org-tag-alist '(
+			;; ("@parisi" . ?gp) ("@geotsek" . ?gt)
+			("@amerigo" . ?a) ("@macchioni" . ?m) ("@grazzini" . ?g)
+			("@numeric" . ?n) ("@jamming" . ?j) ("DOS" . ?d) ("MFT" . ?m)))
 )
 
 
@@ -250,7 +254,6 @@
   :hook (org-mode . org-bullets-mode)
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
-
 
   ;; Set faces for heading levels
   (dolist (face '((org-level-1 . 1.2)
@@ -326,15 +329,17 @@
 (executable-find "sqlite3")
 (add-to-list 'exec-path "path/to/sqlite")
 
-(setq org-roam-directory "~/Dropbox/myannotations/org-roam")
+(setq org-roam-directory "/Users/paolobaldan/Dropbox/myannotations/org-roam")
 (add-hook 'after-init-hook 'org-roam-mode)
-
 
 ;;GENERAL - Keybindings manager
 (use-package general)
 
 (general-define-key
- "C-M-j" 'counsel-switch-buffer)
+ "C-M-j" 'counsel-switch-buffer
+ "C-c t" 'counsel-org-tag
+ "C-c c" 'counsel-org-capture
+ )
 
 ;;CUSTOM
 
@@ -349,8 +354,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(helm-minibuffer-history-key "M-p")
+ '(org-export-backends '(ascii html icalendar latex md odt))
  '(package-selected-packages
-   '(xclip ivy-rich which-key visual-fill-column use-package rainbow-delimiters org-web-tools org-roam org-evil org-bullets material-theme magit general evil-matchit evil-embrace evil-commentary evil-collection doom-themes counsel-projectile command-log-mode badger-theme)))
+   '(doom-modeline xclip ivy-rich which-key visual-fill-column use-package rainbow-delimiters org-web-tools org-roam org-evil org-bullets material-theme magit general evil-matchit evil-embrace evil-commentary evil-collection doom-themes counsel-projectile command-log-mode badger-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
