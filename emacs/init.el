@@ -25,6 +25,7 @@
       kept-old-versions 2   ;; Number of oldest versions to keep.
       version-control t)    ;; Use version numbers for backups. 
 
+
 ;; Initialize package sources
 (require 'package)
 
@@ -123,21 +124,17 @@
   :config
   (setq which-key-idle-delay 0.3))
 
-;; UndoTree had to be installed manually and the syntax to load the
-;; package is therefore slightly different from the packages
-;; that are hosted on official repositories (elpa, melpa, ecc. )
-;; (add-to-list 'load-path "~/.config/emacs/not-elpa/")
-;; (require 'undo-tree)
+;;UNDO-TREE
+;; N.B. Due to the structure of the operations memory structure
+;; in order to undo a previous operation it is needed first to
+;; execute a non-editing command. E.g. To undo a previous operation
+;; it is possible to use the keybinding C-g u.
 ;; (use-package undotree
 ;;   :ensure t
 ;;   :init
 ;;   (global-undo-tree-mode 1))
 
 ;; EVIL MODE
-;; N.B. Due to the structure of the operations memory structure
-;; in order to undo a previous operation it is needed first to
-;; execute a non-editing command. E.g. To undo a previous operation
-;; it is possible to use the keybinding C-g u.
 (defun rune/evil-hook ()
   (dolist (mode '(custom-mode
 		  eshell-mode
