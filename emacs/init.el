@@ -242,9 +242,9 @@
   (setq org-tag-alist '(
 			;; ("@parisi" . ?gp) ("@geotsek" . ?gt)
 			("@amerigo" . ?a) ("@macchioni" . ?m) ("@grazzini" . ?g)
-			("@numeric" . ?n) ("@jamming" . ?j) ("DOS" . ?d) ("MFT" . ?m)))
+			("@numeric" . ?n) ("@jamming" . ?j) ("DOS" . ?d) ("MFT" . ?m)
+			("@exercise" . ?e) ("@open problem" ?p) ("question" ?q)))
 )
-
 
 (use-package org-bullets
   :after org
