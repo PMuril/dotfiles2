@@ -15,6 +15,13 @@ export PATH=/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
 #links gcc-9 and g++-9 to the GNU gcc-9 and g++-9
 export PATH=/usr/local/bin/gcc-9:/usr/local/bin/g++-9:$PATH
 
+#makes all the clang-toolkit binaries available (clangd in particular)
+export PATH=$PATH:/usr/local/opt/llvm/bin/
+
+#makes the open blas libraries discoverable by the compiler
+export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/sqlite/lib"
+export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/sqlite/include"
+
 #makes npm (node package manager) directly callable 
 export PATH=$PATH:$HOME/.npm-packages/bin
 
