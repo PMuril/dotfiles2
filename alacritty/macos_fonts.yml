@@ -1,14 +1,17 @@
 # Font Customization
 font:
   normal:
-    family: SourcecodePro+Powerline+Awesome Regular
+    family: Source Code Pro for Powerline
     style: Regular
   bold:
-    family: SourcecodePro+Powerline+Awesome Regular
+    family: Source Code Pro for Powerline
     style: Bold
   italic:
-    family: SourcecodePro+Powerline+Awesome Regular
+    family: Source Code Pro for Powerline
     style: Italic
+  bold_italic:
+    family: Source Code Pro for Powerline
+    style: Bold Italic
   size: 12
   offset:
     x: 0
