@@ -1,11 +1,12 @@
 #General Aliases
-alias emacs="emacs -nw"
 alias ls="ls -GH"
 
 alias gdb="sudo gdb"
 
 #sets the tmux source file to ~/.config/tmux/tmux.conf
-alias tmux="tmux -f ~/.config/tmux/tmux.conf"
+#the -2 option is to force tmux to always load a screen-256colors terminal
+#on every platform
+alias tmux="tmux -2 -f ~/.config/tmux/tmux.conf"
 
 alias vim="nvim"
 
@@ -15,7 +16,7 @@ alias fgrep="fgrep  --color=auto"
 alias egrep="egrep  --color=auto"
 
 #aliasing emacs
-alias emacs="/usr/local/Cellar/emacs/27.2/bin/emacs"
+alias emacs="/usr/local/Cellar/emacs/27.2/bin/emacs -nw"
 
 #aliases the icloud directory path
 alias icloud_drive="/Users/paolobaldan/Library/Mobile Documents/com~apple~CloudDocs"
