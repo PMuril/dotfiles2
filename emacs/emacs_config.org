@@ -60,9 +60,9 @@
 ** Fonts
    #+begin_src emacs-lisp
 
-     ;;Default font settings
-     ;; (set-frame-font "Source Code Pro for Powerline 12" nil t)
-(set-face-attribute 'default nil :font "Source Code Pro" :height runemacs/default-font-size)
+	  ;;Default font settings
+	  ;; (set-frame-font "Source Code Pro for Powerline 12" nil t)
+     ;; (set-face-attribute 'default nil :font "Source Code Pro" :height runemacs/default-font-size)
    #+end_src
 
 ** Theme
@@ -350,6 +350,7 @@
 
 
        ;; Set faces for heading levels
+(with-eval-after-load 'org-faces
        (dolist (face '((org-level-1 . 1.2)
 		       (org-level-2 . 1.1)
 		       (org-level-3 . 1.05)
@@ -358,7 +359,7 @@
 		       (org-level-6 . 1.0)
 		       (org-level-7 . 1.1)
 		       (org-level-8 . 1.1)))
-	 (set-face-attribute (car face) nil :font "PowerLine" :weight 'regular :height (cdr face)))
+	 (set-face-attribute (car face) nil :font "PowerLine" :weight 'regular :height (cdr face))))
 
    #+end_src 
 
@@ -386,7 +387,7 @@
 	 (let ((org-confirm-babel-evaluate nil))
 	   (org-babel-tangle)))
 
-       (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+       (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config))))
 
    #+end_src
 
