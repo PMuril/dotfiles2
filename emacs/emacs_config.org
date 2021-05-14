@@ -59,12 +59,13 @@
 ** Fonts
    #+begin_src emacs-lisp
 
-	  ;;Default font settings
-	  ;; (set-frame-font "Source Code Pro for Powerline 12" nil t)
+     ;;Default font settings
+     ;; (set-frame-font "Source Code Pro for Powerline 12" nil t)
      (set-face-attribute 'default nil
 			 :font "Source Code Pro"
 			 :weight 'light
-			 :height (dw/system-settings-get 'emacs/default-face-size)))
+			 ;; :height (dw/system-settings-get 'emacs/default-face-size))
+			 :height 11)
    #+end_src
 
 ** Theme
@@ -183,7 +184,7 @@
 * Undo-Tree
   #+begin_src emacs-lisp
 
-    (use-package undotree
+    (use-package undo-tree
       :ensure t
       :init
       (global-undo-tree-mode 1))
@@ -288,6 +289,7 @@
 * Org Mode
 ** Org Mod Init Settings
    #+begin_src emacs-lisp
+     (add-hook 'org-mode-hook 'org-indent-mode)
 
 	  (defun efs/org-mode-setup ()
 	    (org-indent-mode)
