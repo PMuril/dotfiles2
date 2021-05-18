@@ -1,9 +1,11 @@
 ;; silences the default Emacs startup message
 (setq inhibit-startup-message t)
 
-;; scroll-bar-mode -1)
-;; (tool-bar-mode -1)
-;; (tooltip-mode -1)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(tooltip-mode -1)
+(set-fringe-mode 10)
+
 (menu-bar-mode -1)
 
 (indent-for-tab-command)
@@ -44,11 +46,7 @@
 
 ;;Default font settings
 ;; (set-frame-font "Source Code Pro for Powerline 12" nil t)
-(set-face-attribute 'default nil
-		    :font "Source Code Pro"
-		    :weight 'light
-		    ;; :height (dw/system-settings-get 'emacs/default-face-size))
-		    :height 11)
+(set-face-attribute 'default nil :font "Source Code Pro for Powerline" :height 180)
 
 (cond
  ((string-equal system-type "darwin") 
@@ -307,7 +305,7 @@
 		       (org-level-6 . 1.0)
 		       (org-level-7 . 1.1)
 		       (org-level-8 . 1.1)))
-	 (set-face-attribute (car face) nil :font "PowerLine" :weight 'regular :height (cdr face))))
+	 (set-face-attribute (car face) nil :font "Source Code Pro for Powerline" :weight 'regular :height (cdr face))))
 
 (require 'org-tempo)
 

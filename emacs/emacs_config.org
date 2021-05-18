@@ -1,15 +1,19 @@
 #+Title: Emacs Config File
 #+PROPERTY: header-args:emacs-lisp :tangle ./init.new.el
-* Functional Specifications
+#+STARTUP: overview
+
+* Emacs GUI customization
 
   #+begin_src emacs-lisp
 
     ;; silences the default Emacs startup message
     (setq inhibit-startup-message t)
 
-    ;; scroll-bar-mode -1)
-    ;; (tool-bar-mode -1)
-    ;; (tooltip-mode -1)
+    (scroll-bar-mode -1)
+    (tool-bar-mode -1)
+    (tooltip-mode -1)
+    (set-fringe-mode 10)
+
     (menu-bar-mode -1)
 
     (indent-for-tab-command)
@@ -24,10 +28,10 @@
     (setq backup-directory-alist `(("." . "~/.config/emacs/backups")))
 
     (setq delete-old-versions t ;; Don't ask to delete excess backup versions.
-	  backup-by-copying t   ;; Copy all files, don't rename them.
-	  kept-new-versions 6   ;; Number of newest versions to keep.
-	  kept-old-versions 2   ;; Number of oldest versions to keep.
-	  version-control t)    ;; Use version numbers for backups. 
+          backup-by-copying t   ;; Copy all files, don't rename them.
+          kept-new-versions 6   ;; Number of newest versions to keep.
+          kept-old-versions 2   ;; Number of oldest versions to keep.
+          version-control t)    ;; Use version numbers for backups. 
 
   #+end_src
 
@@ -55,17 +59,12 @@
 
   #+end_src
 * Appearance
-  
 ** Fonts
    #+begin_src emacs-lisp
 
      ;;Default font settings
      ;; (set-frame-font "Source Code Pro for Powerline 12" nil t)
-     (set-face-attribute 'default nil
-			 :font "Source Code Pro"
-			 :weight 'light
-			 ;; :height (dw/system-settings-get 'emacs/default-face-size))
-			 :height 11)
+     (set-face-attribute 'default nil :font "Source Code Pro for Powerline" :height 180)
    #+end_src
 
 ** Theme
@@ -104,7 +103,6 @@
 	:hook (prog-mode . rainbow-delimiters-mode))
 
   #+end_src
-
 
 * Miscellanea
   #+begin_src emacs-lisp
@@ -417,7 +415,7 @@
 		       (org-level-6 . 1.0)
 		       (org-level-7 . 1.1)
 		       (org-level-8 . 1.1)))
-	 (set-face-attribute (car face) nil :font "PowerLine" :weight 'regular :height (cdr face))))
+	 (set-face-attribute (car face) nil :font "Source Code Pro for Powerline" :weight 'regular :height (cdr face))))
 
    #+end_src 
 
