@@ -15,8 +15,6 @@ alias grep="grep -P --color=auto"
 alias fgrep="fgrep  --color=auto"
 alias egrep="egrep  --color=auto"
 
-#aliasing emacs
-alias emacs="/usr/local/Cellar/emacs/27.2/bin/emacs -nw"
-
 #aliases the icloud directory path
 alias icloud_drive="/Users/paolobaldan/Library/Mobile Documents/com~apple~CloudDocs"
+alias myannotations="/Users/paolobaldan/Dropbox/myannotations"
