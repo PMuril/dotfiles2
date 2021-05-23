@@ -78,19 +78,19 @@
 
      ;;Default font settings
      ;; (set-frame-font "Source Code Pro for Powerline 12" nil t)
-     (set-face-attribute 'default nil :font "Source Code Pro for Powerline" :height 180)
+     (cond
+      ((string-equal system-type "darwin")
+       (progn
+         (set-face-attribute 'default nil :font "Source Code Pro for Powerline" :height 180))))
    #+end_src
 
 ** Theme
    #+begin_src emacs-lisp
 
-     (cond
-      ((string-equal system-type "darwin") 
-       (progn 
-	 ;; if system is MacOs enables doom-dracula color theme
-	 ;; otherwise load the default theme
-	 (use-package doom-themes
-	 :init (load-theme 'doom-dracula t)))))
+     ;; if system is MacOs enables doom-dracula color theme
+     ;; otherwise load the default theme
+     (use-package doom-themes
+     :init (load-theme 'doom-zenburn t))
 
    #+end_src
 
