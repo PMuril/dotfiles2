@@ -467,7 +467,13 @@
     (executable-find "sqlite3")
     (add-to-list 'exec-path "path/to/sqlite")
 
-    (setq org-roam-directory "~/Dropbox/myannotations/org-roam")
+    (cond
+     ((string-equal system-type "darwin") 
+      (progn 
+        (setq org-roam-directory "~/Dropbox/myannotations/org-roam")))
+     ((string-equal system-type "linux")
+      (progn
+        (setq org-roam-directory "~/workspace/myannotations"))))
     (add-hook 'after-init-hook 'org-roam-mode)
 
   #+end_src  
