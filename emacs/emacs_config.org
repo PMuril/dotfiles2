@@ -109,7 +109,7 @@
 
    #+end_src
    
-** Delimiters
+** Rainbow Delimiters
   #+begin_src emacs-lisp 
 
     (use-package rainbow-delimiters
@@ -117,17 +117,17 @@
 
   #+end_src
 
+** Modeline
+#+begin_src emacs-lisp
+
+  (use-package doom-modeline
+      :ensure t
+      :init (doom-modeline-mode 1)
+      :custom ((doom-modeline-height 12)))
+
+#+end_src
 * Miscellanea
   #+begin_src emacs-lisp
-    ;;enables doom modeline
-    (use-package doom-modeline
-        :ensure t
-        :init (doom-modeline-mode 1)
-        :custom ((doom-modeline-height 12)))
-
-    ;; remaps Caps Lock to META
-    ;; (setq mac-caps-modifier 'meta)
-    (setq mac-option-modifier 'meta)
 
     ;; Make ESC quit prompts
     (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
