@@ -84,18 +84,17 @@
    #+begin_src emacs-lisp
 
       ;; Disable line numbers for some modes
-      (dolist (mode '(org-mode-hook
-		      term-mode-hook
-		      shell-mode-hook
-		      eshell-mode-hook))
-	(add-hook mode (lambda () (display-line-numbers-mode 0))))
+     (dolist (mode '(term-mode-hook
+                     shell-mode-hook
+                     eshell-mode-hook))
+       (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
      ;;Display relative line numbers
      (global-display-line-numbers-mode)
      (setq display-line-numbers 'relative)
 
    #+end_src
-
+   
 ** Delimiters
   #+begin_src emacs-lisp 
 
