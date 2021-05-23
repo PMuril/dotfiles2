@@ -16,25 +16,39 @@
 
     (menu-bar-mode -1)
 
-    (indent-for-tab-command)
-
-    ;; Disables the double prompt when trying to quit an emacs file
-    (setq confirm-kill-emacs nil)
-
-    ;; copy to system clipboard
-    ;;works both on MacOs and Linux
-    (xclip-mode 1)
-
-    (setq backup-directory-alist `(("." . "~/.config/emacs/backups")))
-
-    (setq delete-old-versions t ;; Don't ask to delete excess backup versions.
-          backup-by-copying t   ;; Copy all files, don't rename them.
-          kept-new-versions 6   ;; Number of newest versions to keep.
-          kept-old-versions 2   ;; Number of oldest versions to keep.
-          version-control t)    ;; Use version numbers for backups. 
-
   #+end_src
 
+* Commands
+#+begin_src emacs-lisp
+
+  (indent-for-tab-command)
+
+  ;; Disables the double prompt when trying to quit an emacs file
+  (setq confirm-kill-emacs nil)
+
+  ;; copy to system clipboard
+  ;;works both on MacOs and Linux
+  (xclip-mode 1)
+
+#+end_src
+* KeyModifiers
+#+begin_src emacs-lisp
+    ;; (cond
+    ;;   ((string-equal system-type "darwin")
+  ;;
+#+end_src
+* Backup Management
+#+begin_src emacs-lisp
+
+  (setq backup-directory-alist `(("." . "~/.config/emacs/backups")))
+
+  (setq delete-old-versions t ;; Don't ask to delete excess backup versions.
+        backup-by-copying t   ;; Copy all files, don't rename them.
+        kept-new-versions 6   ;; Number of newest versions to keep.
+        kept-old-versions 2   ;; Number of oldest versions to keep.
+        version-control t)    ;; Use version numbers for backups. 
+
+#+end_src
 * Package System Setup
   #+begin_src emacs-lisp
 
