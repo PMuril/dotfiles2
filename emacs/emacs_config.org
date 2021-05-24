@@ -468,6 +468,8 @@
    #+end_src
 
 * Org-Roam
+** Org-Roam Init Settings
+
   #+begin_src emacs-lisp
     ;;finding ORG-ROAM dependency: sqlite3
     (executable-find "sqlite3")
@@ -484,6 +486,29 @@
 
   #+end_src  
   
+** Org-Roam Bibtex
+Below is provided a configuration of Org-Roam Bibtext using
+either *Helm-Bibtex* or *Ivy-Bibtex* as beckend. The two configurations
+are (presumably) mutually exclusive and therefore cannot be
+simultaneously activated
+*** Helm-Bibtex Beckend
+#+begin_src emacs-lisp
+  ;; (autoload 'helm-bibtex "helm-bibtex" "" t)
+#+end_src
+*** Ivy-Bibtex Beckend
+#+begin_src emacs-lisp
+  (autoload 'ivy-bibtex "ivy-bibtex" "" t)
+  (setq ivy-re-builders-alist
+        '((ivy-bibtex . ivy--regex-ignore-order)
+          (t . ivy--regex-plus)))
+#+end_src
+*** Bibliographic Database Management
+#+begin_src emacs-lisp
+  (setq bibtex-completion-library-path '("/Users/paolobaldan/Desktop/global_library.bib"))
+  (setq bibtex-completion-pdf-field "file")
+  (setq bibtex-completion-pdf-symbol "⌘")
+  (setq bibtex-completion-notes-symbol "✎")
+#+end_src
 * General
   #+begin_src emacs-lisp
 
