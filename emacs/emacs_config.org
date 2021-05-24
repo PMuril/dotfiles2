@@ -323,6 +323,7 @@
           :config
           (setq org-ellipsis "▾")
           ;; TODO: find a way to set the color to wheat1 at configuration time
+          ;; current activation: M-x customize-face RET org-ellipsis RET
           ;;(efs/org-font-setup)
           ;; Here it would probably be necessary to setup an environment specific folder
           (setq org-agenda-start-with-log-mode t)
