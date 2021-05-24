@@ -33,9 +33,14 @@
 #+end_src
 * KeyModifiers
 #+begin_src emacs-lisp
-    ;; (cond
-    ;;   ((string-equal system-type "darwin")
-  ;;
+
+  ;; (cond
+  ;;   ((string-equal system-type "darwin")
+  (setq mac-right-command-modifier 'meta)
+  ;; (setq mac-caps-modifier 'control)
+  ;; enables the input of special characters on MacOS
+  (setq mac-option-modifier 'none)
+
 #+end_src
 * Backup Management
 #+begin_src emacs-lisp
@@ -492,11 +497,4 @@
   #+begin_src emacs-lisp
 
     (custom-set-variables
-     ;; custom-set-variables was added by Custom.
-     ;; If you edit it by hand, you could mess it up, so be careful.
-     ;; Your init file should contain only one such instance.
-     ;; If there is more than one, they won't work right.
-     '(package-selected-packages
-       '(xclip ivy-rich which-key visual-fill-column use-package rainbow-delimiters org-web-tools org-roam org-evil org-bullets material-theme magit general evil-matchit evil-embrace evil-commentary evil-collection doom-themes counsel-projectile command-log-mode badger-theme)))
-
-  #+end_src
+     ;; cus
