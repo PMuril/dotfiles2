@@ -320,23 +320,23 @@
 ** General Settings
    #+begin_src emacs-lisp
 
-        (use-package org
-          :config
-          (setq org-ellipsis "▾")
-          ;; TODO: find a way to set the color to wheat1 at configuration time
-          ;; current activation: M-x customize-face RET org-ellipsis RET
-          ;;(efs/org-font-setup)
-          ;; Here it would probably be necessary to setup an environment specific folder
-          (setq org-agenda-start-with-log-mode t)
-          (setq org-log-done 'time)
-          (setq org-log-into-drawer t)
-          ;;org-mode task list
-          (setq org-tag-alist '(
-                                ;; ("@parisi" . ?gp) ("@geotsek" . ?gt)
-                                ("@amerigo" . ?a) ("@macchioni" . ?m) ("@grazzini" . ?g)
-                                ("@numeric" . ?n) ("@jamming" . ?j) ("DOS" . ?d) ("MFT" . ?m)
-                                ("@exercise" . ?e) ("@open problem" ?p) ("question" ?q)))
-        )
+     (use-package org
+       :config
+       (setq org-ellipsis "▾")
+       ;; (set-face-attribute 'org-ellipsis :color "wheat2")
+       ;; current activation: M-x customize-face RET org-ellipsis RET
+       ;;(efs/org-font-setup)
+       ;; Here it would probably be necessary to setup an environment specific folder
+       (setq org-agenda-start-with-log-mode t)
+       (setq org-log-done 'time)
+       (setq org-log-into-drawer t)
+       ;;org-mode task list
+       (setq org-tag-alist '(
+                             ;; ("@parisi" . ?gp) ("@geotsek" . ?gt)
+                             ("@amerigo" . ?a) ("@macchioni" . ?m) ("@grazzini" . ?g)
+                             ("@numeric" . ?n) ("@jamming" . ?j) ("DOS" . ?d) ("MFT" . ?m)
+                             ("@exercise" . ?e) ("@open problem" ?p) ("question" ?q)))
+     )
 
    #+end_src
 
