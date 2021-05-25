@@ -505,12 +505,37 @@ simultaneously activated
 #+end_src
 *** Bibliographic Database Management
 #+begin_src emacs-lisp
-  (setq bibtex-completion-library-path '("/Users/paolobaldan/Desktop/global_library.bib"))
+  (setq bibtex-completion-bibliography '("~/Desktop/global_library.bib"))
   (setq bibtex-completion-pdf-field "file")
+  ;; (setq bibtex-completion-library-path '("")
+
   (setq bibtex-completion-pdf-symbol "⌘")
   (setq bibtex-completion-notes-symbol "✎")
+  ;; For publications that are composed of more than 1 PDF file
+  ;;e.g. a main pubblication + supplemental informations
+  ;; this triggers the engine to browse for additional materials
+  (setq bibtex-completion-find-additional-pdfs t)
+  ;; specify the application to open the publication pdf when this is present
+  (setq bibtex-completion-pdf-open-function
+        (lambda (fpath)
+          (call-process "open" nil 0 nil "-a" "/Applications/PDF Expert 2.app" fpath)))
+
+  (setq bibitex-completion-browser-function
+        (lambda (ril -) (statrt-process "firefox" "*firefox*" "firefox" url)))
 #+end_src
-* General
+*** Org-Ref
+#+begin_src emacs-lisp
+  ;; (require 'org-ref)
+  ;; (setq reftex-default-bibliography '("~/Desktop/global_library.bib"))
+
+  ;; (setq org-ref-bibliography-notes "~/Desktop/global_library.bib"
+  ;;       org-ref-default-bibliography "~/Desktop/)
+
+  ;; ;;specify that org-latex-pdf-process takes also care of processing the bibliography
+  ;; (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
+#+end_src
+
+* General Keybindings Manager
   #+begin_src emacs-lisp
 
     (use-package general)
