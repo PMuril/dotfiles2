@@ -1,5 +1,5 @@
 #+Title: Emacs Config File
-#+PROPERTY: header-args:emacs-lisp :tangle ./init.new.el
+#+PROPERTY: header-args:emacs-lisp :tangle ./init.el
 #+STARTUP: overview
 
 * Emacs GUI customization
@@ -36,10 +36,11 @@
 
   ;; (cond
   ;;   ((string-equal system-type "darwin")
-  (setq mac-right-command-modifier 'meta)
+  (setq mac-left-option-modifier 'meta)
+  ;; (setq mac-right-command-modifier 'meta)
   ;; (setq mac-caps-modifier 'control)
   ;; enables the input of special characters on MacOS
-  (setq mac-option-modifier 'none)
+  (setq mac-right-option-modifier 'none)
 
 #+end_src
 * Backup Management
@@ -415,7 +416,7 @@
 
    #+end_src
 
-** Org Bulltes  
+** Org Bullets  
    #+begin_src emacs-lisp
 
      (use-package org-bullets
