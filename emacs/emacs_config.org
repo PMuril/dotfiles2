@@ -502,26 +502,40 @@ simultaneously activated
   (setq ivy-re-builders-alist
         '((ivy-bibtex . ivy--regex-ignore-order)
           (t . ivy--regex-plus)))
+
+  ;;keybindings
+  ;; (global-set-key (kbd "<fn>") 'ivy-command-prefix)
+
+  ;; (define-key ivy-command-map "C-i b" ivy-bibtex)
+  ;; (define-key ivy-command-map "C-i B" 'ivy-bibtex-with-local-bibliography)
+  ;; (define-key ivy-command-map "C-i n" 'ivy-bibtex-with-notes)
+  ;; (define-key ivy-command-map (kbd "<fn>") 'ivy-resume)
+
 #+end_src
 *** Bibliographic Database Management
 #+begin_src emacs-lisp
-  (setq bibtex-completion-bibliography '("~/Desktop/global_library.bib"))
-  (setq bibtex-completion-pdf-field "file")
-  ;; (setq bibtex-completion-library-path '("")
 
-  (setq bibtex-completion-pdf-symbol "⌘")
-  (setq bibtex-completion-notes-symbol "✎")
-  ;; For publications that are composed of more than 1 PDF file
-  ;;e.g. a main pubblication + supplemental informations
-  ;; this triggers the engine to browse for additional materials
-  (setq bibtex-completion-find-additional-pdfs t)
-  ;; specify the application to open the publication pdf when this is present
-  (setq bibtex-completion-pdf-open-function
-        (lambda (fpath)
-          (call-process "open" nil 0 nil "-a" "/Applications/PDF Expert 2.app" fpath)))
+        (setq bibtex-completion-bibliography '("~/Desktop/global_library.bib"))
+        (setq bibtex-completion-pdf-field "file")
+        (setq bibtex-completion-notes-path "~/Dropbox/myannotations/Zotero")
 
-  (setq bibitex-completion-browser-function
-        (lambda (ril -) (statrt-process "firefox" "*firefox*" "firefox" url)))
+        ;; For publications that are composed of more than 1 PDF file
+        ;;e.g. a main pubblication + supplemental informations
+        ;; this triggers the engine to browse for additional materials
+        (setq bibtex-completion-find-additional-pdfs t)
+
+        (setq bibtex-completion-pdf-symbol "⌘")
+        (setq bibtex-completion-notes-symbol "✎")
+
+        ;; specify the application to open the publication pdf when this is present
+        (setq bibtex-completion-pdf-open-function
+              (lambda (fpath)
+                (call-process "open" nil 0 nil "-a" "/Applications/PDF Expert 2.app" fpath)))
+
+        ;; specify the browser for opening URLs or DOIs
+        (setq bibitex-completion-browser-function
+              (lambda (ril -) (statrt-process "firefox" "*firefox*" "firefox" url)))
+
 #+end_src
 *** Org-Ref
 #+begin_src emacs-lisp
