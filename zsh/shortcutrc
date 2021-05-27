@@ -1,36 +1,20 @@
-#Some useful shortcuts of system paths
-export texlive="usr/local/texlive/2017/texmf-dist"
-export mycodes="/Users/paolobaldan/Dropbox/mycodes"
-export myshells="/Users/paolobaldan/Dropbox/myshells"
-export mybashscripts="/Users/paolobaldan/Dropbox/myscripts/bash"
-export landjam_new="$mycodes/cpp/landjam_new"
-export icloud_drive="/Users/paolobaldan/Library/Mobile Documents/com~apple~CloudDocs"
- 
-export HOMEBREW_NO_ANALYTICS=1
-#replaces ggrep and gawk with grep and awk
-export PATH=/opt/local/libexec/gnubin:$PATH
-#replaces gsed with sed
-export PATH=/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
- 
-#links gcc-9 and g++-9 to the GNU gcc-9 and g++-9
-export PATH=/usr/local/bin/gcc-9:/usr/local/bin/g++-9:$PATH
+#source OS-dependent shortcuts
+if [[ "$OSTYPE"=="darwin" ]]; then
+    source "/Users/paolobaldan/.config/zsh/macos_shortcutrc";
+elif [[ "$OSTYPE"=="linux-gnu" ]]; then
+    source "/home/alten_pbaldan@elt.elt/.config/zsh/linux_shortcutrc";
+fi
 
-#makes all the clang-toolkit binaries available (clangd in particular)
-export PATH=$PATH:/usr/local/opt/llvm/bin/
-
-#makes the open blas libraries discoverable by the compiler
-export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/sqlite/lib"
-export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/sqlite/include"
-
-#makes npm (node package manager) directly callable 
-export PATH=$PATH:$HOME/.npm-packages/bin
-
-#adds user-defined scripts to PATH
-export PATH=$PATH:/Users/paolobaldan/Dropbox/myscripts/bash
-
-#adds the emacs installation folder to the system path
-#this is required in order to install doom emacs
-export PATH=$PATH:/usr/local/Cellar/emacs/27.2/bin
+#set the size of the terminal rollback memory
+export HISTSIZE=10000
+if [[ "$SHELL"=="/bin/zsh" ]]; then
+    echo "zsh!"
+    export SAVEHIST=10000
+elif [[ "$SHELL"=="/bin/bash" ]]; then
+    echo "bash!"
+    export HISTFILESIZE=10000
+fi
+   echo "stampa di prova" 
 
 #setting vim as the defualt text editor
 export VISUAL=vim
