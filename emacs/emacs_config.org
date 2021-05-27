@@ -565,8 +565,10 @@ simultaneously activated
 
 * Custom
 * Todolist
-** TODO Find a way to integrate org-roam and Zotero without the need to export the .bib file
+** DONE Find a way to integrate org-roam and Zotero without the need to export the .bib file
+CLOSED: [2021-05-27 Thu 16:41]
 *** TODO In case the point above is not possible find a way to encapsulate the name of the path of the library, pdfs and notes inside variables toe be shared between ivy-bibtex and org-ref
 ** TODO Find a way to set the color of some faces at configuration time
 ** TODO Customize the citation commands, as specified in the documentation
 ** TODO See if there's any way to include Zotero tags in the bibliographic search
+** TODO Try to understand why when finding with ivy-bibtex a document that also contains annotations it is not possible to open the annotations
