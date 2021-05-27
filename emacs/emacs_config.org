@@ -539,14 +539,18 @@ simultaneously activated
 #+end_src
 *** Org-Ref
 #+begin_src emacs-lisp
-  ;; (require 'org-ref)
-  ;; (setq reftex-default-bibliography '("~/Desktop/global_library.bib"))
+  (require 'org-ref)
+  (setq reftex-default-bibliography '("~/Desktop/global_library.bib"))
 
-  ;; (setq org-ref-bibliography-notes "~/Desktop/global_library.bib"
-  ;;       org-ref-default-bibliography "~/Desktop/)
+  (setq org-ref-default-bibliography '("~/Desktop/global_library.bib")
+        org-ref-bibliography-notes "~/Dropbox/myannotations/Zotero"
+        bibtex-completion-pdf-field "file"
+        ;; org-ref-get-pdf-filename-function 'org-ref-get-pdf-filename-helm-bibtex
+        ;; org-ref-pdf-field "file"
+        )
 
-  ;; ;;specify that org-latex-pdf-process takes also care of processing the bibliography
-  ;; (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
+  ;;specify that org-latex-pdf-process takes also care of processing the bibliography
+  (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
 #+end_src
 
 * General Keybindings Manager
