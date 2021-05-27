@@ -1,4 +1,5 @@
 #+Title: Emacs Config File
+
 #+PROPERTY: header-args:emacs-lisp :tangle ./init.el
 #+STARTUP: overview
 
@@ -304,7 +305,7 @@
   #+end_src 
 
 * Org Mode
-** Org Mod Init Settings
+** Org Mode Init Settings
    #+begin_src emacs-lisp
      (add-hook 'org-mode-hook 'org-indent-mode)
 
@@ -351,6 +352,12 @@
 
    #+end_src
    
+** Org-Mode Custom faces
+#+begin_src emacs-lisp
+  (set-face-attribute 'org-ellipsis nil :foreground "wheat2" )
+  (set-face-attribute 'org-headline-done nil :foreground "gray73" )
+  (set-face-attribute 'org-document-info-keyword nil :foreground "gray73")
+#+end_src
 ** Org Agenda
    #+begin_src emacs-lisp
 
@@ -552,6 +559,7 @@ simultaneously activated
   ;;specify that org-latex-pdf-process takes also care of processing the bibliography
   (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
 #+end_src
+
 
 * General Keybindings Manager
   #+begin_src emacs-lisp
