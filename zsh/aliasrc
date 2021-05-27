@@ -1,5 +1,6 @@
 #General Aliases
 alias ls="ls -GH"
+alias ll="ls -l"
 
 alias gdb="sudo gdb"
 
