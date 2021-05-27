@@ -30,6 +30,7 @@ nvim/undodir
 emacs/elpa
 //emacs backup configuration file
 emacs/init.el~
+emacs/init.el
 emacs/transient
 emacs/auto-save-list
 emacs/backups
