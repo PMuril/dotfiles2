@@ -522,35 +522,35 @@ simultaneously activated
 *** Bibliographic Database Management
 #+begin_src emacs-lisp
 
-        (setq bibtex-completion-bibliography '("~/Desktop/global_library.bib"))
-        (setq bibtex-completion-pdf-field "file")
-        (setq bibtex-completion-notes-path "~/Dropbox/myannotations/Zotero")
+  (setq bibtex-completion-bibliography '("~/Zotero/zotero_full_lib.bib"))
+  (setq bibtex-completion-pdf-field "file")
+  (setq bibtex-completion-notes-path "~/Dropbox/myannotations/org-roam/Zotero")
 
-        ;; For publications that are composed of more than 1 PDF file
-        ;;e.g. a main pubblication + supplemental informations
-        ;; this triggers the engine to browse for additional materials
-        (setq bibtex-completion-find-additional-pdfs t)
+  ;; For publications that are composed of more than 1 PDF file
+  ;;e.g. a main pubblication + supplemental informations
+  ;; this triggers the engine to browse for additional materials
+  (setq bibtex-completion-find-additional-pdfs t)
 
-        (setq bibtex-completion-pdf-symbol "⌘")
-        (setq bibtex-completion-notes-symbol "✎")
+  (setq bibtex-completion-pdf-symbol "⌘")
+  (setq bibtex-completion-notes-symbol "✎")
 
-        ;; specify the application to open the publication pdf when this is present
-        (setq bibtex-completion-pdf-open-function
-              (lambda (fpath)
-                (call-process "open" nil 0 nil "-a" "/Applications/PDF Expert 2.app" fpath)))
+  ;; specify the application to open the publication pdf when this is present
+  (setq bibtex-completion-pdf-open-function
+        (lambda (fpath)
+          (call-process "open" nil 0 nil "-a" "/Applications/PDF Expert 2.app" fpath)))
 
-        ;; specify the browser for opening URLs or DOIs
-        (setq bibitex-completion-browser-function
-              (lambda (ril -) (statrt-process "firefox" "*firefox*" "firefox" url)))
+  ;; specify the browser for opening URLs or DOIs
+  (setq bibitex-completion-browser-function
+        (lambda (ril -) (statrt-process "firefox" "*firefox*" "firefox" url)))
 
 #+end_src
 *** Org-Ref
 #+begin_src emacs-lisp
   (require 'org-ref)
-  (setq reftex-default-bibliography '("~/Desktop/global_library.bib"))
+  (setq reftex-default-bibliography '("~/Zotero/zotero_full_lib.bib"))
 
-  (setq org-ref-default-bibliography '("~/Desktop/global_library.bib")
-        org-ref-bibliography-notes "~/Dropbox/myannotations/Zotero"
+  (setq org-ref-default-bibliography '("~/Zotero/zotero_full_lib.bib")
+        ;; org-ref-bibliography-notes "~/Dropbox/myannotations/org-roam/Zotero"
         bibtex-completion-pdf-field "file"
         ;; org-ref-get-pdf-filename-function 'org-ref-get-pdf-filename-helm-bibtex
         ;; org-ref-pdf-field "file"
@@ -560,7 +560,33 @@ simultaneously activated
   (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
 #+end_src
 
+*** Org-Roam Bibtex
+#+begin_src emacs-lisp
 
+  (use-package org-roam-bibtex
+    :requires bibtex-completion
+    :hook (org-roam-mode . org-roam-bibtex-mode)
+    :bind (:map org-mode-map
+                (("C-c n a" . orb-note-actions)))
+    :custom
+    (orb-preformat-keywords
+     '(("citekey" . "=key=")
+       "title"
+       "url"
+       "author-or-editor-abbrev"
+       "abstract"
+       "keywords"))
+
+    :custom
+    (orb-templates
+     '(("r" "ref" plain (function org-roam-capture--get-point) "%?"
+        :file-name "zotero/${citekey}"
+        ;; :head "#+TITLE: ${title}\n#+ROAM_KEY: ${ref}\n#+CREATED: %U\n#+EDITED: %U\n#+ROAM_TAGS: \n* Notes on ${citekey}\n :PROPERTIES:\n :Custom_ID:  ${citekey}\n :PDF: /home/julian/Documents/Refs/${citekey}.pdf\n :END:\n"
+        :head "#+TITLE: ${title}\n#+ROAM_KEY: ${ref}\n#+CREATED: %U\n#+EDITED: %U\n#+ROAM_TAGS: \n* Notes on ${citekey}\n :PROPERTIES:\n :Custom_ID:  ${citekey}\n :END:\n"
+        :unnarrowed t
+        :immediate-finish t))))
+
+#+end_src
 * General Keybindings Manager
   #+begin_src emacs-lisp
 
@@ -576,7 +602,11 @@ simultaneously activated
 ** DONE Find a way to integrate org-roam and Zotero without the need to export the .bib file
 CLOSED: [2021-05-27 Thu 16:41]
 *** TODO In case the point above is not possible find a way to encapsulate the name of the path of the library, pdfs and notes inside variables toe be shared between ivy-bibtex and org-ref
-** TODO Find a way to set the color of some faces at configuration time
+** DONE Find a way to set the color of some faces at configuration time
+CLOSED: [2021-06-01 Tue 02:20]
 ** TODO Customize the citation commands, as specified in the documentation
-** TODO See if there's any way to include Zotero tags in the bibliographic search
-** TODO Try to understand why when finding with ivy-bibtex a document that also contains annotations it is not possible to open the annotations
+** DONE See if there's any way to include Zotero tags in the bibliographic search
+CLOSED: [2021-06-01 Tue 02:20]
+** DONE Try to understand why when finding with ivy-bibtex a document that also contains annotations it is not possible to open the annotations
+CLOSED: [2021-06-01 Tue 02:21]
+** TODO Find a way to integrate the information on the pdf file path in the the orb-template instruction
