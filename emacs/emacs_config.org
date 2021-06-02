@@ -489,26 +489,70 @@ It also enables the keybinding "C-r" for redo in Evil mode.
        (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config))))
 
    #+end_src
-
+   
 * Org-Roam
+** Custom Functions
+#+begin_src emacs-lisp
+
+  (defun my/org-roam-link-word-at-point ()
+    (interactive)
+    (when (word-at-point t)
+      (re-search-backward "\\b")
+      (mark-word)
+      (call-interactively #'org-roam-insert-immediate)))
+
+  (defun my/org-roam-open-or-link-at-point ()
+    (interactive)
+    (let ((context (org-element-context)))
+      (if (equal (car context) 'link)
+          (org-open-at-point)
+        (my/org-roam-link-word-at-point))))
+
+#+end_src
+
+Following local org-roam-mode is defined so that org-roam keybindings is valid only in org-roam directory
+#+begin_src emacs-lisp
+  (define-minor-mode my/local-org-roam-mode
+    "Local version of `org-roam-mode'.
+            Does nothing but can be used for local keybindings."
+    :init-value nil
+    :global nil
+    :lighter " OR local"
+    :keymap (let ((map (make-sparse-keymap)))
+              map)
+    :group 'org-roam
+    :require 'org-roam
+    (when my/local-org-roam-mode
+      (message "Local keybindings for Org Roam enabled")))
+#+end_src
 ** Org-Roam Init Settings
 
   #+begin_src emacs-lisp
-    ;;finding ORG-ROAM dependency: sqlite3
-    (executable-find "sqlite3")
-    (add-to-list 'exec-path "path/to/sqlite")
+        ;;finding ORG-ROAM dependency: sqlite3
+        (executable-find "sqlite3")
+        (add-to-list 'exec-path "path/to/sqlite")
 
-    (cond
-     ((string-equal system-type "darwin") 
-      (progn 
-        (setq org-roam-directory "~/Dropbox/myannotations/org-roam")))
-     ((string-equal system-type "linux")
-      (progn
-        (setq org-roam-directory "~/workspace/myannotations"))))
-    (add-hook 'after-init-hook 'org-roam-mode)
+        (cond
+         ((string-equal system-type "darwin") 
+          (progn 
+            (setq org-roam-directory "~/Dropbox/myannotations/org-roam")
+            (setq org-roam-index-file  "~/Dropbox/myannotations/org-roam/index.org")))
+         ((string-equal system-type "linux")
+          (progn
+            (setq org-roam-directory "~/workspace/myannotations")
+            (setq org-roam-directory "~/workspace/myannotations/index.org"))))
+        (add-hook 'after-init-hook 'org-roam-mode)
 
   #+end_src  
   
+** Deft
+#+begin_src emacs-lisp
+  (use-package deft
+    :bind ("<f8>" . deft)
+    :commands(deft)
+    :config(setq deft-directory
+                 deft-extensions '("org")))
+#+end_src
 ** Org-Roam Bibtex
 Below is provided a configuration of Org-Roam Bibtext using
 either *Helm-Bibtex* or *Ivy-Bibtex* as beckend. The two configurations
