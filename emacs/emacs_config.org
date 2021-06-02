@@ -133,16 +133,11 @@
       :custom ((doom-modeline-height 12)))
 
 #+end_src
-* Miscellanea
-  #+begin_src emacs-lisp
-
-    ;; Make ESC quit prompts
-    (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-
+* Log Mode
+#+begin_src emacs-lisp
     ;; logs the command run inside emacs
     (use-package command-log-mode)
-
-  #+end_src
+#+end_src
 
 * Ivy
   #+begin_src emacs-lisp
@@ -309,14 +304,29 @@ It also enables the keybinding "C-r" for redo in Evil mode.
 
 * General Keybindings Manager
 [[https://www.masteringemacs.org/article/mastering-key-bindings-emacs][mastering emacs]] tips for setting emacs keybindings.
-  #+begin_src emacs-lisp
+#+begin_src emacs-lisp
 
-    (use-package general)
+    ;; Make ESC quit prompts
+  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+  (global-unset-key (kbd "C-SPC"))
 
-    (general-define-key
-     "C-M-j" 'counsel-switch-buffer)
+    (use-package general
+      :after evil
+      :config
+      (general-create-definer efs/leader-keys
+        :keymaps '(normal insert visual emacs)
+        :prefix "SPC"
+        :global-prefix "C-SPC") 
 
-  #+end_src
+      (efs/leader-keys
+       "t" '(:ignore t :which-key "toggles")
+       "tt" '(counsel-load-theme :which-key "choose-theme")))
+  ;; "fde" '(lambda () (interactive) (find-file (expand-file-name "~/.config/emacs/emacs_config.org")))))
+
+    ;; (general-define-key
+    ;;  "C-M-j" 'counsel-switch-buffer)
+
+#+end_src
 
 * Org Mode
 ** Org Mode Init Settings
