@@ -338,6 +338,7 @@ It also enables the keybinding "C-r" for redo in Evil mode.
      (use-package org
        :config
        (setq org-ellipsis "▾")
+       (setq display-line-numbers 'relative)
        ;; (set-face-attribute 'org-ellipsis :color "wheat2")
        ;; current activation: M-x customize-face RET org-ellipsis RET
        ;;(efs/org-font-setup)
