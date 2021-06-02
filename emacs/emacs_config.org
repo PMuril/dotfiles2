@@ -200,6 +200,8 @@
   #+end_src 
 
 * Undo-Tree
+Allows to browse the history of all elementary changes made to Emacs.
+It also enables the keybinding "C-r" for redo in Evil mode.
   #+begin_src emacs-lisp
 
     (use-package undo-tree
@@ -218,15 +220,15 @@
     ;; it is possible to use the keybinding C-g u.
     (defun rune/evil-hook ()
       (dolist (mode '(custom-mode
-		      eshell-mode
-		      git-rebase-mode
-		      erc-mode
-		      circe-server-mode
-		      circe-chat-mode
-		      circed-query-mode
-		      sauron-mode
-		      term-mode))
-	(add-to-list 'evil-emacs-state-modes mode)))
+                      eshell-mode
+                      git-rebase-mode
+                      erc-mode
+                      circe-server-mode
+                      circe-chat-mode
+                      circed-query-mode
+                      sauron-mode
+                      term-mode))
+        (add-to-list 'evil-emacs-state-modes mode)))
 
 
     (use-package evil
@@ -250,7 +252,8 @@
       (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
       (evil-set-initial-state 'messages-buffer-mode 'normal)
-      (evil-set-initial-state 'dashboard-mode 'normal))
+      (evil-set-initial-state 'dashboard-mode 'normal)
+      (evil-set-undo-system 'undo-tree))
 
   #+end_src
 
