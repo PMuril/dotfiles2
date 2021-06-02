@@ -233,9 +233,12 @@ It also enables the keybinding "C-r" for redo in Evil mode.
       (setq evil-want-C-u-scroll t)
       (setq evil-want-C-i-jump nil)
       (setq evil-want-fine-undo 'fine)
+
+      ;; evil cursor aspect
       (setq evil-normal-state-cursor '("light blue" box))         ;;setting still not applicable in Alacritty
       (setq evil-insert-state-cursor '("medium sea green" box))   ;;setting still not applicable in Alacritty
       (setq evil-visual-state-cursor '("orange" box))             ;;setting still not applicable in Alacritty
+
       :hook(evil-mode . rune/evil-hook)
       :config
       (evil-mode 1)
@@ -248,6 +251,8 @@ It also enables the keybinding "C-r" for redo in Evil mode.
 
       (evil-set-initial-state 'messages-buffer-mode 'normal)
       (evil-set-initial-state 'dashboard-mode 'normal)
+
+      ;;delegating the undo operations in Evil to undo-tree
       (evil-set-undo-system 'undo-tree))
 
   #+end_src
