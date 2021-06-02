@@ -579,6 +579,22 @@ Following local org-roam-mode is defined so that org-roam keybindings is valid o
     :config(setq deft-directory
                  deft-extensions '("org")))
 #+end_src
+** Org-Roam Keybindings
+#+begin_src emacs-lisp
+  (general-define-key
+   :states '(normal visual)
+   :keymaps 'my/local-org-roam-mode-map
+   :prefix "SPC"
+   "r" '(:ignore t :which-key "roam")
+   "rr" 'rename-file
+   "rd" 'delete-file
+   "rh" 'org-roam-jump-to-index
+   "rb" 'org-roam
+   )
+
+    ;; rebind enter key in normal mode to my/org-roam-link-word-at-point
+  (define-key my/local-org-roam-mode-map [remap evil-ret] 'my/org-roam-open-or-link-at-point)
+#+end_src
 ** Org-Roam Bibtex
 Below is provided a configuration of Org-Roam Bibtext using
 either *Helm-Bibtex* or *Ivy-Bibtex* as beckend. The two configurations
@@ -677,22 +693,6 @@ simultaneously activated
         :unnarrowed t
         :immediate-finish t))))
 
-#+end_src
-** Keybindings
-#+begin_src emacs-lisp
-  (general-define-key
-   :states '(normal visual)
-   :keymaps 'my/local-org-roam-mode-map
-   :prefix "SPC"
-   "r" '(:ignore t :which-key "roam")
-   "rr" 'rename-file
-   "rd" 'delete-file
-   "rh" 'org-roam-jump-to-index
-   "rb" 'org-roam
-   )
-
-    ;; rebind enter key in normal mode to my/org-roam-link-word-at-point
-  (define-key my/local-org-roam-mode-map [remap evil-ret] 'my/org-roam-open-or-link-at-point)
 #+end_src
 * Custom
 
