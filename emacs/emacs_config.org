@@ -570,7 +570,11 @@ Following local org-roam-mode is defined so that org-roam keybindings is valid o
             (setq org-roam-directory "~/workspace/myannotations/index.org"))))
         (add-hook 'after-init-hook 'org-roam-mode)
 
-  #+end_src  
+    ;; specify the app to open the org-roam-graph
+    (setq org-roam-graph-executable "/usr/local/Cellar/graphviz/2.47.1/bin/dot")
+    (setq org-roam-graph-viewer "/Applications/Firefox.app/Contents/MacOS/firefox")
+
+    #+end_src  
   
 ** Deft
 #+begin_src emacs-lisp
@@ -649,7 +653,7 @@ simultaneously activated
 
   ;; specify the browser for opening URLs or DOIs
   (setq bibitex-completion-browser-function
-        (lambda (ril -) (statrt-process "firefox" "*firefox*" "firefox" url)))
+        (lambda (ril -) (start-process "firefox" "*firefox*" "firefox" url)))
 
 #+end_src
 **** Org-Ref
