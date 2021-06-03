@@ -371,28 +371,6 @@ It also enables the keybinding "C-r" for redo in Evil mode.
 
    #+end_src
 
-** Org Keybindings
-   #+begin_src emacs-lisp
-
-     ;;org-mode keybindings
-     ;;enforces the use of org-modes files when conflicting
-     (setq  org-want-todo-bindings t)
-     (global-set-key (kbd "C-c l")   'org-store-link)
-     (global-set-key (kbd "C-c C-l") 'org-insert-link)
-
-     (general-define-key
-      :states '(normal visual)
-      :keymaps 'org-mode-map
-      :prefix "SPC"
-      "e"  '(:ignore t :which-key "export")
-      "el" 'org-latex-export-to-pdf
-      "ep" 'org-publish-current-project
-      "s" 'org-store-link
-      "o" 'counsel-imenu
-      )
-
-   #+end_src
-   
 ** Org-Mode Custom faces
 #+begin_src emacs-lisp
   (set-face-attribute 'org-ellipsis nil :foreground "wheat2" )
@@ -516,6 +494,29 @@ It also enables the keybinding "C-r" for redo in Evil mode.
 
    #+end_src
 
+** Org Keybindings
+#+begin_src emacs-lisp
+
+  ;;org-mode keybindings
+  ;;enforces the use of org-modes files when conflicting
+  (setq  org-want-todo-bindings t)
+  (global-set-key (kbd "C-c l")   'org-store-link)
+  (global-set-key (kbd "C-c C-l") 'org-insert-link)
+
+  (general-define-key
+   :states '(normal visual)
+   :keymaps 'org-mode-map
+   :prefix "SPC"
+   "e"  '(:ignore t :which-key "export")
+   "el" 'org-latex-export-to-pdf
+   "ep" 'org-publish-current-project
+   "s" 'org-store-link
+   "o" 'counsel-imenu
+   "b" 'helm-bibtex
+   )
+
+#+end_src
+   
 * Org-Roam
 ** Custom Functions
 #+begin_src emacs-lisp
