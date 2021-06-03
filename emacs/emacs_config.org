@@ -607,9 +607,9 @@ simultaneously activated
   (helm-mode 1)
   (autoload 'helm-bibtex "helm-bibtex" "" t)
 
-  (helm-add-action-to-source
-   "Open annotated PDF (if present)" 'helm-bibtex-open-annotated-pdf
-   helm-source-bibtex)
+  ;; (helm-add-action-to-source
+  ;;  "Open annotated PDF (if present)" 'helm-bibtex-open-annotated-pdf
+  ;;  helm-source-bibtex)
 #+end_src
 *** Ivy-Bibtex Beckend
 #+begin_src emacs-lisp
