@@ -18,7 +18,7 @@
     (menu-bar-mode -1)
 
   #+end_src
-
+  
 * Commands
 #+begin_src emacs-lisp
 
@@ -184,6 +184,15 @@
 
   #+end_src 
 
+* Olivetti
+#+begin_src emacs-lisp
+  (use-package olivetti
+    :diminish
+    :hook
+    (text-mode . olivetti-mode)
+    :config
+    (setq olivetti-body-width 100))
+#+end_src
 * Which Key
   #+begin_src emacs-lisp
 
