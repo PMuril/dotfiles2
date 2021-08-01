@@ -716,8 +716,48 @@ simultaneously activated
         :immediate-finish t))))
 
 #+end_src
-* Custom
+** Org-Roam Server
+#+begin_src emacs-lisp
+  (use-package org-roam-server
+    :ensure t
+    :config
+    (setq org-roam-server-host "127.0.0.1"
+          org-roam-server-port 8080
+          org-roam-server-authenticate nil
+          org-roam-server-export-inline-images t
+          org-roam-server-serve-files nil
+          org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
+          org-roam-server-network-poll t
+          org-roam-server-network-arrows nil
+          org-roam-server-network-label-truncate t
+          org-roam-server-network-label-truncate-length 60
+          org-roam-server-network-label-wrap-length 20))
+#+end_src
+* AucTex
+#+begin_src emacs-lisp
+  ;; enables reftex whenever a latex buffer is opened
+  (require 'reftex)
+  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+
+  (setq-default TeXMaster nil)
+#+end_src
+* Yasnippets
+#+begin_src emacs-lisp
+    (add-to-list 'load-path
+                 "~/.config/emacs/plugins/yasnippet")
+    (require 'yasnippet)
+
+    (yas-reload-all)
+    (add-hook 'prog-mode-hook #'yas-minor-mode)
+
+  ;; fundamental-mode loads a set of snippets that are useful in a multi-environment environment and that gets loaded whenever a minor mode is activated
+  (add-hook 'yas-minor-mode-hook (lambda ()
+                                   (yas-activate-extra-mode 'fundamental-mode)))
+#+end_src
+* Custom
 * Todotree
 ** DONE Find a way to integrate org-roam and Zotero without the need to export the .bib file
 CLOSED: [2021-05-27 Thu 16:41]
