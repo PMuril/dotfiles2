@@ -59,11 +59,12 @@
 * Package System Setup
   #+begin_src emacs-lisp
 
-    (require 'package)
 
+    (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+    (require 'package)
     (setq package-archives '(("org" . "https://elpa.gnu.org/packages/")
-			     ("melpa" . "http://melpa.org/packages/")
-			     ("melpa-stable" . "http://stable.melpa.org/packages/")))
+                             ("melpa" . "http://melpa.org/packages/")
+                             ("melpa-stable" . "http://stable.melpa.org/packages/")))
 
     (package-initialize)
     (unless package-archive-contents
@@ -112,7 +113,7 @@
 
      ;;Display relative line numbers
      (global-display-line-numbers-mode)
-     (setq display-line-numbers 'relative)
+     (setq display-line-numbers-type 'relative)
 
    #+end_src
    
