@@ -765,8 +765,7 @@ simultaneously activated
   (add-hook 'yas-minor-mode-hook (lambda ()
                                    (yas-activate-extra-mode 'fundamental-mode)))
 #+end_src
-* Custom
-* Todotree
+* Todolist
 ** DONE Find a way to integrate org-roam and Zotero without the need to export the .bib file
 CLOSED: [2021-05-27 Thu 16:41]
 *** DONE In case the point above is not possible find a way to encapsulate the name of the path of the library, pdfs and notes inside variables toe be shared between ivy-bibtex and org-ref
@@ -779,5 +778,6 @@ CLOSED: [2021-06-01 Tue 02:20]
 ** DONE Try to understand why when finding with ivy-bibtex a document that also contains annotations it is not possible to open the annotations
 CLOSED: [2021-06-01 Tue 02:21]
 ** TODO Find a way to integrate the information on the pdf file path in the the orb-template instruction
-** TODO Create a fully fledged emacs-config file
+** TODO Create a fully fledged helm-config area
 *** TODO Decouple the initialization of helm and helm-bibtex
+** TODO Customize the flyspell error faces
