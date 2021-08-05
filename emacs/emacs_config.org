@@ -516,7 +516,7 @@ It also enables the keybinding "C-r" for redo in Evil mode.
   (general-define-key
    :states '(normal visual)
    :keymaps 'org-mode-map
-   :prefix "SPC"
+   :prefix "C-c"
    "e"  '(:ignore t :which-key "export")
    "el" 'org-latex-export-to-pdf
    "ep" 'org-publish-current-project
