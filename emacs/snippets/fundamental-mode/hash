@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: generate_hash 
+# key: /hash
+# --
+
+`(buffer-hash)`
