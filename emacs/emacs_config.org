@@ -531,19 +531,27 @@ It also enables the keybinding "C-r" for redo in Evil mode.
 ** Custom Functions
 #+begin_src emacs-lisp
 
-  (defun my/org-roam-link-word-at-point ()
-    (interactive)
-    (when (word-at-point t)
-      (re-search-backward "\\b")
-      (mark-word)
-      (call-interactively #'org-roam-insert-immediate)))
+      (defun my/org-roam-link-word-at-point ()
+        (interactive)
+        (when (word-at-point t)
+          (re-search-backward "\\b")
+          (mark-word)
+          (call-interactively #'org-roam-insert-immediate)))
 
-  (defun my/org-roam-open-or-link-at-point ()
-    (interactive)
-    (let ((context (org-element-context)))
-      (if (equal (car context) 'link)
-          (org-open-at-point)
-        (my/org-roam-link-word-at-point))))
+      (defun my/org-roam-open-or-link-at-point ()
+        (interactive)
+        (let ((context (org-element-context)))
+          (if (equal (car context) 'link)
+              (org-open-at-point)
+            (my/org-roam-link-word-at-point))))
+
+  (defvar custom-org-roam-directory
+  (cond ((string-equal system-type "darwin") "~/Dropbox/myannotations/org-roam")
+        ((string-equal system-type "linux") "~/workspace/myannotations")))
+
+  (defvar custom-org-roam-index
+  (cond ((string-equal system-type "darwin") "~/Dropbox/myannotations/org-roam/index.org")
+        ((string-equal system-type "linux") "~/workspace/myannotations/index.org")))
 
 #+end_src
 
@@ -563,29 +571,41 @@ Following local org-roam-mode is defined so that org-roam keybindings is valid o
       (message "Local keybindings for Org Roam enabled")))
 #+end_src
 ** Org-Roam Init Settings
-
   #+begin_src emacs-lisp
-        ;;finding ORG-ROAM dependency: sqlite3
-        (executable-find "sqlite3")
-        (add-to-list 'exec-path "path/to/sqlite")
 
-        (cond
-         ((string-equal system-type "darwin") 
-          (progn 
-            (setq org-roam-directory "~/Dropbox/myannotations/org-roam")
-            (setq org-roam-index-file  "~/Dropbox/myannotations/org-roam/index.org")))
-         ((string-equal system-type "linux")
-          (progn
-            (setq org-roam-directory "~/workspace/myannotations")
-            (setq org-roam-directory "~/workspace/myannotations/index.org"))))
-        (add-hook 'after-init-hook 'org-roam-mode)
+    ;;finding ORG-ROAM dependency: sqlite3
+    (executable-find "sqlite3")
+    (add-to-list 'exec-path "path/to/sqlite")
+
+    (use-package org-roam
+      :ensure t
+      :custom
+      (org-roam-directory custom-org-roam-directory)
+      (org-roam-index custom-org-roam-index)
+      ;; ((my/set-org-roam-index-file))
+      :bind (("C-c n l" . org-roam-buffer-toggle)
+             ("C-c n f" . org-roam-node-find)
+             ("C-c n g" . org-roam-graph)
+             ("C-c n i" . org-roam-node-insert)
+             ("C-c n c" . org-roam-capture)
+             ;; Dailies
+             ("C-c n j" . org-roam-dailies-capture-today))
+      :config
+      (org-roam-setup)
+      ;; If using org-roam-protocol
+      ;; (require 'org-roam-protocol)
+      )
+
+    ;;specifies that org-roam v2 is in use
+    (setq org-roam-v2-ack t)
+
+    (add-hook 'after-init-hook 'org-roam-mode)
 
     ;; specify the app to open the org-roam-graph
     (setq org-roam-graph-executable "/usr/local/Cellar/graphviz/2.47.1/bin/dot")
     (setq org-roam-graph-viewer "/Applications/Firefox.app/Contents/MacOS/firefox")
 
     #+end_src  
-  
 ** Deft
 #+begin_src emacs-lisp
   (use-package deft
@@ -617,13 +637,12 @@ are (presumably) mutually exclusive and therefore cannot be
 simultaneously activated
 *** Helm-Bibtex Beckend
 #+begin_src emacs-lisp
-  (require 'helm-config)
-  (helm-mode 1)
-  (autoload 'helm-bibtex "helm-bibtex" "" t)
+  (use-package helm-bibtex
+    :bind (("C-c b" . helm-bibtex)))
 
-  ;; (helm-add-action-to-source
-  ;;  "Open annotated PDF (if present)" 'helm-bibtex-open-annotated-pdf
-  ;;  helm-source-bibtex)
+    (require 'helm-config)
+    (helm-mode 1)
+    (autoload 'helm-bibtex "helm-bibtex" "" t)
 #+end_src
 *** Ivy-Bibtex Beckend
 #+begin_src emacs-lisp
@@ -631,15 +650,6 @@ simultaneously activated
   (setq ivy-re-builders-alist
         '((ivy-bibtex . ivy--regex-ignore-order)
           (t . ivy--regex-plus)))
-
-  ;;keybindings
-  ;; (global-set-key (kbd "<fn>") 'ivy-command-prefix)
-
-  ;; (define-key ivy-command-map "C-i b" ivy-bibtex)
-  ;; (define-key ivy-command-map "C-i B" 'ivy-bibtex-with-local-bibliography)
-  ;; (define-key ivy-command-map "C-i n" 'ivy-bibtex-with-notes)
-  ;; (define-key ivy-command-map (kbd "<fn>") 'ivy-resume)
-
 #+end_src
 *** Bibliographic Database Management
 #+begin_src emacs-lisp
@@ -691,7 +701,6 @@ simultaneously activated
 
 *** Org-Roam Bibtex
 #+begin_src emacs-lisp
-
   (use-package org-roam-bibtex
     :requires bibtex-completion
     :hook (org-roam-mode . org-roam-bibtex-mode)
@@ -714,7 +723,6 @@ simultaneously activated
         :head "#+TITLE: ${title}\n#+ROAM_KEY: ${ref}\n#+CREATED: %U\n#+EDITED: %U\n#+ROAM_TAGS: \n* Notes on ${citekey}\n :PROPERTIES:\n :Custom_ID:  ${citekey}\n :END:\n"
         :unnarrowed t
         :immediate-finish t))))
-
 #+end_src
 ** Org-Roam Server
 #+begin_src emacs-lisp
