@@ -360,33 +360,104 @@ It also enables the keybinding "C-r" for redo in Evil mode.
 ** General Settings
    #+begin_src emacs-lisp
 
-     (use-package org
-       :config
-       (setq org-ellipsis "▾")
-       (setq display-line-numbers 'relative)
-       ;; (set-face-attribute 'org-ellipsis :color "wheat2")
-       ;; current activation: M-x customize-face RET org-ellipsis RET
-       ;;(efs/org-font-setup)
-       ;; Here it would probably be necessary to setup an environment specific folder
-       (setq org-agenda-start-with-log-mode t)
-       (setq org-log-done 'time)
-       (setq org-log-into-drawer t)
-       ;;org-mode task list
-       (setq org-tag-alist '(
-                             ;; ("@parisi" . ?gp) ("@geotsek" . ?gt)
-                             ("@amerigo" . ?a) ("@macchioni" . ?m) ("@grazzini" . ?g)
-                             ("@numeric" . ?n) ("@jamming" . ?j) ("DOS" . ?d) ("MFT" . ?m)
-                             ("@exercise" . ?e) ("@open problem" ?p) ("question" ?q)))
+        (use-package org
+          :config
+          (setq org-ellipsis "▾")
+          (setq display-line-numbers 'relative)
+          (setq org-agenda-start-with-log-mode t)
+          (setq org-log-done 'time)
+          (setq org-log-into-drawer t)
+          (setq org-highlight-latex-and-related '(latex script entities))
+          ;;org-mode task list
      )
 
    #+end_src
+*** TODOs
+#+begin_src emacs-lisp
+  (setq org-enforce-todo-dependencies t)
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "DONE(d)")
+          (sequence "QUESTION(q)" "ANSWER(a)")))
+#+end_src
+*** Tags
+#+begin_src emacs-lisp
 
-** Org-Mode Custom faces
+  (setq org-tag-alist '((:startgrouptag)
+                        ("recipient")
+                        (:grouptags)
+                        ("@parisi" . ?p) ("@geotsek" . ?t)
+                        (:endgrouptag)
+
+                        (:startgroup)
+                        ("todo-type")
+                        (:grouptags)
+                        ("exercise" . ?e) ("open problem" . ?p) ("question" . ?q)
+                        (:endgroup)
+
+                        (:startgroup)
+                        ("priority")
+                        (:grouptags)
+                        ("high")("moderate")("small")("none")
+                        (:endgroup) 
+
+                        ("@numeric" . ?n) ("@jamming" . ?j) ("DOS" . ?d) ("MFT" . ?m)))
+#+end_src
+
+*** LaTeX Preview
+#+begin_src emacs-lisp
+  (setq org-latex-create-formula-image-program 'dvipng)
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
+#+end_src
+*** LaTeX intellisense and code Completion
+#+begin_src emacs-lisp
+  (require 'latex)
+  (setq latex-math-mode t)
+#+end_src
+*** Org-Mode export
+** Org-Mode Appearence
+*** Custom Faces
 #+begin_src emacs-lisp
   (set-face-attribute 'org-ellipsis nil :foreground "wheat2" )
   (set-face-attribute 'org-headline-done nil :foreground "gray73" )
   (set-face-attribute 'org-document-info-keyword nil :foreground "gray73")
 #+end_src
+*** Org Bullets
+   #+begin_src emacs-lisp
+
+     (use-package org-bullets
+       :after org
+       :hook (org-mode . org-bullets-mode)
+       :custom
+       (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+
+
+       ;; Set faces for heading levels
+(with-eval-after-load 'org-faces
+       (dolist (face '((org-level-1 . 1.2)
+		       (org-level-2 . 1.1)
+		       (org-level-3 . 1.05)
+		       (org-level-4 . 1.0)
+		       (org-level-5 . 1.0)
+		       (org-level-6 . 1.0)
+		       (org-level-7 . 1.1)
+		       (org-level-8 . 1.1)))
+	 (set-face-attribute (car face) nil :font "Source Code Pro for Powerline" :weight 'regular :height (cdr face))))
+
+   #+end_src 
+
+*** Fill-Column Mode
+   #+begin_src emacs-lisp
+
+     (defun efs/org-mode-visual-fill ()
+       (setq visual-fill-column-width 100
+	     visual-fill-column-center-text t)
+       (visual-fill-column-mode 1))
+
+     (use-package visual-fill-column
+       :hook (org-mode . efs/org-mode-visual-fill))
+
+   #+end_src
+
 ** Org Agenda
    #+begin_src emacs-lisp
 
@@ -439,44 +510,18 @@ It also enables the keybinding "C-r" for redo in Evil mode.
 
    #+end_src 
 
-** Fill-Column Mode
-   #+begin_src emacs-lisp
+** Org-Babel
+*** Programming Languages
+#+begin_src emacs-lisp
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (python . t)))
 
-     (defun efs/org-mode-visual-fill ()
-       (setq visual-fill-column-width 100
-	     visual-fill-column-center-text t)
-       (visual-fill-column-mode 1))
+  (setq org-confirm-babel-evaluate nil)
+#+end_src
 
-     (use-package visual-fill-column
-       :hook (org-mode . efs/org-mode-visual-fill))
-
-   #+end_src
-
-** Org Bullets  
-   #+begin_src emacs-lisp
-
-     (use-package org-bullets
-       :after org
-       :hook (org-mode . org-bullets-mode)
-       :custom
-       (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
-
-
-       ;; Set faces for heading levels
-(with-eval-after-load 'org-faces
-       (dolist (face '((org-level-1 . 1.2)
-		       (org-level-2 . 1.1)
-		       (org-level-3 . 1.05)
-		       (org-level-4 . 1.0)
-		       (org-level-5 . 1.0)
-		       (org-level-6 . 1.0)
-		       (org-level-7 . 1.1)
-		       (org-level-8 . 1.1)))
-	 (set-face-attribute (car face) nil :font "Source Code Pro for Powerline" :weight 'regular :height (cdr face))))
-
-   #+end_src 
-
-** Org Structure Template
+*** Org Structure Template
    #+begin_src emacs-lisp
 
      (require 'org-tempo)
