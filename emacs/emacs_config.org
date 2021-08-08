@@ -769,23 +769,23 @@ simultaneously activated
         :unnarrowed t
         :immediate-finish t))))
 #+end_src
-** Org-Roam Server
-#+begin_src emacs-lisp
-  (use-package org-roam-server
-    :ensure t
-    :config
-    (setq org-roam-server-host "127.0.0.1"
-          org-roam-server-port 8080
-          org-roam-server-authenticate nil
-          org-roam-server-export-inline-images t
-          org-roam-server-serve-files nil
-          org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
-          org-roam-server-network-poll t
-          org-roam-server-network-arrows nil
-          org-roam-server-network-label-truncate t
-          org-roam-server-network-label-truncate-length 60
-          org-roam-server-network-label-wrap-length 20))
-#+end_src
+# ** Org-Roam Server
+# #+begin_src emacs-lisp
+#   (use-package org-roam-server
+#     :ensure t
+#     :config
+#     (setq org-roam-server-host "127.0.0.1"
+#           org-roam-server-port 8080
+#           org-roam-server-authenticate nil
+#           org-roam-server-export-inline-images t
+#           org-roam-server-serve-files nil
+#           org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
+#           org-roam-server-network-poll t
+#           org-roam-server-network-arrows nil
+#           org-roam-server-network-label-truncate t
+#           org-roam-server-network-label-truncate-length 60
+#           org-roam-server-network-label-wrap-length 20))
+# #+end_src
 * AucTex
 #+begin_src emacs-lisp
         ;; enables reftex whenever a latex buffer is opened
@@ -837,3 +837,4 @@ CLOSED: [2021-06-01 Tue 02:21]
 ** TODO Create a fully fledged helm-config area
 *** TODO Decouple the initialization of helm and helm-bibtex
 ** TODO Customize the flyspell error faces
+** TODO Replace Org-Roam Server with Org-Roam U:I
