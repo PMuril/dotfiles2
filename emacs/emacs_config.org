@@ -805,8 +805,8 @@ simultaneously activated
     (setq ispell-dictionary "english")
     (setq ispell-list-command "--list")
 
-  (global-set-jey (kbd "C-c i b") 'ispell-buffer)
-  (global-set-jey (kbd "C-c i f") 'flyspell-buffer)
+  (global-set-key (kbd "C-c i b") 'ispell-buffer)
+  (global-set-key (kbd "C-c i f") 'flyspell-buffer)
 #+end_src
 * Yasnippets
 #+begin_src emacs-lisp
