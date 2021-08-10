@@ -786,22 +786,22 @@ simultaneously activated
 # #+end_src
 * AucTex
 #+begin_src emacs-lisp
-        ;; enables reftex whenever a latex buffer is opened
-    (require 'reftex)
-    (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+  ;; enables reftex whenever a latex buffer is opened
+  (require 'reftex)
+  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 
-    (setq TeX-auto-save t)
-    (setq TeX-parse-self t)
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
 
-    ;;enables flyspell (frontend) mode whenever a .tex buffer is opened
-    (add-hook 'LaTeX-mode-hook #'turn-on-flyspell)
+  ;;enables flyspell (frontend) mode whenever a .tex buffer is opened
+  (add-hook 'LaTeX-mode-hook #'turn-on-flyspell)
 
-    (setq-default TeXMaster nil)
+  (setq-default TeXMaster nil)
 
-
-    (setq-default ispell-program-name "aspell")
-    (setq ispell-dictionary "english")
-    (setq ispell-list-command "--list")
+  ;;sets aspell as the beckend engine for spellchecking in TeX buffers
+  (setq-default ispell-program-name "aspell")
+  (setq ispell-dictionary "english")
+  (setq ispell-list-command "--list --mode=tex")
 
   (global-set-key (kbd "C-c i b") 'ispell-buffer)
   (global-set-key (kbd "C-c i f") 'flyspell-buffer)
