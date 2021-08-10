@@ -1,0 +1,14 @@
+#+TITLE: ${title}
+#+ROAM_KEY: ${ref}
+#+CREATED: %U
+#+EDITED: %U
+#+ROAM_TAGS: ${tags}
+
+* Notes on ${citekey}
+:PROPERTIES:
+:Custom_ID:  ${citekey}
+:END:
+
+
+%?
+* Open Problems
