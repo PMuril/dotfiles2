@@ -14,7 +14,6 @@ elif [[ "$SHELL"=="/bin/bash" ]]; then
     echo "bash!"
     export HISTFILESIZE=10000
 fi
-   echo "stampa di prova" 
 
 #setting vim as the defualt text editor
 export VISUAL=vim
