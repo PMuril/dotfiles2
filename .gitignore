@@ -10,6 +10,9 @@ xbuild
 stetic
 neofetch
 
+//MacOs artifacts
+.DS_Store
+
 //zsh-related
 //zsh history files
 zsh/.zsh_history
@@ -37,6 +40,7 @@ emacs/backups
 emacs/bookmarks
 emacs/org-roam.db
 emacs/projectile-bookmarks.eld
+emacs/.org-id-locations
 
 //yabai windows manager
 yabai
