@@ -627,7 +627,6 @@ Following local org-roam-mode is defined so that org-roam keybindings is valid o
       :custom
       (org-roam-directory custom-org-roam-directory)
       (org-roam-index custom-org-roam-index)
-      ;; ((my/set-org-roam-index-file))
       :bind (("C-c n l" . org-roam-buffer-toggle)
              ("C-c n f" . org-roam-node-find)
              ("C-c n g" . org-roam-graph)
@@ -643,8 +642,6 @@ Following local org-roam-mode is defined so that org-roam keybindings is valid o
 
     ;;specifies that org-roam v2 is in use
     (setq org-roam-v2-ack t)
-
-    (add-hook 'after-init-hook 'org-roam-mode)
 
     ;; specify the app to open the org-roam-graph
     (setq org-roam-graph-executable "/usr/local/Cellar/graphviz/2.47.1/bin/dot")
@@ -748,7 +745,8 @@ simultaneously activated
 #+begin_src emacs-lisp
   (use-package org-roam-bibtex
     :requires bibtex-completion
-    :hook (org-roam-mode . org-roam-bibtex-mode)
+    :after org-roam
+    (require 'org-ref)
     :bind (:map org-mode-map
                 (("C-c n a" . orb-note-actions)))
     :custom
