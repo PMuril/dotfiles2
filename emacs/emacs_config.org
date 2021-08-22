@@ -801,10 +801,26 @@ simultaneously activated
   ;;sets aspell as the beckend engine for spellchecking in TeX buffers
   (setq-default ispell-program-name "aspell")
   (setq ispell-dictionary "english")
+
+  ;; specifies the path where to store the personal dictionary
+  (setq ispell-personal-dictionary "~/.config/emacs/dictionaries/aspell_personal")
+
   (setq ispell-list-command "--list --mode=tex")
 
   (global-set-key (kbd "C-c i b") 'ispell-buffer)
   (global-set-key (kbd "C-c i f") 'flyspell-buffer)
+
+  (setq ispell-tex-skip-alists
+        (list
+         (append
+          (car ispell-tex-skip-alists)
+          '(("[^\\]\\$" . "[^\\]\\$")
+            ("\\\\acrfull" ispell-tex-arg-end 2)
+            ("\\\\eqref" ispell-tex-arg-end 2)
+            ("\\\\begin{equation}" . "\\\\end{equation}")
+            ("\\\\begin{equation\\*}" . "\\\\end{equation\\*}")
+            ))
+         (cadr ispell-tex-skip-alists)))
 #+end_src
 * Yasnippets
 #+begin_src emacs-lisp
