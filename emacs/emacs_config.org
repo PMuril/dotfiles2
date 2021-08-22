@@ -743,30 +743,45 @@ simultaneously activated
 
 *** Org-Roam Bibtex
 #+begin_src emacs-lisp
-  (use-package org-roam-bibtex
-    :requires bibtex-completion
-    :after org-roam
-    (require 'org-ref)
-    :bind (:map org-mode-map
-                (("C-c n a" . orb-note-actions)))
-    :custom
-    (orb-preformat-keywords
-     '(("citekey" . "=key=")
-       "title"
-       "url"
-       "author-or-editor-abbrev"
-       "abstract"
-       "keywords"))
+    (use-package org-roam-bibtex
+      :after org-roam
+      :config
+      (require 'org-ref))
 
-    :custom
-    (orb-templates
-     '(("r" "ref" plain (function org-roam-capture--get-point) "%?"
-        :file-name "zotero/${citekey}"
-        ;; :head "#+TITLE: ${title}\n#+ROAM_KEY: ${ref}\n#+CREATED: %U\n#+EDITED: %U\n#+ROAM_TAGS: \n* Notes on ${citekey}\n :PROPERTIES:\n :Custom_ID:  ${citekey}\n :PDF: /home/julian/Documents/Refs/${citekey}.pdf\n :END:\n"
-        :head "#+TITLE: ${title}\n#+ROAM_KEY: ${ref}\n#+CREATED: %U\n#+EDITED: %U\n#+ROAM_TAGS: \n* Notes on ${citekey}\n :PROPERTIES:\n :Custom_ID:  ${citekey}\n :END:\n"
-        :unnarrowed t
-        :immediate-finish t))))
+  (setq org-roam-capture-templates
+        '(("r" "ref" plain
+	 ""
+           ;; (file "~/.config/emacs/orb-templates/reference.org")
+           :if-new
+           (file+head "Zotero/${citekey}.org" "#+title: ${title}\n")
+           :unnarrowed t)))
 #+end_src
+
+# #+begin_src emacs-lisp
+#   (use-package org-roam-bibtex
+#     :requires bibtex-completion
+#     :after org-roam
+#     :hook (org-roam-mode . org-roam-bibtex-mode)
+#     :bind (:map org-mode-map
+#                 (("C-c n a" . orb-note-actions)))
+#     :custom
+#     (orb-preformat-keywords
+#      '(("citekey" . "=key=")
+#        "title"
+#        "url"
+#        "author-or-editor-abbrev"
+#        "abstract"
+#        "keywords"))
+
+#     :config
+#     (setq orb-templates
+#      '(("r" "ref" plain (function org-roam-capture--get-point) "%?"
+#         :file-name "zotero/${citekey}"
+#         :head "#+TITLE: ${title}\n#+ROAM_KEY: ${ref}\n#+CREATED: %U\n#+EDITED: %U\n#+ROAM_TAGS: \n* Notes on ${citekey}\n :PROPERTIES:\n :Custom_ID:  ${citekey}\n :END:\(not )"
+#         :unnarrowed t
+#         :immediate-finish t))))
+# #+end_src
+
 # ** Org-Roam Server
 # #+begin_src emacs-lisp
 #   (use-package org-roam-server
