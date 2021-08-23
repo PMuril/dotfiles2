@@ -192,10 +192,21 @@
     :config
     (setq olivetti-body-width 100))
 #+end_src
+* Perspective
+#+begin_src emacs-lisp
+
+  (use-package perspective
+    :ensure t
+    :bind (("C-x k" . persp-kill-buffer*))
+    :init
+    (persp-mode))
+
+#+end_src
 * Which Key
   #+begin_src emacs-lisp
 
     (use-package which-key
+      :ensure t
       :init (which-key-mode)
       :diminish which-key-mode
       :config
