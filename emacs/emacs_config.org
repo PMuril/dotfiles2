@@ -509,7 +509,9 @@ It also enables the keybinding "C-r" for redo in Evil mode.
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((emacs-lisp . t)
-     (python . t)))
+     (python . t)
+     (C . t)
+     (latex . t))) ;; C, C++ and D are all activated loading the C language
 
   (setq org-confirm-babel-evaluate nil)
 #+end_src
