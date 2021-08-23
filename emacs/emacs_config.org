@@ -51,26 +51,28 @@
         version-control t)    ;; Use version numbers for backups. 
 
 #+end_src
-* Package System Setup
+* Package Management System Setup
   #+begin_src emacs-lisp
-
 
     (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
     (require 'package)
     (setq package-archives '(("org" . "https://elpa.gnu.org/packages/")
                              ("melpa" . "http://melpa.org/packages/")
                              ("melpa-stable" . "http://stable.melpa.org/packages/")))
-
     (package-initialize)
+
     (unless package-archive-contents
       (package-refresh-contents))
 
-    ;; Initialize use-package on non-Linux platform
+    ;; Bootstraps the use-package installation
     (unless (package-installed-p 'use-package)
+      (package-refresh-contents)
       (package-install 'use-package))
 
-    (require 'use-package)
-    ;;enforces package manager to download a package
+    (eval-when-compile 
+      (require 'use-package))
+
+    ;;enforces use-package manager to download a package
     ;;whenever this is require but not already installed
     (setq use-package-always-ensure t)
 
