@@ -1,14 +1,19 @@
-#+TITLE: ${title}
 #+ROAM_KEY: ${ref}
 #+CREATED: %U
 #+EDITED: %U
-#+ROAM_TAGS: ${tags}
+#+ROAM_TAGS: %^{keywords} #zotero tags
 
-* Notes on ${citekey}
 :PROPERTIES:
-:Custom_ID:  ${citekey}
+:Custom_ID:  %^{citekey}
 :END:
 
 
+* Notes on %^{citekey}
+
+** Synopsis
 %?
-* Open Problems
+** Abstract
+
+** Annotations
+
+** Open Problems
