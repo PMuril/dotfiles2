@@ -114,7 +114,8 @@
   #+begin_src emacs-lisp 
 
     (use-package rainbow-delimiters
-	:hook (prog-mode . rainbow-delimiters-mode))
+      :ensure t
+      :hook (prog-mode . rainbow-delimiters-mode))
 
   #+end_src
 
@@ -137,20 +138,21 @@
   #+begin_src emacs-lisp
 
     (use-package ivy
+      :ensure t
       :diminish
       :bind (("C-s" . swiper)
-	     :map ivy-minibuffer-map
-	     ("TAB" . ivy-alt-done)
-	     ("C-l" . ivy-alt-done)
-	     ("C-j" . ivy-next-line)
-	     ("C-k" . ivy-previous-line)
-	     :map ivy-switch-buffer-map
-	     ("C-k" . ivy-previous-line)
-	     ("C-l" . ivy-done)
-	     ("C-d" . ivy-switch-buffer-kill)
-	     :map ivy-reverse-i-search-map
-	     ("C-k" . ivy-previous-line)
-	     ("C-d" . ivy-reverse-i-search-kill))
+             :map ivy-minibuffer-map
+             ("TAB" . ivy-alt-done)
+             ("C-l" . ivy-alt-done)
+             ("C-j" . ivy-next-line)
+             ("C-k" . ivy-previous-line)
+             :map ivy-switch-buffer-map
+             ("C-k" . ivy-previous-line)
+             ("C-l" . ivy-done)
+             ("C-d" . ivy-switch-buffer-kill)
+             :map ivy-reverse-i-search-map
+             ("C-k" . ivy-previous-line)
+             ("C-d" . ivy-reverse-i-search-kill))
       :config
       (ivy-mode 1))
 
@@ -160,6 +162,7 @@
    #+begin_src emacs-lisp
 
      (use-package ivy-rich
+       :ensure t
        :init
        (ivy-rich-mode 1))
 
@@ -169,11 +172,12 @@
   #+begin_src emacs-lisp
 
     (use-package counsel
+      :ensure t
       :bind (("M-x" . counsel-M-x)
-	      ("C-x b" . counsel-ibuffer)
-	      ("C-x C-f" . counsel-find-file)
-	      :map minibuffer-local-map
-	      ("C-r" . 'counsel-minibuffer-history)))
+              ("C-x b" . counsel-ibuffer)
+              ("C-x C-f" . counsel-find-file)
+              :map minibuffer-local-map
+              ("C-r" . 'counsel-minibuffer-history)))
 
   #+end_src 
 
@@ -230,6 +234,7 @@ It also enables the keybinding "C-r" for redo in Evil mode.
 
 
     (use-package evil
+      :ensure t
       :init
       (setq evil-want-integration t)
       (setq evil-want-keybinding nil)
@@ -264,6 +269,7 @@ It also enables the keybinding "C-r" for redo in Evil mode.
    #+begin_src emacs-lisp
 
      (use-package evil-collection
+       :ensure t
        :after evil
        :config
        (evil-collection-init))
@@ -277,9 +283,9 @@ It also enables the keybinding "C-r" for redo in Evil mode.
 
      ;; vim surround
      (use-package evil-surround
-		  :ensure t
-		  :config
-		  (global-evil-surround-mode 1))
+                  :ensure t
+                  :config
+                  (global-evil-surround-mode 1))
 
    #+end_src
 
@@ -353,16 +359,17 @@ It also enables the keybinding "C-r" for redo in Evil mode.
 ** General Settings
    #+begin_src emacs-lisp
 
-        (use-package org
-          :config
-          (setq org-ellipsis "▾")
-          (setq display-line-numbers 'relative)
-          (setq org-agenda-start-with-log-mode t)
-          (setq org-log-done 'time)
-          (setq org-log-into-drawer t)
-          (setq org-highlight-latex-and-related '(latex script entities))
-          ;;org-mode task list
-     )
+     (use-package org
+       :ensure t
+       :config
+       (setq org-ellipsis "▾")
+       (setq display-line-numbers 'relative)
+       (setq org-agenda-start-with-log-mode t)
+       (setq org-log-done 'time)
+       (setq org-log-into-drawer t)
+       (setq org-highlight-latex-and-related '(latex script entities))
+       ;;org-mode task list
+       )
 
    #+end_src
 *** TODOs
@@ -675,7 +682,9 @@ simultaneously activated
 *** Helm-Bibtex Beckend
 #+begin_src emacs-lisp
   (use-package helm-bibtex
-    :bind (("C-c b" . helm-bibtex)))
+    :ensure t
+    :bind (("C-c h b" . helm-bibtex)
+           ("C-c h n" . helm-bibtex-with-notes)))
 
     (require 'helm-config)
     (helm-mode 1)
