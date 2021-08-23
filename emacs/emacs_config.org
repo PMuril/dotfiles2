@@ -35,12 +35,7 @@
 * KeyModifiers
 #+begin_src emacs-lisp
 
-  ;; (cond
-  ;;   ((string-equal system-type "darwin")
   (setq mac-left-option-modifier 'meta)
-  ;; (setq mac-right-command-modifier 'meta)
-  ;; (setq mac-caps-modifier 'control)
-  ;; enables the input of special characters on MacOS
   (setq mac-right-option-modifier 'none)
 
 #+end_src
@@ -95,8 +90,6 @@
 ** Theme
    #+begin_src emacs-lisp
 
-     ;; if system is MacOs enables doom-dracula color theme
-     ;; otherwise load the default theme
      (use-package doom-themes
      :init (load-theme 'doom-zenburn t))
 
@@ -743,46 +736,31 @@ simultaneously activated
 
 *** Org-Roam Bibtex
 #+begin_src emacs-lisp
-    (use-package org-roam-bibtex
-      :after org-roam
-      :config
-      (require 'org-ref))
+  (use-package org-roam-bibtex
+    :after org-roam
+    :config
+    (require 'org-ref)
+    :bind (:map org-mode-map
+                (("C-c n a" . orb-note-actions))))
+
+  (setq orb-preformat-keywords
+        '(("citekey" . "=key=")
+          "title"
+          "url"
+          "author-or-editor-abbrev"
+          "abstract"
+          "keywords"))
 
   (setq org-roam-capture-templates
         '(("r" "ref" plain
-	 ""
-           ;; (file "~/.config/emacs/orb-templates/reference.org")
+           (file "~/.config/emacs/orb-templates/reference.org")
            :if-new
            (file+head "Zotero/${citekey}.org" "#+title: ${title}\n")
            :unnarrowed t)))
+
 #+end_src
 
-# #+begin_src emacs-lisp
-#   (use-package org-roam-bibtex
-#     :requires bibtex-completion
-#     :after org-roam
-#     :hook (org-roam-mode . org-roam-bibtex-mode)
-#     :bind (:map org-mode-map
-#                 (("C-c n a" . orb-note-actions)))
-#     :custom
-#     (orb-preformat-keywords
-#      '(("citekey" . "=key=")
-#        "title"
-#        "url"
-#        "author-or-editor-abbrev"
-#        "abstract"
-#        "keywords"))
-
-#     :config
-#     (setq orb-templates
-#      '(("r" "ref" plain (function org-roam-capture--get-point) "%?"
-#         :file-name "zotero/${citekey}"
-#         :head "#+TITLE: ${title}\n#+ROAM_KEY: ${ref}\n#+CREATED: %U\n#+EDITED: %U\n#+ROAM_TAGS: \n* Notes on ${citekey}\n :PROPERTIES:\n :Custom_ID:  ${citekey}\n :END:\(not )"
-#         :unnarrowed t
-#         :immediate-finish t))))
-# #+end_src
-
-# ** Org-Roam Server
+** Org-Roam Server
 # #+begin_src emacs-lisp
 #   (use-package org-roam-server
 #     :ensure t
