@@ -127,7 +127,7 @@
 
   (use-package doom-modeline
       :ensure t
-      :init (doom-modeline-mode 1)
+      :hook (after-init . doom-modeline-mode)
       :custom ((doom-modeline-height 12)))
 
 #+end_src
