@@ -805,16 +805,66 @@ simultaneously activated
 #           org-roam-server-network-label-wrap-length 20))
 # #+end_src
 * AucTex
+** Auto-Fill-Mode
+#+begin_src emacs-lisp
+
+    ;; disables auto-fill-mode for mathematical and tabular environments
+  ;; https://tex.stackexchange.com/questions/69555/i-want-to-disable-auto-fill-mode-when-editing-equations
+    (defvar my-LaTex-no-autofill-environments
+      '("equation" "equation*" "tabular" "tabular*" "array" "array*")
+      "A list of LaTeX environment names in which `auto-fill-mode' should be inhibited.")
+
+    (defun my-LaTeX-auto-fill-function ()
+      "This function checks whether point is currently inside one of
+    the LaTeX environments listed in
+    `my-LaTeX-no-autofill-environments'. If so, it inhibits automatic
+    filling of the current paragraph."
+      (let ((do-auto-fill t)
+            (current-environment "")
+            (level 0))
+        (while (and do-auto-fill (not (string= current-environment "document")))
+          (setq level (1+ level)
+                current-environment (LaTeX-current-environment level)
+                do-auto-fill (not (member current-environment my-LaTeX-no-autofill-environments))))
+        (when do-auto-fill
+          (do-auto-fill))))
+
+    (defun my-LaTeX-setup-auto-fill ()
+      "This function turns on auto-fill-mode and sets the function
+    used to fill a paragraph to `my-LaTeX-auto-fill-function'."
+      (auto-fill-mode)
+      (setq auto-fill-function 'my-LaTeX-auto-fill-function))
+#+end_src
+** Font Locking
+#+begin_src emacs-lisp
+  (setq font-latex-match-reference-keywords
+        '(
+          ;; cleveref
+          ("cref" "{")
+          ;; user-defined
+          ("acrfull" "{")))
+#+end_src
+** AucTex Core Settings 
 #+begin_src emacs-lisp
   ;; enables reftex whenever a latex buffer is opened
   (require 'reftex)
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 
+  ;; Use reftex commands as part of the AUCTeX environment
+  (setq reftex-plug-into-AUCTeX t)
+
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
 
+  ;; LaTeX-mode hooks
   ;;enables flyspell (frontend) mode whenever a .tex buffer is opened
   (add-hook 'LaTeX-mode-hook #'turn-on-flyspell)
+
+  ;;enables math mode mode whenever a .tex buffer is opened
+  (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+
+  ;;enables auto-fill-mode mode mode whenever a .tex buffer is opened
+  (add-hook 'LaTeX-mode-hook 'my-LaTeX-setup-auto-fill)
 
   (setq-default TeXMaster nil)
 
