@@ -829,6 +829,7 @@ simultaneously activated
 
   (global-set-key (kbd "C-c i b") 'ispell-buffer)
   (global-set-key (kbd "C-c i f") 'flyspell-buffer)
+  (global-set-key (kbd "C-c C-q C-b") 'LaTeX-fill-buffer)
 
   (setq ispell-tex-skip-alists
         (list
