@@ -41,6 +41,7 @@ emacs/bookmarks
 emacs/org-roam.db
 emacs/projectile-bookmarks.eld
 emacs/.org-id-locations
+emacs/recentf
 
 //yabai windows manager
 yabai
