@@ -738,22 +738,24 @@ simultaneously activated
         (lambda (ril -) (start-process "firefox" "*firefox*" "firefox" url)))
 
 #+end_src
-**** Org-Ref
+*** Org-Ref
 #+begin_src emacs-lisp
   (require 'org-ref)
   (setq reftex-default-bibliography '("~/Zotero/zotero_full_lib.bib"))
   (setq org-ref-default-bibliography '("~/Zotero/zotero_full_lib.bib"))
+  (setq org-ref-notes-function 'org-ref-notes-function-many-files)
 
+  (setq org-ref-notes-directory "~/Dropbox/myannotations/org-roam/Zotero")
 
   (defun efs/org-ref-open-pdf-at-point ()
     "Open the pdf for bibtex key under point if it exists"
     (interactive)
     (let* ((results (org-ref-get-bibtex-key-and-file))
-           (key (car results))
-           (pdf-file (car (bibtex-completion-find-pdf key))))
+	   (key (car results))
+	   (pdf-file (car (bibtex-completion-find-pdf key))))
       (if (file-exists-p pdf-file)
-          (org-open-file pdf-file)
-        (message "No PDF found for %s" key))))
+	  (org-open-file pdf-file)
+	(message "No PDF found for %s" key))))
 
   (setq org-ref-open-pdf-function 'efs/org-ref-open-pdf-at-point)
 
