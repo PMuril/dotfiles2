@@ -846,12 +846,6 @@ simultaneously activated
 #+end_src
 ** AucTex Core Settings 
 #+begin_src emacs-lisp
-  ;; enables reftex whenever a latex buffer is opened
-  (require 'reftex)
-  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-
-  ;; Use reftex commands as part of the AUCTeX environment
-  (setq reftex-plug-into-AUCTeX t)
 
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
