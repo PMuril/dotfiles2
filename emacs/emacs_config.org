@@ -370,6 +370,14 @@ It also enables the keybinding "C-r" for redo in Evil mode.
           (diminish org-indent-mode))
 
    #+end_src 
+** File Extension Associations
+#+begin_src emacs-lisp
+  (add-hook 'org-mode-hook
+	  '(lambda ()
+	   (setq org-file-apps
+		 '(("\\.pdf\\'" . "open -a /Applications/PDF\ Expert\ 2.app %s")
+		   ("\\.code-workspace\\'" . "code %s")))))
+#+end_src
 ** General Settings
    #+begin_src emacs-lisp
 
