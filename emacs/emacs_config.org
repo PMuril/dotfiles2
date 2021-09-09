@@ -858,34 +858,67 @@ simultaneously activated
   (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 
   ;;enables auto-fill-mode mode mode whenever a .tex buffer is opened
-  (add-hook 'LaTeX-mode-hook 'my-LaTeX-setup-auto-fill)
+  (add-hook 'LaTeX-mode-hook
+            (lambda () (setq auto-fill-function #'LaTeX-limited-auto-fill)) t)
 
-  (setq-default TeXMaster nil)
+#+end_src
+** RefTeX
+#+begin_src emacs-lisp
+  (require 'bibtex-completion)
+  (require 'tex)
 
-  ;;sets aspell as the beckend engine for spellchecking in TeX buffers
-  (setq-default ispell-program-name "aspell")
-  (setq ispell-dictionary "english")
+  (defun open-key-at-point ()
+    (interactive)
+    (let (start end key)
+      (save-excursion
+        (setq start (progn (re-search-backward "{\\|,") (match-end 0))
+            end (progn (re-search-forward "}\\|,") (match-beginning 0))
+            key (buffer-substring-no-properties start end)))
 
-  ;; specifies the path where to store the personal dictionary
-  (setq ispell-personal-dictionary "~/.config/emacs/dictionaries/aspell_personal")
+        (bibtex-completion-show-entry (list key))
+        (bibtex-beginning-of-entry)))
 
-  (setq ispell-list-command "--list --mode=tex")
+    (define-key tex-mode-map (kbd "C-c h o") #'open-key-at-point)
+#+end_src
 
-  (global-set-key (kbd "C-c i b") 'ispell-buffer)
-  (global-set-key (kbd "C-c i f") 'flyspell-buffer)
-  (global-set-key (kbd "C-c C-q C-b") 'LaTeX-fill-buffer)
+#+begin_src emacs-lisp
+  ;; enables reftex whenever a latex buffer is opened
+  (require 'reftex)
+  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 
-  (setq ispell-tex-skip-alists
-        (list
-         (append
-          (car ispell-tex-skip-alists)
-          '(("[^\\]\\$" . "[^\\]\\$")
-            ("\\\\acrfull" ispell-tex-arg-end 2)
-            ("\\\\eqref" ispell-tex-arg-end 2)
-            ("\\\\begin{equation}" . "\\\\end{equation}")
-            ("\\\\begin{equation\\*}" . "\\\\end{equation\\*}")
-            ))
-         (cadr ispell-tex-skip-alists)))
+  ;; Use reftex commands as part of the AUCTeX environment
+  (setq reftex-plug-into-AUCTeX t)
+#+end_src
+** Ispell
+#+begin_src emacs-lisp
+
+    (setq LaTeX-fill-break-before-code-comments nil)
+    (setq-default TeXMaster nil)
+
+    ;;sets aspell as the beckend engine for spellchecking in TeX buffers
+    (setq-default ispell-program-name "aspell")
+    (setq ispell-dictionary "english")
+
+    ;; specifies the path where to store the personal dictionary
+    (setq ispell-personal-dictionary "~/.config/emacs/dictionaries/aspell_personal")
+
+    (setq ispell-list-command "--list --mode=tex")
+
+    (global-set-key (kbd "C-c i b") 'ispell-buffer)
+    (global-set-key (kbd "C-c i f") 'flyspell-buffer)
+    (global-set-key (kbd "C-c C-q C-b") 'LaTeX-fill-buffer)
+
+    (setq ispell-tex-skip-alists
+          (list
+           (append
+            (car ispell-tex-skip-alists)
+            '(("[^\\]\\$" . "[^\\]\\$")
+              ("\\\\acrfull" ispell-tex-arg-end 2)
+              ("\\\\eqref" ispell-tex-arg-end 2)
+              ("\\\\begin{equation}" . "\\\\end{equation}")
+              ("\\\\begin{equation\\*}" . "\\\\end{equation\\*}")
+              ))
+           (cadr ispell-tex-skip-alists)))
 #+end_src
 * Yasnippets
 #+begin_src emacs-lisp
