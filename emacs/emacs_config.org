@@ -817,33 +817,14 @@ simultaneously activated
 * AucTex
 ** Auto-Fill-Mode
 #+begin_src emacs-lisp
+  (defcustom LaTeX-inhibited-auto-fill-environments
+    '("equation" "equation*" "array" "tabular" "tikzpicture") "For which LaTeX environments not to run auto-fill.")
 
-    ;; disables auto-fill-mode for mathematical and tabular environments
-  ;; https://tex.stackexchange.com/questions/69555/i-want-to-disable-auto-fill-mode-when-editing-equations
-    (defvar my-LaTex-no-autofill-environments
-      '("equation" "equation*" "tabular" "tabular*" "array" "array*")
-      "A list of LaTeX environment names in which `auto-fill-mode' should be inhibited.")
+  (defun LaTeX-limited-auto-fill ()
+    (let ((environment (LaTeX-current-environment)))
+      (when (not (member environment LaTeX-inhibited-auto-fill-environments))
+        (do-auto-fill))))
 
-    (defun my-LaTeX-auto-fill-function ()
-      "This function checks whether point is currently inside one of
-    the LaTeX environments listed in
-    `my-LaTeX-no-autofill-environments'. If so, it inhibits automatic
-    filling of the current paragraph."
-      (let ((do-auto-fill t)
-            (current-environment "")
-            (level 0))
-        (while (and do-auto-fill (not (string= current-environment "document")))
-          (setq level (1+ level)
-                current-environment (LaTeX-current-environment level)
-                do-auto-fill (not (member current-environment my-LaTeX-no-autofill-environments))))
-        (when do-auto-fill
-          (do-auto-fill))))
-
-    (defun my-LaTeX-setup-auto-fill ()
-      "This function turns on auto-fill-mode and sets the function
-    used to fill a paragraph to `my-LaTeX-auto-fill-function'."
-      (auto-fill-mode)
-      (setq auto-fill-function 'my-LaTeX-auto-fill-function))
 #+end_src
 ** Font Locking
 #+begin_src emacs-lisp
