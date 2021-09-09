@@ -37,6 +37,7 @@
 
   (setq mac-left-option-modifier 'meta)
   (setq mac-right-option-modifier 'none)
+  (setq mac-function-modifier 'hyper) ; useful in conjuction with org-ref
 
 #+end_src
 * Backup Management
