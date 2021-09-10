@@ -484,7 +484,7 @@ It also enables the keybinding "C-r" for redo in Evil mode.
                             (org-level-6 . 1.0)
                             (org-level-7 . 1.1)
                             (org-level-8 . 1.1)))
-              (set-face-attribute (car face) nil :font "DejaVu Sans Mono for Powerline" :weight 'regular :height (cdr face))))
+              (set-face-attribute (car face) nil :font custom-org-face :weight 'regular :height (cdr face))))
 
    #+end_src 
 
@@ -639,11 +639,11 @@ It also enables the keybinding "C-r" for redo in Evil mode.
 
   (defvar custom-org-roam-directory
   (cond ((string-equal system-type "darwin") "~/Dropbox/myannotations/org-roam")
-        ((string-equal system-type "linux") "~/workspace/myannotations")))
+        ((string-equal system-type "gnu/linux") "~/workspace/myannotations")))
 
   (defvar custom-org-roam-index
   (cond ((string-equal system-type "darwin") "~/Dropbox/myannotations/org-roam/index.org")
-        ((string-equal system-type "linux") "~/workspace/myannotations/index.org")))
+        ((string-equal system-type "gnu/linux") "~/workspace/myannotations/index.org")))
 
 #+end_src
 
