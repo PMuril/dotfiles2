@@ -55,7 +55,8 @@ CLOSED: [2021-09-10 Fri 23:29]
 #+end_src
 ** xclip-mode
 #+begin_src emacs-lisp 
-  (use-package xclip)
+  (use-package xclip
+  :ensure t)
 #+end_src
 * KeyModifiers
 #+begin_src emacs-lisp
