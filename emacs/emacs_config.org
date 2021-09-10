@@ -49,10 +49,10 @@ CLOSED: [2021-08-24 Tue 00:39]
   ;; Disables the double prompt when trying to quit an emacs file
   (setq confirm-kill-emacs nil)
 
-  ;; copy to system clipboard
-  ;;works both on MacOs and Linux
-  (xclip-mode 1)
-
+#+end_src
+** xclip-mode
+#+begin_src emacs-lisp 
+  (use-package xclip)
 #+end_src
 * KeyModifiers
 #+begin_src emacs-lisp
