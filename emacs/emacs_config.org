@@ -393,11 +393,18 @@ It also enables the keybinding "C-r" for redo in Evil mode.
    #+end_src 
 ** File Extension Associations
 #+begin_src emacs-lisp
-  (add-hook 'org-mode-hook
-	  '(lambda ()
-	   (setq org-file-apps
-		 '(("\\.pdf\\'" . "open -a /Applications/PDF\ Expert\ 2.app %s")
-		   ("\\.code-workspace\\'" . "code %s")))))
+
+  ;;   Defines the custom pdf viewer to be used on linux and MacOs.
+  ;; Technically is also includes the string "%s" containing the name of the file being passed to the viewer
+      (defvar custom-pdf-viewer
+      (cond ((string-equal system-type "darwin") "open -a /Applications/PDF\ Expert\ 2.app %s")
+            ((string-equal system-type "gnu/linux") "evince %s")))
+
+      (add-hook 'org-mode-hook
+              '(lambda ()
+               (setq org-file-apps
+                     '(("\\.pdf\\'" . custom-pdf-viewer)
+                       ("\\.code-workspace\\'" . "code %s")))))
 #+end_src
 ** General Settings
    #+begin_src emacs-lisp
@@ -463,6 +470,12 @@ It also enables the keybinding "C-r" for redo in Evil mode.
   (set-face-attribute 'org-ellipsis nil :foreground "wheat2" )
   (set-face-attribute 'org-headline-done nil :foreground "gray73" )
   (set-face-attribute 'org-document-info-keyword nil :foreground "gray73")
+
+ ;setting the default faces for emacs and linux systems
+
+  (defvar custom-org-face
+    (cond ((string-equal system-type "darwin") "Source Code Pro for Powerline")
+    ((string-equal system-type "gnu/linux") "DejaVuSansMono")))
 #+end_src
 *** Org Bullets
    #+begin_src emacs-lisp
