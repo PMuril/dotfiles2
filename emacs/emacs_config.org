@@ -3,6 +3,28 @@
 #+PROPERTY: header-args:emacs-lisp :tangle ./init.el
 #+STARTUP: overview
 
+* Todolist
+** DONE Find a way to integrate org-roam and Zotero without the need to export the .bib file
+CLOSED: [2021-05-27 Thu 16:41]
+*** DONE In case the point above is not possible find a way to encapsulate the name of the path of the library, pdfs and notes inside variables toe be shared between ivy-bibtex and org-ref
+CLOSED: [2021-06-02 Wed 12:57]
+** DONE Find a way to set the color of some faces at configuration time
+CLOSED: [2021-06-01 Tue 02:20]
+** TODO Customize the citation commands, as specified in the documentation
+** DONE See if there's any way to include Zotero tags in the bibliographic search
+CLOSED: [2021-06-01 Tue 02:20]
+** DONE Try to understand why when finding with ivy-bibtex a document that also contains annotations it is not possible to open the annotations
+CLOSED: [2021-06-01 Tue 02:21]
+** TODO Find a way to integrate the information on the pdf file path in the the orb-template instruction
+** TODO Create a fully fledged helm-config area
+*** TODO Decouple the initialization of helm and helm-bibtex
+** DONE Customize the flyspell error faces
+CLOSED: [2021-08-24 Tue 00:39]
+** TODO Replace Org-Roam Server with Org-Roam UI
+** TODO Activate xclip via use-package
+** TODO Consider the option to employ the reverse-tangling package
+** TODO Update the default names of the fonts via defvar
+
 * Emacs GUI customization
 
   #+begin_src emacs-lisp
@@ -927,21 +949,3 @@ simultaneously activated
   (add-hook 'yas-minor-mode-hook (lambda ()
                                    (yas-activate-extra-mode 'fundamental-mode)))
 #+end_src
-* Todolist
-** DONE Find a way to integrate org-roam and Zotero without the need to export the .bib file
-CLOSED: [2021-05-27 Thu 16:41]
-*** DONE In case the point above is not possible find a way to encapsulate the name of the path of the library, pdfs and notes inside variables toe be shared between ivy-bibtex and org-ref
-CLOSED: [2021-06-02 Wed 12:57]
-** DONE Find a way to set the color of some faces at configuration time
-CLOSED: [2021-06-01 Tue 02:20]
-** TODO Customize the citation commands, as specified in the documentation
-** DONE See if there's any way to include Zotero tags in the bibliographic search
-CLOSED: [2021-06-01 Tue 02:20]
-** DONE Try to understand why when finding with ivy-bibtex a document that also contains annotations it is not possible to open the annotations
-CLOSED: [2021-06-01 Tue 02:21]
-** TODO Find a way to integrate the information on the pdf file path in the the orb-template instruction
-** TODO Create a fully fledged helm-config area
-*** TODO Decouple the initialization of helm and helm-bibtex
-** DONE Customize the flyspell error faces
-CLOSED: [2021-08-24 Tue 00:39]
-** TODO Replace Org-Roam Server with Org-Roam UI
