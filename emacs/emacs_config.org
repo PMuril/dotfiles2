@@ -835,7 +835,11 @@ simultaneously activated
           "keywords"))
 
   (setq org-roam-capture-templates
-        '(("r" "ref" plain
+        '(("d" "default" plain
+          "%?"
+          :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+          :unnarrowed t)
+          ("r" "ref" plain
            (file "~/.config/emacs/orb-templates/reference.org")
            :if-new
            (file+head "Zotero/${citekey}.org" "#+title: ${title}\n")
