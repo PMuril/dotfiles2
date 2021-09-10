@@ -10,20 +10,23 @@ CLOSED: [2021-05-27 Thu 16:41]
 CLOSED: [2021-06-02 Wed 12:57]
 ** DONE Find a way to set the color of some faces at configuration time
 CLOSED: [2021-06-01 Tue 02:20]
-** TODO Customize the citation commands, as specified in the documentation
+** DONE Customize the citation commands, as specified in the documentation
+CLOSED: [2021-09-10 Fri 23:29]
 ** DONE See if there's any way to include Zotero tags in the bibliographic search
 CLOSED: [2021-06-01 Tue 02:20]
 ** DONE Try to understand why when finding with ivy-bibtex a document that also contains annotations it is not possible to open the annotations
 CLOSED: [2021-06-01 Tue 02:21]
-** TODO Find a way to integrate the information on the pdf file path in the the orb-template instruction
+CLOSED: [2021-09-10 Fri 23:29]
 ** TODO Create a fully fledged helm-config area
 *** TODO Decouple the initialization of helm and helm-bibtex
 ** DONE Customize the flyspell error faces
 CLOSED: [2021-08-24 Tue 00:39]
 ** TODO Replace Org-Roam Server with Org-Roam UI
-** TODO Activate xclip via use-package
+** DONE Activate xclip via use-package
+CLOSED: [2021-09-10 Fri 23:29]
 ** TODO Consider the option to employ the reverse-tangling package
 ** TODO Update the default names of the fonts via defvar
+
 
 * Emacs GUI customization
 
