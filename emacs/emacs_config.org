@@ -158,8 +158,16 @@ CLOSED: [2021-09-10 Fri 23:29]
 #+end_src
 * Log Mode
 #+begin_src emacs-lisp
-    ;; logs the command run inside emacs
-    (use-package command-log-mode)
+
+  ;; logs the command run inside emacs
+
+  ;; To enable command tracking first run
+  ;; M-x global-command-long-mode
+  ;; and then
+  ;; M-x clm/toggle-command-log-buffer
+
+  (use-package command-log-mode)
+
 #+end_src
 
 * Ivy
