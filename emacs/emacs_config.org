@@ -792,7 +792,12 @@ simultaneously activated
            (file "~/.config/emacs/orb-templates/reference.org")
            :if-new
            (file+head "Zotero/${citekey}.org" "#+title: ${title}\n")
-           :unnarrowed t)))
+           :unnarrowed t)
+        ("p" "design-pattern" plain
+          (file "~/.config/emacs/orb-templates/design-pattern-note-template.org")
+          :if-new
+          (file+head "design-patterns/${title}.org" "#+title: ${title}\n")
+          :unnarrowed t)))
 
 #+end_src
 

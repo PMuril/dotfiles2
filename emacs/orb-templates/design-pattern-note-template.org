@@ -1,0 +1,22 @@
+#+CREATED: %U
+#+EDITED: %U
+#+ROAM_TAGS: :design-patterns 
+
+* Open Problems
+%?
+
+* Purpose
+
+* Possible Solutions and their Drawbacks
+
+* Core Idea
+
+* UML diagram
+
+* C++ Implementation
+
+* Related Patterns
+
+* Pros and Cons
+
+* References
