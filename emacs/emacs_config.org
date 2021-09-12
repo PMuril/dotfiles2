@@ -285,7 +285,7 @@ It also enables the keybinding "C-r" for redo in Evil mode.
       :init
       (setq evil-want-integration t)
       (setq evil-want-keybinding nil)
-      (setq evil-want-C-u-scroll t)
+      ;; (setq evil-want-C-u-scroll t) ;; when uncommented binds C-u to scrolling
       (setq evil-want-C-i-jump nil)
       (setq evil-want-fine-undo 'fine)
 
