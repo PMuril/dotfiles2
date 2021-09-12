@@ -1,7 +1,8 @@
 #+ROAM_KEY: ${ref}
 #+CREATED: %U
 #+EDITED: %U
-#+ROAM_TAGS: %^{keywords} #zotero tags
+
+#+filetags: %^{keywords} #zotero tags
 
 :PROPERTIES:
 :Custom_ID:  %^{citekey}

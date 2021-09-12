@@ -1,6 +1,7 @@
 #+CREATED: %U
 #+EDITED: %U
-#+ROAM_TAGS: :design-patterns 
+
+#+filetags: design-patterns 
 
 * Open Problems
 %?
