@@ -48,6 +48,8 @@ set t_Co=256
 " the installation can be performed via 'pip3 install neovim'
 call plug#begin('~/.vim/plugged')
 
+" Plugins list
+" to perform plugins update/installation run \"PlugInstall\"
 Plug 'https://github.com/xavierd/clang_complete'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/tpope/vim-commentary'
@@ -58,5 +60,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'mbbill/undotree'
 Plug 'https://github.com/adelarsq/vim-matchit'
+Plug 'https://github.com/tpope/vim-repeat'
+Plug 'https://github.com/glts/vim-radical' "for istantaneously converting between numerical representations
 "Plug 'https://github.com/christoomey/vim-tmux-navigator'
 call plug#end()
