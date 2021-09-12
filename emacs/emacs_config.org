@@ -687,7 +687,7 @@ Following local org-roam-mode is defined so that org-roam keybindings is valid o
     (when my/local-org-roam-mode
       (message "Local keybindings for Org Roam enabled")))
 #+end_src
-** Org-Roam Init Settings
+** Org-Roam Core Settings
   #+begin_src emacs-lisp
 
     ;;finding ORG-ROAM dependency: sqlite3
@@ -704,6 +704,7 @@ Following local org-roam-mode is defined so that org-roam keybindings is valid o
              ("C-c n g" . org-roam-graph)
              ("C-c n i" . org-roam-node-insert)
              ("C-c n c" . org-roam-capture)
+             ("C-d n t" . org-roam-tag-add) ;; Use TAB to get suggestions
              ;; Dailies
              ("C-c n j" . org-roam-dailies-capture-today))
       :config
@@ -924,7 +925,7 @@ simultaneously activated
         (bibtex-completion-show-entry (list key))
         (bibtex-beginning-of-entry)))
 
-    (define-key tex-mode-map (kbd "C-c h o") #'open-key-at-point)
+    ;; (define-key tex-mode-map (kbd "C-c h o") #'open-key-at-point)
 #+end_src
 #+begin_src emacs-lisp
   ;; enables reftex whenever a latex buffer is opened
