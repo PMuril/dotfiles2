@@ -891,6 +891,10 @@ simultaneously activated
           ;; user-defined
           ("acrfull" "{")))
 #+end_src
+** Math Mode Customization
+#+begin_src emacs-lisp
+  (setq LaTeX-math-abbrev-prefix "°")
+#+end_src
 ** AucTex Core Settings 
 #+begin_src emacs-lisp
 
