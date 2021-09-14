@@ -418,7 +418,7 @@ It also enables the keybinding "C-r" for redo in Evil mode.
                      '(("\\.pdf\\'" . custom-pdf-viewer)
                        ("\\.code-workspace\\'" . "code %s")))))
 #+end_src
-** General Settings
+** Org Mode Core Settings
    #+begin_src emacs-lisp
 
      (use-package org
@@ -704,7 +704,7 @@ Following local org-roam-mode is defined so that org-roam keybindings is valid o
              ("C-c n g" . org-roam-graph)
              ("C-c n i" . org-roam-node-insert)
              ("C-c n c" . org-roam-capture)
-             ("C-d n t" . org-roam-tag-add) ;; Use TAB to get suggestions
+             ("C-c n t" . org-roam-tag-add) ;; Use TAB to get suggestions
              ;; Dailies
              ("C-c n j" . org-roam-dailies-capture-today))
       :config
