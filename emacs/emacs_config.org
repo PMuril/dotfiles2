@@ -406,7 +406,7 @@ It also enables the keybinding "C-r" for redo in Evil mode.
 ** File Extension Associations
 #+begin_src emacs-lisp
 
-  ;;   Defines the custom pdf viewer to be used on linux and MacOs.
+  ;; Defines the custom pdf viewer to be used on linux and MacOs.
   ;; Technically is also includes the string "%s" containing the name of the file being passed to the viewer
       (defvar custom-pdf-viewer
       (cond ((string-equal system-type "darwin") "open -a /Applications/PDF\ Expert\ 2.app %s")
@@ -837,19 +837,19 @@ simultaneously activated
 
   (setq org-roam-capture-templates
         '(("d" "default" plain
-          "%?"
-          :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
-          :unnarrowed t)
+           "%?"
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+           :unnarrowed t)
           ("r" "ref" plain
            (file "~/.config/emacs/orb-templates/reference.org")
            :if-new
            (file+head "Zotero/${citekey}.org" "#+title: ${title}\n")
            :unnarrowed t)
-        ("p" "design-pattern" plain
-          (file "~/.config/emacs/orb-templates/design-pattern-note-template.org")
-          :if-new
-          (file+head "design-patterns/${title}.org" "#+title: ${title}\n")
-          :unnarrowed t)))
+          ("p" "design-pattern" plain
+           (file "~/.config/emacs/orb-templates/design-pattern-note-template.org")
+           :if-new
+           (file+head "design-patterns/${title}.org" "#+title: ${title}\n")
+           :unnarrowed t)))
 
 #+end_src
 
