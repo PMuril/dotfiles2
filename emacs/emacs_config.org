@@ -54,7 +54,7 @@ CLOSED: [2021-09-10 Fri 23:29]
 
 #+end_src
 ** xclip-mode
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
   (use-package xclip
   :ensure t)
 #+end_src
