@@ -401,17 +401,24 @@ It also enables the keybinding "C-r" for redo in Evil mode.
 ** File Extension Associations
 #+begin_src emacs-lisp
 
-  ;; Defines the custom pdf viewer to be used on linux and MacOs.
-  ;; Technically is also includes the string "%s" containing the name of the file being passed to the viewer
-      (defvar custom-pdf-viewer
-      (cond ((string-equal system-type "darwin") "open -a /Applications/PDF\ Expert\ 2.app %s")
-            ((string-equal system-type "gnu/linux") "evince %s")))
+        ;; Defines the custom pdf viewer to be used on linux and MacOs.
+        ;; Technically is also includes the string "%s" containing the name of the file being passed to the viewer
+            ;(defvar custom-pdf-viewer
+            ; (cond ((string-equal system-type "darwin") "open -a \\'PDF Expert 2.app\\' %s")
+            ;      ((string-equal system-type "gnu/linux") "evince %s")))
 
+
+  (if (eq system-type 'darwin)
       (add-hook 'org-mode-hook
+                '(lambda ()
+                   (setq org-file-apps
+                         '(("\\.pdf\\'" . "open -a \'PDF Expert 2.app\' %s")
+                           ("\\.code-workspace\\'" . "code %s")))))
+    (add-hook 'org-mode-hook
               '(lambda ()
-               (setq org-file-apps
-                     '(("\\.pdf\\'" . custom-pdf-viewer)
-                       ("\\.code-workspace\\'" . "code %s")))))
+                 (setq org-file-apps
+                       '(("\\.pdf\\'" . "evince %s")
+                         ("\\.code-workspace\\'" . "code %s"))))))
 #+end_src
 ** Org Mode Core Settings
    #+begin_src emacs-lisp
