@@ -42,6 +42,14 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme='bubblegum'
 set t_Co=256
 
+"HIGHLIGHTING
+
+" makes the highlight under the current line persistent
+" press \l to highlight, :match to remove the highlight
+nnoremap <silent> <Leader>l ml:execute 'match Search /\%'.line('.').'l/'<CR>
+
+"specifies the highlighting profile
+highlight CursorLine cterm=NONE ctermbg=darkred ctermfg=white
 
 " Specify the plugins installation directories
 " clang_complete requires to install nvim with python support
