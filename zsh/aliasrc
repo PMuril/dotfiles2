@@ -16,6 +16,9 @@ alias grep="grep -P --color=auto"
 alias fgrep="fgrep  --color=auto"
 alias egrep="egrep  --color=auto"
 
+# python packages
+alias compdb='compdb -p build/Debug/ list > compile_commands.json'
+
 #aliases the icloud directory path
 alias icloud_drive="/Users/paolobaldan/Library/Mobile Documents/com~apple~CloudDocs"
 alias myannotations="/Users/paolobaldan/Dropbox/myannotations"
