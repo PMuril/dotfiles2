@@ -67,6 +67,7 @@ if
 source "$HOME/.config/zsh/shortcutrc"
 fi
 [[ -f "$HOME/.config/zsh/aliasrc" ]] && source "$HOME/.config/zsh/aliasrc"
+[[ -f "$HOME/.config/zsh/functionsrc" ]] && source "$HOME/.config/zsh/functionsrc"
 
 
 # prompt configuration
