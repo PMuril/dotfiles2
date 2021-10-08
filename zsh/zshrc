@@ -74,9 +74,15 @@ fi
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Sourcing Powerline
+# export PATH=$PATH:/Users/paolobaldan/Library/Python/3.9/bin
+# powerline-daemon -q
+# . /Users/paolobaldan/Library/Python/3.9/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
+
 # setting up custom plugins
-# zsh history search
-# zsh history search
-source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-# Load zsh-syntax-highlighting; should be the last
-source /Users/paolobaldan/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# zsh-history-search
+source "$HOME/.config/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh"
+# zsh-syntax-highlighting
+source "$HOME/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+# zsh-autosuggestions
+source "$HOME/.config/zsh/plugins/zsh-autosuggestions-master/zsh-autosuggestions-master.zsh"
