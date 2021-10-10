@@ -1,1 +1,74 @@
-/Users/paolobaldan/Dropbox/myscripts/bash/install_dotfiles.sh
+#! /bin/bash
+
+install_zsh_history_substring_search () {
+
+    printf "installing zsh-history-substring-search\n"
+    wget https://github.com/zsh-users/zsh-history-substring-search/archive/refs/heads/master.zip\
+    && unzip master.zip \
+    && rsync -av --exclude=".git" "./zsh-history-substring-search-master/" "$HOME/.config/zsh/plugins/zsh-history-substring-search/" \
+    && rm -r master.zip zsh-history-substring-search-master
+
+}
+
+install_zsh_syntax_highlighting () {
+    
+    printf "installing zsh-syntax-highlighting\n"
+    wget https://github.com/zsh-users/zsh-syntax-highlighting/archive/refs/heads/master.zip \
+    && unzip master.zip \
+    && rsync -av --exclude=".git" "./zsh-syntax-highlighting-master/" "$HOME/.config/zsh/plugins/zsh-syntax-highlighting/" \
+    && rm -r master.zip zsh-syntax-highlighting-master
+
+}
+
+install_zsh_autosuggestions () {
+
+    printf "installing zsh-autosuggestions\n"
+    wget https://github.com/zsh-users/zsh-autosuggestions/archive/refs/heads/master.zip \
+    && unzip master.zip \
+    && rsync -av --exclude=".git" "./zsh-autosuggestions-master/" "$HOME/.config/zsh/plugins/zsh-autosuggestions/" \
+    && rm -r master.zip zsh-autosuggestions-master
+
+}
+
+install_zsh_plugins () {
+
+    install_zsh_history_substring_search
+    install_zsh_syntax_highlighting
+    install_zsh_autosuggestions
+
+}
+
+#checking that the system is run inide the dotfiles repository
+if [[ "$PWD" != "$(git rev-parse --show-toplevel)" ]]; then
+    echo "Error present working directory does not coincide with dotfiles2!"
+    exit 5
+fi
+
+# checks that the destination folder exists and eventually creates it
+if [[ ! ( -e "$HOME/.config" ) ]]; then
+    echo "directory \"$HOME/.config\" does not exists. Proceeding to create it"
+    mkdir "$HOME/.config"  
+else 
+    echo "directory \"$HOME/.config\" already exists"
+fi
+
+# installing dotfiles
+install_zsh_plugins
+
+# copying alacritty settings
+rsync -av "alacritty" "$HOME/.config/alacritty"
+
+# copying alacritty settings
+rsync -av "emacs" "$HOME/.config/emacs"
+
+# copying alacritty settings
+rsync -av "i3" "$HOME/.config/i3"
+
+# copying neovim settings
+rsync -av "nvim" "$HOME/.config/nvim"
+
+# copying zsh settings
+rsync -av "tmux" "$HOME/.config/tmux"
+
+# copying zsh settings
+rsync -av "zsh" "$HOME/.config/zsh"
