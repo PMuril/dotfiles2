@@ -23,7 +23,7 @@ zsh/.zshrc
 zsh/.zcompcache
 
 //zsh plugins artifact
-zsh/plugins/zsh-syntax-highlighting/.gitignore
+zsh/plugins/*
 
 //nvim modified files history
 nvim/.netrwhist
