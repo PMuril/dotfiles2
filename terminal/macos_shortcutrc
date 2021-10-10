@@ -6,7 +6,9 @@ export myshells="/Users/paolobaldan/Dropbox/myshells"
 export mybashscripts="/Users/paolobaldan/Dropbox/myscripts/bash"
 export landjam_new="$mycodes/cpp/landjam_new"
 export icloud_drive="/Users/paolobaldan/Library/Mobile Documents/com~apple~CloudDocs"
- 
+ecport myannotations="/Users/paolobaldan/Dropbox/myannotations"
+
+#prevents homebrew from collecting analytics on the user
 export HOMEBREW_NO_ANALYTICS=1
 #replaces ggrep and gawk with grep and awk
 export PATH=/opt/local/libexec/gnubin:$PATH

@@ -43,7 +43,7 @@ function zle-keymap-select {
 
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/Users/paolobaldan/.zshrc'
+zstyle :compinstall filename "$HOME/.zshrc"
 
 autoload -Uz compinit
 compinit
@@ -63,11 +63,11 @@ stty -ixon
 
 # Load shortcuts if the file exists and TMUX is not set
 if
-[[ -f "$HOME/.config/zsh/shortcutrc" ]] && [[ -z "$TMUX" ]]; then
-source "$HOME/.config/zsh/shortcutrc"
+[[ -f "$HOME/.config/terminal/shortcutrc" ]] && [[ -z "$TMUX" ]]; then
+source "$HOME/.config/terminal/shortcutrc"
 fi
-[[ -f "$HOME/.config/zsh/aliasrc" ]] && source "$HOME/.config/zsh/aliasrc"
-[[ -f "$HOME/.config/zsh/functionsrc" ]] && source "$HOME/.config/zsh/functionsrc"
+[[ -f "$HOME/.config/terminal/aliasrc" ]] && source "$HOME/.config/terminal/aliasrc"
+[[ -f "$HOME/.config/terminal/functionsrc" ]] && source "$HOME/.config/terminal/functionsrc"
 
 
 # prompt configuration
@@ -86,4 +86,4 @@ source "$HOME/.config/zsh/plugins/zsh-history-substring-search/zsh-history-subst
 # zsh-syntax-highlighting
 source "$HOME/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 # zsh-autosuggestions
-source "$HOME/.config/zsh/plugins/zsh-autosuggestions-master/zsh-autosuggestions-master.zsh"
+source "$HOME/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"

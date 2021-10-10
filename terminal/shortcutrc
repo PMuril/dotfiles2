@@ -1,8 +1,8 @@
 #source OS-dependent shortcuts
 if [[ "$OSTYPE"=="darwin" ]]; then
-    source "/Users/paolobaldan/.config/zsh/macos_shortcutrc";
+    source "$HOME/.config/zsh/macos_shortcutrc";
 elif [[ "$OSTYPE"=="linux-gnu" ]]; then
-    source "/home/alten_pbaldan@elt.elt/.config/zsh/linux_shortcutrc";
+    source "$HOME/.config/zsh/linux_shortcutrc";
 fi
 
 #set the size of the terminal rollback memory
