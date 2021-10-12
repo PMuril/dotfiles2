@@ -38,6 +38,11 @@ install_zsh_plugins () {
 
 }
 
+install_vimplug () {
+    sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+           https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+}
+
 #checking that the system is run inide the dotfiles repository
 if [[ "$PWD" != "$(git rev-parse --show-toplevel)" ]]; then
     echo "Error present working directory does not coincide with dotfiles2!"
@@ -64,7 +69,8 @@ rsync -av "emacs" "$HOME/.config/"
 # copying alacritty settings
 rsync -av "i3" "$HOME/.config/"
 
-# copying neovim settings
+# installing VimPlug and neovim settings
+install_vimplug
 rsync -av "nvim" "$HOME/.config/"
 
 # copying shell-independent terminal settings
