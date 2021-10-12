@@ -56,19 +56,22 @@ fi
 install_zsh_plugins
 
 # copying alacritty settings
-rsync -av "alacritty" "$HOME/.config/alacritty"
+rsync -av "alacritty" "$HOME/.config/"
 
 # copying alacritty settings
-rsync -av "emacs" "$HOME/.config/emacs"
+rsync -av "emacs" "$HOME/.config/"
 
 # copying alacritty settings
-rsync -av "i3" "$HOME/.config/i3"
+rsync -av "i3" "$HOME/.config/"
 
 # copying neovim settings
-rsync -av "nvim" "$HOME/.config/nvim"
+rsync -av "nvim" "$HOME/.config/"
+
+# copying shell-independent terminal settings
+rsync -av "terminal" "$HOME/.config/"
+
+# copying tmux settings
+rsync -av "tmux" "$HOME/.config/"
 
 # copying zsh settings
-rsync -av "tmux" "$HOME/.config/tmux"
-
-# copying zsh settings
-rsync -av "zsh" "$HOME/.config/zsh"
+rsync -av "zsh" "$HOME/.config/"
