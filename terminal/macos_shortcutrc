@@ -28,9 +28,9 @@ export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/sqlite/include"
 #makes npm (node package manager) directly callable 
 export PATH=$PATH:$HOME/.npm-packages/bin
 
+#adds the python packages installation directory to PATH
+#(required to launch the powerline daemon)
+export PATH=$PATH:/Users/paolobaldan/Library/Python/3.9/lib/python/site-packages
+
 #adds user-defined scripts to PATH
 export PATH=$PATH:/Users/paolobaldan/Dropbox/myscripts/bash
-
-#adds the emacs installation folder to the system path
-#this is required in order to install doom emacs
-export PATH=$PATH:/usr/local/Cellar/emacs/27.2/bin
