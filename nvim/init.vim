@@ -8,15 +8,17 @@ set expandtab
 :set number relativenumber
 set laststatus=2
 
-" Disables arrows keys in Normal Mode
+" KEYBINDINGS
+" sets the leader key
+let mapleader = "\"
 
+" Disables arrows keys in Normal Mode
 nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>
 nnoremap <Left> <Nop>
 nnoremap <Right> <Nop>
 
 " Disables arrows keys in Insert Mode
-
 inoremap <Up> <Nop>
 inoremap <Down> <Nop>
 inoremap <Left> <Nop>
