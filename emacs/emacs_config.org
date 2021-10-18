@@ -583,15 +583,16 @@ It also enables the keybinding "C-r" for redo in Evil mode.
 ** Org-Babel
 *** Programming Languages
 #+begin_src emacs-lisp
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((emacs-lisp . t)
-       (python . t)
-       (C . t)
-       (latex . t)
-       (gnuplot . t))) ;; C, C++ and D are all activated loading the C language
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (python . t)
+     (C . t)
+     (awk . t)
+     (latex . t)
+     (gnuplot . t))) ;; C, C++ and D are all activated loading the C language
 
-    (setq org-confirm-babel-evaluate nil)
+  (setq org-confirm-babel-evaluate nil)
 #+end_src
 
 *** Org Structure Template
