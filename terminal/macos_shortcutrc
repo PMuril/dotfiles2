@@ -6,7 +6,7 @@ export myshells="/Users/paolobaldan/Dropbox/myshells"
 export mybashscripts="/Users/paolobaldan/Dropbox/myscripts/bash"
 export landjam_new="$mycodes/cpp/landjam_new"
 export icloud_drive="/Users/paolobaldan/Library/Mobile Documents/com~apple~CloudDocs"
-ecport myannotations="/Users/paolobaldan/Dropbox/myannotations"
+export myannotations="/Users/paolobaldan/Dropbox/myannotations"
 
 #prevents homebrew from collecting analytics on the user
 export HOMEBREW_NO_ANALYTICS=1
@@ -30,7 +30,7 @@ export PATH=$PATH:$HOME/.npm-packages/bin
 
 #adds the python packages installation directory to PATH
 #(required to launch the powerline daemon)
-export PATH=$PATH:/Users/paolobaldan/Library/Python/3.9/lib/python/site-packages
+export PATH=$PATH:/usr/local/bin:/usr/local/lib
 
 #adds user-defined scripts to PATH
 export PATH=$PATH:/Users/paolobaldan/Dropbox/myscripts/bash
