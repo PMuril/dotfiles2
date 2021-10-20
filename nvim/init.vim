@@ -10,7 +10,7 @@ set laststatus=2
 
 " KEYBINDINGS
 " sets the leader key
-let mapleader = "\"
+let mapleader="\\"
 
 " Disables arrows keys in Normal Mode
 nnoremap <Up> <Nop>
