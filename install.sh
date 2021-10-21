@@ -32,9 +32,15 @@ install_zsh_autosuggestions () {
 
 install_zsh_plugins () {
 
+    mkdir "$HOME/.config/zsh/plugins" 
+
+    if [[ -e "$HOME/.config/zsh/plugins" ]]; then
+
     install_zsh_history_substring_search
     install_zsh_syntax_highlighting
     install_zsh_autosuggestions
+
+    fi
 
 }
 
