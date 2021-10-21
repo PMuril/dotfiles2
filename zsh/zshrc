@@ -73,7 +73,7 @@ fi
 # PROMPT
 # Loading Powerline settings
 #
-if [[ -f "zsh_powerline_source" ]]; then
+if [[ -e "zsh_powerline_source" ]]; then
     source "zsh_powerline_source"
 fi
 
