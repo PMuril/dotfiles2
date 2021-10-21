@@ -73,8 +73,8 @@ fi
 # PROMPT
 # Loading Powerline settings
 #
-if [[ -e "zsh_powerline_source" ]]; then
-    source "zsh_powerline_source"
+if [[ -e "$HOME/.config/zsh/zsh_powerline_source" ]]; then
+    source "$HOME/.config/zsh/zsh_powerline_source"
 fi
 
 # setting up custom plugins
