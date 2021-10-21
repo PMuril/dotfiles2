@@ -87,3 +87,6 @@ rsync -av "tmux" "$HOME/.config/"
 
 # copying zsh settings
 rsync -av "zsh" "$HOME/.config/"
+
+#Creating relevant Symlinks
+ln -s "$HOME/.config/zsh/zshrc" "$HOME/.zshrc"
