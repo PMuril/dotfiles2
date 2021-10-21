@@ -6,7 +6,7 @@ install_zsh_history_substring_search () {
     wget https://github.com/zsh-users/zsh-history-substring-search/archive/refs/heads/master.zip\
     && unzip master.zip \
     && rsync -av --exclude=".git" "./zsh-history-substring-search-master/" "$HOME/.config/zsh/plugins/zsh-history-substring-search/" \
-    && rm -r master.zip zsh-history-substring-search-master
+    && rm -r master.zip* zsh-history-substring-search-master
 
 }
 
@@ -16,7 +16,7 @@ install_zsh_syntax_highlighting () {
     wget https://github.com/zsh-users/zsh-syntax-highlighting/archive/refs/heads/master.zip \
     && unzip master.zip \
     && rsync -av --exclude=".git" "./zsh-syntax-highlighting-master/" "$HOME/.config/zsh/plugins/zsh-syntax-highlighting/" \
-    && rm -r master.zip zsh-syntax-highlighting-master
+    && rm -r master.zip* zsh-syntax-highlighting-master
 
 }
 
@@ -26,7 +26,7 @@ install_zsh_autosuggestions () {
     wget https://github.com/zsh-users/zsh-autosuggestions/archive/refs/heads/master.zip \
     && unzip master.zip \
     && rsync -av --exclude=".git" "./zsh-autosuggestions-master/" "$HOME/.config/zsh/plugins/zsh-autosuggestions/" \
-    && rm -r master.zip zsh-autosuggestions-master
+    && rm -r master.zip* zsh-autosuggestions-master
 
 }
 
