@@ -412,7 +412,7 @@ It also enables the keybinding "C-r" for redo in Evil mode.
       (add-hook 'org-mode-hook
                 '(lambda ()
                    (setq org-file-apps
-                         '(("\\.pdf\\'" . "open -a \'PDF Expert 2.app\' %s")
+                         '(("\\.pdf\\'" . "open -a \'PDF Expert 3.app\' %s")
                            ("\\.code-workspace\\'" . "code %s")))))
     (add-hook 'org-mode-hook
               '(lambda ()
