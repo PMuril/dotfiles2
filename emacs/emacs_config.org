@@ -646,7 +646,24 @@ It also enables the keybinding "C-r" for redo in Evil mode.
    )
 
 #+end_src
-   
+
+** CDLaTeX Integration
+#+begin_src emacs-lisp
+          (use-package cdlatex
+            :ensure t
+            :bind ("C-c C-{" . org-cdlatex-environment-indent))
+
+          ;; enables org-cdlatex (for latex math macros insertion) at org-mode startup
+          (add-hook 'org-mode-hook #'turn-on-org-cdlatex)
+
+      ;; adding custom environment for unnambered equation
+        (setq cdlatex-env-alist
+            '(("equation*" "\\begin{equation*}\nAUTOLABEL\n?\n\\end{equation*}\n" nil)))
+
+  ;; sets a custom symbol for math symbol insertion (corresponds to the keys combination "M-ù" on an italian MacOS keyboard
+    ;; (setq cdlatex-math-symbol-prefix 248)
+#+end_src
+
 * Org-Roam
 ** Custom Functions
 #+begin_src emacs-lisp
