@@ -387,15 +387,15 @@ It also enables the keybinding "C-r" for redo in Evil mode.
 * Org Mode
 ** Org Mode Init Settings
    #+begin_src emacs-lisp
-     (add-hook 'org-mode-hook 'org-indent-mode)
+          (add-hook 'org-mode-hook 'org-indent-mode)
 
           (defun efs/org-mode-setup ()
             (org-indent-mode)
             (variable-pitch-mode 1)
             (auto-fill-mode 0)
             (visual-line-mode 1)
-          (setq evil-auto-indent nil)
-          (diminish org-indent-mode))
+            (setq evil-auto-indent nil)
+            (diminish org-indent-mode))
 
    #+end_src 
 ** File Extension Associations
