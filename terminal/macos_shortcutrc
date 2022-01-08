@@ -7,6 +7,7 @@ export mybashscripts="/Users/paolobaldan/Dropbox/myscripts/bash"
 export landjam_new="$mycodes/cpp/landjam_new"
 export icloud_drive="/Users/paolobaldan/Library/Mobile Documents/com~apple~CloudDocs"
 export myannotations="/Users/paolobaldan/Dropbox/myannotations"
+export landjam_renewed="$mycodes/landjam_renewed"
 
 #prevents homebrew from collecting analytics on the user
 export HOMEBREW_NO_ANALYTICS=1
@@ -14,16 +15,22 @@ export HOMEBREW_NO_ANALYTICS=1
 export PATH=/opt/local/libexec/gnubin:$PATH
 #replaces gsed with sed
 export PATH=/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
- 
+
+# COMPILERS
+## GCC
 #links gcc-9 and g++-9 to the GNU gcc-9 and g++-9
 export PATH=/usr/local/bin/gcc-9:/usr/local/bin/g++-9:$PATH
-
+ 
+## LLVM
 #makes all the clang-toolkit binaries available (clangd in particular)
 export PATH=$PATH:/usr/local/opt/llvm/bin/
 
+export LDFLAGS="-L/usr/local/opt/llvm/lib"
+export CPPFLAGS="-I/usr/local/opt/llvm/include"
+
 #makes the open blas libraries discoverable by the compiler
-export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/sqlite/lib"
-export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/sqlite/include"
+export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/sqlite/lib ${LDFLAGS}"
+export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/sqlite/include ${CPPFLAGS}"
 
 #makes npm (node package manager) directly callable 
 export PATH=$PATH:$HOME/.npm-packages/bin
