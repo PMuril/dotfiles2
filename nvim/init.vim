@@ -74,5 +74,7 @@ Plug 'https://github.com/adelarsq/vim-matchit'
 Plug 'https://github.com/tpope/vim-repeat'
 Plug 'https://github.com/glts/vim-magnum'
 Plug 'https://github.com/glts/vim-radical' "for istantaneously converting between numerical representations
+Plug 'https://github.com/kana/vim-textobj-user' "dependency of vim-textobj-latex
+Plug 'https://github.com/rbonvall/vim-textobj-latex' "for yanking inside latex-defined environments
 "Plug 'https://github.com/christoomey/vim-tmux-navigator'
 call plug#end()
