@@ -874,8 +874,19 @@ simultaneously activated
 #+end_src
 
 ** Org-Roam Ui
-(add-to-list 'load-path "~/.emacs.d/private/org-roam-ui")
-(load-library "org-roam-ui")
+#+begin_src emacs-lisp
+    ;; (add-to-list 'load-path "~/.emacs.d/private/org-roam-ui")
+      ;; (load-library "org-roam-ui")
+
+  (use-package org-roam-ui
+    :ensure t
+    :after org-roam
+    :config
+    (setq org-roam-ui-sync-theme t
+        org-roam-ui-follow t
+        org-roam-ui-update-on-save t
+        org-roam-ui-open-on-start t))
+#+end_src
 * AucTex
 ** Auto-Fill-Mode
 #+begin_src emacs-lisp
