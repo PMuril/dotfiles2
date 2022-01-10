@@ -850,16 +850,23 @@ simultaneously activated
     "Open the pdf for bibtex key under point if it exists"
     (interactive)
     (let* ((results (org-ref-get-bibtex-key-and-file))
-	   (key (car results))
-	   (pdf-file (car (bibtex-completion-find-pdf key))))
+           (key (car results))
+           (pdf-file (car (bibtex-completion-find-pdf key))))
       (if (file-exists-p pdf-file)
-	  (org-open-file pdf-file)
-	(message "No PDF found for %s" key))))
+          (org-open-file pdf-file)
+        (message "No PDF found for %s" key))))
 
   (setq org-ref-open-pdf-function 'efs/org-ref-open-pdf-at-point)
 
   ;;specify that org-latex-pdf-process takes also care of processing the bibliography
   (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
+
+  ;; since version 3 org-ref no longer provides automatic keybindings the following provides two alternatives for defining org-ref keybindings
+  ;;gets the behavior of version 2
+  (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link)
+
+  ;;delegates to hydra
+  ;; (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link-hydra)
 #+end_src
 
 *** Org-Roam Bibtex
