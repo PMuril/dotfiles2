@@ -908,7 +908,7 @@ simultaneously activated
   (setq TeX-parse-self t)
 
   ;; LaTeX-mode hooks
-  ;;enables flyspell (frontend) mode whenever a .tex buffer is opened
+  ;;enables flyspell (frontend grammar checker) mode whenever a .tex buffer is opened
   (add-hook 'LaTeX-mode-hook #'turn-on-flyspell)
 
   ;;enables math mode mode whenever a .tex buffer is opened
@@ -916,7 +916,10 @@ simultaneously activated
 
   ;;enables auto-fill-mode mode mode whenever a .tex buffer is opened
   (add-hook 'LaTeX-mode-hook
-            (lambda () (setq auto-fill-function #'LaTeX-limited-auto-fill)) t)
+              (lambda () (setq auto-fill-function #'LaTeX-limited-auto-fill)) t)
+
+  ;;enables CDLaTex whenever a .tex buffer is opened
+  (add-hook 'LaTeX-mode-hook 'turn-on-cdlatex)
 
 #+end_src
 ** RefTeX
