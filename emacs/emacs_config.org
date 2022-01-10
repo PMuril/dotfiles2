@@ -335,7 +335,29 @@ It also enables the keybinding "C-r" for redo in Evil mode.
                   (global-evil-surround-mode 1))
 
    #+end_src
+   
+** Custom Test Objects
+The following macro allows to defined custom test objects in evil-mode. This can be useful when enviroments that depend on the programming language need to be defined.
+For more informations see the corresponding [[https://github.com/emacs-evil/evil-surround][Evil Surround Documentation]].
 
+#+begin_src emacs-lisp
+  (defmacro define-and-bind-quoted-text-object (name key start-regex end-regex)
+  (let ((inner-name (make-symbol (concat "evil-inner-" name)))
+        (outer-name (make-symbol (concat "evil-a-" name))))
+      `(progn
+      (evil-define-text-object ,inner-name (count &optional beg end type)
+          (evil-select-paren ,start-regex ,end-regex beg end type count nil))
+      (evil-define-text-object ,outer-name (count &optional beg end type)
+          (evil-select-paren ,start-regex ,end-regex beg end type count t))
+      (define-key evil-inner-text-objects-map ,key #',inner-name)
+      (define-key evil-outer-text-objects-map ,key #',outer-name))))
+#+end_src
+
+*** LaTeX
+#+begin_src emacs-lisp
+  (define-and-bind-quoted-text-object "dollar" "$" "\\$" "\\$")
+  (define-and-bind-quoted-text-object "latex-environment" "e" "\\\\begin\{.*\}" "\\\\end\{.*\}")
+  #+end_src
 * Projectile
   #+begin_src emacs-lisp
 
