@@ -839,7 +839,7 @@ simultaneously activated
 #+end_src
 *** Org-Ref
 #+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
-  (require 'org-ref)
+  (use-package org-ref)
   (setq reftex-default-bibliography '("~/Zotero/zotero_full_lib.bib"))
   (setq org-ref-default-bibliography '("~/Zotero/zotero_full_lib.bib"))
   (setq org-ref-notes-function 'org-ref-notes-function-many-files)
