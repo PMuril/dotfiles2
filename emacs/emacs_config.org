@@ -27,7 +27,6 @@ CLOSED: [2021-09-10 Fri 23:29]
 ** TODO Consider the option to employ the reverse-tangling package
 ** TODO Update the default names of the fonts via defvar
 
-
 * Emacs GUI customization
 
   #+begin_src emacs-lisp
@@ -671,20 +670,23 @@ For more informations see the corresponding [[https://github.com/emacs-evil/evil
 
 ** CDLaTeX Integration
 #+begin_src emacs-lisp
-      (use-package cdlatex
-        :ensure t
-        :bind ("C-c C-{" . org-cdlatex-environment-indent))
+        (use-package cdlatex
+          :ensure t
+          :bind ("C-c C-{" . org-cdlatex-environment-indent))
 
-      ;; enables org-cdlatex (for latex math macros insertion) at org-mode startup
-      (add-hook 'org-mode-hook #'turn-on-org-cdlatex)
+        ;; enables org-cdlatex (for latex math macros insertion) at org-mode startup
+        (add-hook 'org-mode-hook #'turn-on-org-cdlatex)
 
-      ;; adding custom environment for unnumbered equation
-      (setq cdlatex-env-alist
-            '(("equation*" "\\begin{equation*}\n?\n\\end{equation*}\n" nil)))
+        ;; adding custom environment for unnumbered equation
+        (setq cdlatex-env-alist
+              '(("equation*" "\\begin{equation*}\n?\n\\end{equation*}\n" nil)))
 
-    ;;adding custom accent to produce the Mathbb style
-  (setq cdlatex-math-modify-alist
-        '((66 "\\mathbb" nil t nil nil)))
+      ;;adding custom accent to produce the Mathbb style
+    (setq cdlatex-math-modify-alist
+          '((66 "\\mathbb" nil t nil nil)))
+
+  (setq cdlatex-command-alist
+  '(("bin" "Insert \\binom{}{}" "\\binom{?}{}" cdlatex-position-cursor nil nil t)))
 
 #+end_src
 
