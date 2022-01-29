@@ -12,8 +12,7 @@ set laststatus=2
 " sets the leader key
 let mapleader="\\"
 
-" Disables arrows keys in Normal Mode
-nnoremap <Up> <Nop>
+" Disables arrows keys in Normal Mode nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>
 nnoremap <Left> <Nop>
 nnoremap <Right> <Nop>
@@ -72,9 +71,15 @@ Plug 'tpope/vim-fugitive'
 Plug 'mbbill/undotree'
 Plug 'https://github.com/adelarsq/vim-matchit'
 Plug 'https://github.com/tpope/vim-repeat'
-Plug 'https://github.com/glts/vim-magnum'
+Plug 'https://github.com/glts/vim-magnum' 
 Plug 'https://github.com/glts/vim-radical' "for istantaneously converting between numerical representations
 Plug 'https://github.com/kana/vim-textobj-user' "dependency of vim-textobj-latex
 Plug 'https://github.com/rbonvall/vim-textobj-latex' "for yanking inside latex-defined environments
+Plug 'michaeljsmith/vim-indent-object' "treat indentation levels as vim text objects
+Plug 'https://github.com/bkad/CamelCaseMotion' "allows to specify text objects inside CamelCasedStrings and underlined_strings_
+Plug 'wellle/targets.vim' "allows to easily target arguments inside functions
 "Plug 'https://github.com/christoomey/vim-tmux-navigator'
 call plug#end()
+
+" Plugins settings
+let g:camelcasemotion_key = '<leader>'
