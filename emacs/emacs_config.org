@@ -390,6 +390,13 @@ For more informations see the corresponding [[https://github.com/emacs-evil/evil
 
     ;; Make ESC quit prompts
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+  (global-set-key (kbd "C-S-c") 'copy-to-clipboard)
+  (global-set-key (kbd "C-S-c") 'copy-to-clipboard)
+  (global-set-key (kbd "C-S-v") 'paste-from-clipboard)
+  (global-set-key (kbd "C-S-v") 'paste-from-clipboard)
+  ;; merges OS X and Emacs clipboards
+  (setq x-select-enable-clipboard t)
+  
   (global-unset-key (kbd "C-SPC"))
 
     (use-package general
@@ -437,9 +444,12 @@ For more informations see the corresponding [[https://github.com/emacs-evil/evil
                            ("\\.code-workspace\\'" . "code %s")))))
     (add-hook 'org-mode-hook
               '(lambda ()
-                 (setq org-file-apps
-                       '(("\\.pdf\\'" . "evince %s")
-                         ("\\.code-workspace\\'" . "code %s"))))))
+               (setq org-file-apps
+                     '(("\\.pdf\\'" . "evince %s")
+                       ("\\.code-workspace\\'" . "code %s")
+                       ("\\.xlsx\\'" . "libreoffice %s")
+                       ("\\.docx\\'" . "libreoffice %s"))))))
+  
 #+end_src
 ** Org Mode Core Settings
    #+begin_src emacs-lisp
@@ -908,7 +918,7 @@ simultaneously activated
 #+end_src
 
 ** Org-Roam Ui
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no")
     ;; (add-to-list 'load-path "~/.emacs.d/private/org-roam-ui")
       ;; (load-library "org-roam-ui")
 
