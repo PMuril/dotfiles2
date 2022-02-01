@@ -3,16 +3,15 @@ syntax on
 set tabstop=4
 set shiftwidth=4
 set expandtab
-:set relativenumber
-:set number
-:set number relativenumber
+set number relativenumber "triggers relative lines numbering except for current line, where shows absolute
 set laststatus=2
 
 " KEYBINDINGS
 " sets the leader key
 let mapleader="\\"
 
-" Disables arrows keys in Normal Mode nnoremap <Up> <Nop>
+" Disables arrows keys in Normal Mode 
+nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>
 nnoremap <Left> <Nop>
 nnoremap <Right> <Nop>
@@ -24,7 +23,7 @@ inoremap <Left> <Nop>
 inoremap <Right> <Nop>
 
 " Disable ex mode
-:nnoremap Q <Nop>
+nnoremap Q <Nop>
 
 " Undotree settings
 nnoremap <A-t> :UndotreeToggle<CR>
