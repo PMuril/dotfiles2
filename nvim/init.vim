@@ -25,6 +25,9 @@ inoremap <Right> <Nop>
 " Disable ex mode
 nnoremap Q <Nop>
 
+" Case-insensitive text search by default
+set ignorecase
+
 " Undotree settings
 nnoremap <A-t> :UndotreeToggle<CR>
 let g:undotree_RelativeTimestamp = 1
@@ -80,5 +83,32 @@ Plug 'wellle/targets.vim' "allows to easily target arguments inside functions
 "Plug 'https://github.com/christoomey/vim-tmux-navigator'
 call plug#end()
 
-" Plugins settings
+" Plugins Settings
+" Sets the leader key as the key to prepend to the motion symbol to
+" identify inner text objects in the CamelCaseMotion plugin
 let g:camelcasemotion_key = '<leader>'
+
+" enables the // comment style for the programming languages below
+autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
+
+
+" Custom text objects (requires kana's vim-textobj-user
+" Lines below should be outdated due the CamelCaseMotionPlugin
+" call textobj#user#plugin('dashes', {
+" \   'dash-a' : {
+" \      'pattern': '[-][^-]*[-]',
+" \       'select': 'ay',
+" \   },
+" \   'dash-i' : {
+" \      'pattern': '[-]\zs[^-]*\ze[-]',
+" \       'select': 'iy',
+" \   },
+" \   'underscore-a' : {
+" \      'pattern': '[_][^_]*[_]',
+" \      'select': 'aY', 
+" \   },
+" \   'underscore-i' : {
+" \      'pattern': '[_]\zs[^_]*\ze[_]',
+" \      'select': 'iY', 
+" \   },
+" \ })
