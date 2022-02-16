@@ -80,6 +80,7 @@ Plug 'https://github.com/rbonvall/vim-textobj-latex' "for yanking inside latex-d
 Plug 'michaeljsmith/vim-indent-object' "treat indentation levels as vim text objects
 Plug 'https://github.com/bkad/CamelCaseMotion' "allows to specify text objects inside CamelCasedStrings and underlined_strings_
 Plug 'wellle/targets.vim' "allows to easily target arguments inside functions
+Plug 'unblevable/quick-scope' "Highlights closest match when finding characters
 "Plug 'https://github.com/christoomey/vim-tmux-navigator'
 call plug#end()
 
@@ -90,6 +91,13 @@ let g:camelcasemotion_key = '<leader>'
 
 " enables the // comment style for the programming languages below
 autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
+
+" quick scope
+" Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+" Trigger a highlight only when pressing f and F.
+let g:qs_highlight_on_keys = ['f', 'F']
 
 
 " Custom text objects (requires kana's vim-textobj-user
