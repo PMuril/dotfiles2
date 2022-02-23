@@ -61,7 +61,6 @@ call plug#begin('~/.vim/plugged')
 
 " Plugins list
 " to perform plugins update/installation run \"PlugInstall\"
-Plug 'https://github.com/xavierd/clang_complete'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/tpope/vim-commentary'
 Plug 'https://github.com/vim-scripts/ReplaceWithRegister'
