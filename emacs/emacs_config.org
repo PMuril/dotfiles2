@@ -904,7 +904,7 @@ simultaneously activated
   (setq org-roam-capture-templates
         '(("d" "default" plain
            "%?"
-           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n *Todolist\n *References\n")
            :unnarrowed t)
           ("r" "ref" plain
            (file "~/.config/emacs/orb-templates/reference.org")
