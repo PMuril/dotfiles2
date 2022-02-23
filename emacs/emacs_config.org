@@ -705,27 +705,27 @@ For more informations see the corresponding [[https://github.com/emacs-evil/evil
 ** Custom Functions
 #+begin_src emacs-lisp
 
-      (defun my/org-roam-link-word-at-point ()
-        (interactive)
-        (when (word-at-point t)
-          (re-search-backward "\\b")
-          (mark-word)
-          (call-interactively #'org-roam-insert-immediate)))
+  (defun my/org-roam-link-word-at-point ()
+    (interactive)
+    (when (word-at-point t)
+      (re-search-backward "\\b")
+      (mark-word)
+      (call-interactively #'org-roam-insert-immediate)))
 
-      (defun my/org-roam-open-or-link-at-point ()
-        (interactive)
-        (let ((context (org-element-context)))
-          (if (equal (car context) 'link)
-              (org-open-at-point)
-            (my/org-roam-link-word-at-point))))
+  (defun my/org-roam-open-or-link-at-point ()
+    (interactive)
+    (let ((context (org-element-context)))
+      (if (equal (car context) 'link)
+          (org-open-at-point)
+        (my/org-roam-link-word-at-point))))
 
-  (defvar custom-org-roam-directory
-  (cond ((string-equal system-type "darwin") "~/Dropbox/myannotations/org-roam")
-        ((string-equal system-type "gnu/linux") "~/workspace/myannotations")))
+    (defvar custom-org-roam-directory
+    (cond ((string-equal system-type "darwin") "~/Dropbox/myannotations/org-roam")
+          ((string-equal system-type "gnu/linux") "~/workspace/myannotations")))
 
-  (defvar custom-org-roam-index
-  (cond ((string-equal system-type "darwin") "~/Dropbox/myannotations/org-roam/index.org")
-        ((string-equal system-type "gnu/linux") "~/workspace/myannotations/index.org")))
+    (defvar custom-org-roam-index
+    (cond ((string-equal system-type "darwin") "~/Dropbox/myannotations/org-roam/index.org")
+          ((string-equal system-type "gnu/linux") "~/workspace/myannotations/index.org")))
 
 #+end_src
 
@@ -778,7 +778,7 @@ Following local org-roam-mode is defined so that org-roam keybindings is valid o
     (setq org-roam-graph-viewer "/Applications/Firefox.app/Contents/MacOS/firefox")
 
     #+end_src  
-** Deft
+*** Deft
 #+begin_src emacs-lisp
   (use-package deft
     :bind ("<f8>" . deft)
@@ -786,7 +786,7 @@ Following local org-roam-mode is defined so that org-roam keybindings is valid o
     :config(setq deft-directory
                  deft-extensions '("org")))
 #+end_src
-** Org-Roam Keybindings
+*** Org-Roam Keybindings
 #+begin_src emacs-lisp
   (general-define-key
    :states '(normal visual)
@@ -802,12 +802,12 @@ Following local org-roam-mode is defined so that org-roam keybindings is valid o
     ;; rebind enter key in normal mode to my/org-roam-link-word-at-point
   (define-key my/local-org-roam-mode-map [remap evil-ret] 'my/org-roam-open-or-link-at-point)
 #+end_src
-** Org-Roam Bibtex
+*** Org-Roam Bibtex
 Below is provided a configuration of Org-Roam Bibtext using
 either *Helm-Bibtex* or *Ivy-Bibtex* as beckend. The two configurations
 are (presumably) mutually exclusive and therefore cannot be
 simultaneously activated
-*** Helm-Bibtex Beckend
+**** Helm-Bibtex Beckend
 #+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
   (use-package helm-bibtex
     :ensure t
@@ -818,14 +818,14 @@ simultaneously activated
     (helm-mode 1)
     (autoload 'helm-bibtex "helm-bibtex" "" t)
 #+end_src
-*** Ivy-Bibtex Beckend
+**** Ivy-Bibtex Beckend
 #+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
   (autoload 'ivy-bibtex "ivy-bibtex" "" t)
   (setq ivy-re-builders-alist
         '((ivy-bibtex . ivy--regex-ignore-order)
           (t . ivy--regex-plus)))
 #+end_src
-*** Bibliographic Database Management
+**** Bibliographic Database Management
 #+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
 
   (setq bibtex-completion-bibliography '("~/Zotero/zotero_full_lib.bib"))
@@ -850,39 +850,41 @@ simultaneously activated
         (lambda (ril -) (start-process "firefox" "*firefox*" "firefox" url)))
 
 #+end_src
-*** Org-Ref
+**** Org-Ref
 #+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
-  (use-package org-ref)
-  (setq reftex-default-bibliography '("~/Zotero/zotero_full_lib.bib"))
-  (setq org-ref-default-bibliography '("~/Zotero/zotero_full_lib.bib"))
-  (setq org-ref-notes-function 'org-ref-notes-function-many-files)
+      (use-package org-ref)
+      (setq reftex-default-bibliography '("~/Zotero/zotero_full_lib.bib"))
+      (setq org-ref-default-bibliography '("~/Zotero/zotero_full_lib.bib"))
+      (setq org-ref-notes-function 'org-ref-notes-function-many-files)
 
-  (setq org-ref-notes-directory "~/Dropbox/myannotations/org-roam/Zotero")
+      (setq org-ref-notes-directory "~/Dropbox/myannotations/org-roam/Zotero")
 
-  (defun efs/org-ref-open-pdf-at-point ()
-    "Open the pdf for bibtex key under point if it exists"
-    (interactive)
-    (let* ((results (org-ref-get-bibtex-key-and-file))
-           (key (car results))
-           (pdf-file (car (bibtex-completion-find-pdf key))))
-      (if (file-exists-p pdf-file)
-          (org-open-file pdf-file)
-        (message "No PDF found for %s" key))))
+      (defun efs/org-ref-open-pdf-at-point ()
+        "Open the pdf for bibtex key under point if it exists"
+        (interactive)
+        (let* ((results (org-ref-get-bibtex-key-and-file))
+               (key (car results))
+               (pdf-file (car (bibtex-completion-find-pdf key))))
+          (if (file-exists-p pdf-file)
+              (org-open-file pdf-file)
+            (message "No PDF found for %s" key))))
 
-  (setq org-ref-open-pdf-function 'efs/org-ref-open-pdf-at-point)
+      (setq org-ref-open-pdf-function 'efs/org-ref-open-pdf-at-point)
 
-  ;;specify that org-latex-pdf-process takes also care of processing the bibliography
-  (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
+      ;;specify that org-latex-pdf-process takes also care of processing the bibliography
+      (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
 
-  ;; since version 3 org-ref no longer provides automatic keybindings the following provides two alternatives for defining org-ref keybindings
-  ;;gets the behavior of version 2
-  (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link)
+      ;; since version 3 org-ref no longer provides automatic keybindings the following provides two alternatives for defining org-ref keybindings
+      ;;gets the behavior of version 2
+      (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link)
 
-  ;;delegates to hydra
-  ;; (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link-hydra)
+  ;;specifies that the Bibliography has to be produced by using the biblatex dialect
+    (setq bibtex-dialect 'biblatex)
+      ;;delegates to hydra
+      ;; (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link-hydra)
 #+end_src
 
-*** Org-Roam Bibtex
+**** Org-Roam Bibtex
 #+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
   (use-package org-roam-bibtex
     :after org-roam
@@ -917,7 +919,7 @@ simultaneously activated
 
 #+end_src
 
-** Org-Roam Ui
+*** Org-Roam Ui
 #+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no")
     ;; (add-to-list 'load-path "~/.emacs.d/private/org-roam-ui")
       ;; (load-library "org-roam-ui")
@@ -1036,14 +1038,16 @@ simultaneously activated
 #+end_src
 * Yasnippets
 #+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
-    (add-to-list 'load-path
-                 "~/.config/emacs/plugins/yasnippet")
-    (require 'yasnippet)
+      (add-to-list 'load-path
+                   "~/.config/emacs/plugins/yasnippet")
+      (require 'yasnippet)
 
-    (yas-reload-all)
-    (add-hook 'prog-mode-hook #'yas-minor-mode)
+      (yas-reload-all)
+      (add-hook 'prog-mode-hook #'yas-minor-mode)
 
-  ;; fundamental-mode loads a set of snippets that are useful in a multi-environment environment and that gets loaded whenever a minor mode is activated
-  (add-hook 'yas-minor-mode-hook (lambda ()
-                                   (yas-activate-extra-mode 'fundamental-mode)))
+    ;; fundamental-mode loads a set of snippets that are useful in a multi-environment environment and that gets loaded whenever a minor mode is activated
+    (add-hook 'yas-minor-mode-hook (lambda ()
+                                     (yas-activate-extra-mode 'fundamental-mode)))
+  (add-hook 'latex-mode-hook (lambda ()
+			     (yase-activate-extra-mode 'latex-mode)))
 #+end_src
