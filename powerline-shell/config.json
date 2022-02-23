@@ -1,7 +1,7 @@
 {
   "segments": [
-    "virtual_env", 
     "username", 
+    "virtual_env", 
     "ssh", 
     "cwd", 
     "git", 
