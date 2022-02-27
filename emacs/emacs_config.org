@@ -841,12 +841,12 @@ Following local org-roam-mode is defined so that org-roam keybindings is valid o
     ;; rebind enter key in normal mode to my/org-roam-link-word-at-point
   (define-key my/local-org-roam-mode-map [remap evil-ret] 'my/org-roam-open-or-link-at-point)
 #+end_src
-*** Org-Roam Bibtex
+** Org-Roam Bibtex
 Below is provided a configuration of Org-Roam Bibtext using
 either *Helm-Bibtex* or *Ivy-Bibtex* as beckend. The two configurations
 are (presumably) mutually exclusive and therefore cannot be
 simultaneously activated
-**** Helm-Bibtex Beckend
+*** Helm-Bibtex Beckend
 #+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
   (use-package helm-bibtex
     :ensure t
@@ -857,14 +857,14 @@ simultaneously activated
     (helm-mode 1)
     (autoload 'helm-bibtex "helm-bibtex" "" t)
 #+end_src
-**** Ivy-Bibtex Beckend
+*** Ivy-Bibtex Beckend
 #+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
   (autoload 'ivy-bibtex "ivy-bibtex" "" t)
   (setq ivy-re-builders-alist
         '((ivy-bibtex . ivy--regex-ignore-order)
           (t . ivy--regex-plus)))
 #+end_src
-**** Bibliographic Database Management
+*** Bibliographic Database Management
 #+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
 
   (setq bibtex-completion-bibliography '("~/Zotero/zotero_full_lib.bib"))
@@ -889,7 +889,7 @@ simultaneously activated
         (lambda (ril -) (start-process "firefox" "*firefox*" "firefox" url)))
 
 #+end_src
-**** Org-Ref
+*** Org-Ref
 #+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
       (use-package org-ref)
       (setq reftex-default-bibliography '("~/Zotero/zotero_full_lib.bib"))
@@ -923,7 +923,7 @@ simultaneously activated
       ;; (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link-hydra)
 #+end_src
 
-**** Org-Roam Bibtex
+*** Org-Roam Bibtex
 #+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
   (use-package org-roam-bibtex
     :after org-roam
