@@ -1090,3 +1090,11 @@ simultaneously activated
   (add-hook 'latex-mode-hook (lambda ()
 			     (yase-activate-extra-mode 'latex-mode)))
 #+end_src
+
+* Openwith
+#+begin_src emacs-lisp
+  (use-package openwith
+    :config
+    (setq openwith-associations '(("\\.pdf\\'" "open -a \'PDF Expert 3.app\'" (file)))))
+    (openwith-mode t)
+#+end_src
