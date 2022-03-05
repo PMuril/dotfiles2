@@ -80,6 +80,8 @@ Plug 'michaeljsmith/vim-indent-object' "treat indentation levels as vim text obj
 Plug 'https://github.com/bkad/CamelCaseMotion' "allows to specify text objects inside CamelCasedStrings and underlined_strings_
 Plug 'wellle/targets.vim' "allows to easily target arguments inside functions
 Plug 'unblevable/quick-scope' "Highlights closest match when finding characters
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 "Plug 'https://github.com/christoomey/vim-tmux-navigator'
 call plug#end()
 
@@ -95,9 +97,16 @@ autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
 " Trigger a highlight in the appropriate direction when pressing these keys:
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
-" Trigger a highlight only when pressing f and F.
-let g:qs_highlight_on_keys = ['f', 'F']
+" Ultisnips
+" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
+" - https://github.com/Valloric/YouCompleteMe
+" - https://github.com/nvim-lua/completion-nvim
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsListSnippets="<c-tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
+set runtimepath+=~/.config/nvim/my-snippets/
 
 " Custom text objects (requires kana's vim-textobj-user
 " Lines below should be outdated due the CamelCaseMotionPlugin
@@ -119,3 +128,4 @@ let g:qs_highlight_on_keys = ['f', 'F']
 " \      'select': 'iY', 
 " \   },
 " \ })
+"
