@@ -846,52 +846,57 @@ Below is provided a configuration of Org-Roam Bibtext using
 either *Helm-Bibtex* or *Ivy-Bibtex* as beckend. The two configurations
 are (presumably) mutually exclusive and therefore cannot be
 simultaneously activated
-*** Helm-Bibtex Beckend
-#+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
-  (use-package helm-bibtex
-    :ensure t
-    :bind (("C-c h b" . helm-bibtex)
-           ("C-c h n" . helm-bibtex-with-notes)))
+# *** Helm-Bibtex Beckend
+# #+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
+#   (use-package helm-bibtex
+#     :ensure t
+#     :bind (("C-c h b" . helm-bibtex)
+#            ("C-c h n" . helm-bibtex-with-notes)))
 
-    (require 'helm-config)
-    (helm-mode 1)
-    (autoload 'helm-bibtex "helm-bibtex" "" t)
-#+end_src
-*** Ivy-Bibtex Beckend
-#+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
-  (autoload 'ivy-bibtex "ivy-bibtex" "" t)
-  (setq ivy-re-builders-alist
-        '((ivy-bibtex . ivy--regex-ignore-order)
-          (t . ivy--regex-plus)))
-#+end_src
-*** Bibliographic Database Management
-#+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
+#     (require 'helm-config)
+#     (helm-mode 1)
+#     (autoload 'helm-bibtex "helm-bibtex" "" t)
+# #+end_src
+# *** Ivy-Bibtex Beckend
+# #+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
+#   (autoload 'ivy-bibtex "ivy-bibtex" "" t)
+#   (setq ivy-re-builders-alist
+#         '((ivy-bibtex . ivy--regex-ignore-order)
+#           (t . ivy--regex-plus)))
+# #+end_src
+# *** Bibliographic Database Management
+# #+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
 
-  (setq bibtex-completion-bibliography '("~/Zotero/zotero_full_lib.bib"))
-  (setq bibtex-completion-pdf-field "file")
-  (setq bibtex-completion-notes-path "~/Dropbox/myannotations/org-roam/Zotero")
+#   (setq bibtex-completion-bibliography '("~/Zotero/zotero_full_lib.bib"))
+#   (setq bibtex-completion-pdf-field "file")
+#   (setq bibtex-completion-notes-path "~/Dropbox/myannotations/org-roam/Zotero")
 
-  ;; For publications that are composed of more than 1 PDF file
-  ;;e.g. a main pubblication + supplemental informations
-  ;; this triggers the engine to browse for additional materials
-  (setq bibtex-completion-find-additional-pdfs t)
+#   ;; For publications that are composed of more than 1 PDF file
+#   ;;e.g. a main pubblication + supplemental informations
+#   ;; this triggers the engine to browse for additional materials
+#   (setq bibtex-completion-find-additional-pdfs t)
 
-  (setq bibtex-completion-pdf-symbol "⌘")
-  (setq bibtex-completion-notes-symbol "✎")
+#   (setq bibtex-completion-pdf-symbol "⌘")
+#   (setq bibtex-completion-notes-symbol "✎")
 
-  ;; specify the application to open the publication pdf when this is present
-  (setq bibtex-completion-pdf-open-function
-        (lambda (fpath)
-          (call-process "open" nil 0 nil "-a" "/Applications/PDF Expert 2.app" fpath)))
+#   ;; specify the application to open the publication pdf when this is present
+#   (setq bibtex-completion-pdf-open-function
+#         (lambda (fpath)
+#           (call-process "open" nil 0 nil "-a" "/Applications/PDF Expert 2.app" fpath)))
 
-  ;; specify the browser for opening URLs or DOIs
-  (setq bibitex-completion-browser-function
-        (lambda (ril -) (start-process "firefox" "*firefox*" "firefox" url)))
+#   ;; specify the browser for opening URLs or DOIs
+#   (setq bibitex-completion-browser-function
+#         (lambda (ril -) (start-process "firefox" "*firefox*" "firefox" url)))
 
 #+end_src
 *** Org-Ref
 #+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
-      (use-package org-ref)
+      (use-package org-ref
+        :bind (("C-c r h" . 'org-ref-insert-link-hydra/body)
+               ("C-c r l" . 'org-ref-insert-label-link)
+               ("C-c r g" . 'org-ref-add-glossary-entry)
+               ("C-c r a" . 'org-ref-add-acronym-entry)))
+
       (setq reftex-default-bibliography '("~/Zotero/zotero_full_lib.bib"))
       (setq org-ref-default-bibliography '("~/Zotero/zotero_full_lib.bib"))
       (setq org-ref-notes-function 'org-ref-notes-function-many-files)
@@ -915,12 +920,12 @@ simultaneously activated
 
       ;; since version 3 org-ref no longer provides automatic keybindings the following provides two alternatives for defining org-ref keybindings
       ;;gets the behavior of version 2
-      (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link)
+      ;; (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link)
 
   ;;specifies that the Bibliography has to be produced by using the biblatex dialect
     (setq bibtex-dialect 'biblatex)
       ;;delegates to hydra
-      ;; (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link-hydra)
+    ;; (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link-hydra/body)
 #+end_src
 
 *** Org-Roam Bibtex
@@ -1033,21 +1038,22 @@ simultaneously activated
 #+end_src
 ** RefTeX
 #+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
-  (require 'bibtex-completion)
-  (require 'tex)
+    (require 'bibtex-completion)
+    (require 'tex)
 
-  (defun open-key-at-point ()
-    (interactive)
-    (let (start end key)
-      (save-excursion
-        (setq start (progn (re-search-backward "{\\|,") (match-end 0))
-            end (progn (re-search-forward "}\\|,") (match-beginning 0))
-            key (buffer-substring-no-properties start end)))
+    (defun open-key-at-point ()
+      (interactive)
+      (let (start end key)
+        (save-excursion
+          (setq start (progn (re-search-backward "{\\|,") (match-end 0))
+              end (progn (re-search-forward "}\\|,") (match-beginning 0))
+              key (buffer-substring-no-properties start end)))
 
-        (bibtex-completion-show-entry (list key))
-        (bibtex-beginning-of-entry)))
+          (bibtex-completion-show-entry (list key))
+          (bibtex-beginning-of-entry)))
 
-    ;; (define-key tex-mode-map (kbd "C-c h o") #'open-key-at-point)
+  (setq reftex-default-bibliography '("~/Zotero/zotero_full_lib.bib"))
+      ;; (define-key tex-mode-map (kbd "C-c h o") #'open-key-at-point)
 #+end_src
 #+begin_src emacs-lisp
   ;; enables reftex whenever a latex buffer is opened
