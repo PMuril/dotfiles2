@@ -733,11 +733,15 @@ For more informations see the corresponding [[https://github.com/emacs-evil/evil
 
         ;; adding custom environment for unnumbered equation
         (setq cdlatex-env-alist
-              '(("equation*" "\\begin{equation*}\n?\n\\end{equation*}\n" nil)))
+              '(("equation*" "\\begin{equation*}\n?\n\\end{equation*}\n" nil)
+                ("theorem" "\\begin{theorem}\nAUTOLABEL\n?\n\\end{theorem}\n" nil)
+                ("proof" "\\begin{proof}\nAUTOLABEL\n?\n\\end{proof}\n" nil)
+                ("lemma" "\\begin{lemma}\nAUTOLABEL\n?\n\\end{lemma}\n" nil)
+                ("corollary" "\\begin{corollary}\nAUTOLABEL\n?\n\\end{corollary}\n" nil)))
 
       ;;adding custom accent to produce the Mathbb style
     (setq cdlatex-math-modify-alist
-          '((66 "\\mathbb" nil t nil nil)))
+          '((66 "\\mathbb" nil t nil nil))) ;; 'B -> \mathbb
 
   (setq cdlatex-command-alist
   '(("bin" "Insert \\binom{}{}" "\\binom{?}{}" cdlatex-position-cursor nil nil t)))
