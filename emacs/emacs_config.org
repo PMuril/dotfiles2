@@ -1102,7 +1102,11 @@ simultaneously activated
 #+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
       (add-to-list 'load-path
                    "~/.config/emacs/plugins/yasnippet")
-      (require 'yasnippet)
+
+      (use-package yasnippet
+        :bind (("C-c y s" . yas-insert-snippet)
+               ("C-c y x" . yas-activate-extra-mode)
+               ("C-c y o" . yas-minor-mode-on)))
 
       (yas-reload-all)
       (add-hook 'prog-mode-hook #'yas-minor-mode)
@@ -1111,7 +1115,9 @@ simultaneously activated
     (add-hook 'yas-minor-mode-hook (lambda ()
                                      (yas-activate-extra-mode 'fundamental-mode)))
   (add-hook 'latex-mode-hook (lambda ()
-			     (yase-activate-extra-mode 'latex-mode)))
+                             (yas-activate-extra-mode 'latex-mode)))
+  (add-hook 'org-mode-hook (lambda ()
+                             (yas-activate-extra-mode 'latex-mode)))
 #+end_src
 
 * Openwith
