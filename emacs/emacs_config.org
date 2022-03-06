@@ -21,11 +21,15 @@ CLOSED: [2021-09-10 Fri 23:29]
 *** TODO Decouple the initialization of helm and helm-bibtex
 ** DONE Customize the flyspell error faces
 CLOSED: [2021-08-24 Tue 00:39]
-** TODO Replace Org-Roam Server with Org-Roam UI
+** DONE Replace Org-Roam Server with Org-Roam UI
+CLOSED: [2022-03-05 Sat 09:13]
 ** DONE Activate xclip via use-package
 CLOSED: [2021-09-10 Fri 23:29]
-** TODO Consider the option to employ the reverse-tangling package
-** TODO Update the default names of the fonts via defvar
+** DONE Consider the option to employ the reverse-tangling package
+CLOSED: [2022-03-05 Sat 09:13]
+** DONE Update the default names of the fonts via defvar
+CLOSED: [2022-03-05 Sat 09:13]
+** TODO Find a fully native way to specify the program to open specific
 
 * Emacs GUI customization
 
