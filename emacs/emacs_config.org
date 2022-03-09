@@ -509,9 +509,13 @@ For more informations see the corresponding [[https://github.com/emacs-evil/evil
        ;;org-mode task list
        )
 
+     
    #+end_src
 *** TODOs
 #+begin_src emacs-lisp
+
+  (require 'org-inlinetask) ;;enables inline TODOs
+
   (setq org-enforce-todo-dependencies t)
   (setq org-todo-keywords
         '((sequence "TODO(t)" "DONE(d)")
