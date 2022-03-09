@@ -30,6 +30,9 @@ CLOSED: [2022-03-05 Sat 09:13]
 ** DONE Update the default names of the fonts via defvar
 CLOSED: [2022-03-05 Sat 09:13]
 ** TODO Find a fully native way to specify the program to open specific
+** TODO Find a way to hook  yas-minor-mode-on to the major modes where this is required
+** TODO Find a better embodiement of /requires/ expressions within the definitions
+
 
 * Emacs GUI customization
 
@@ -1139,3 +1142,5 @@ simultaneously activated
     (setq openwith-associations '(("\\.pdf\\'" "open -a \'PDF Expert 3.app\'" (file)))))
     (openwith-mode t)
 #+end_src
+
+
