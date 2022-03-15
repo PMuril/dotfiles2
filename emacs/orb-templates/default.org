@@ -1,0 +1,11 @@
+# The title is automatically deduced by org-roam 
+#+filetags: %^{keywords} #zotero tags
+#+startup: inlineimages #C-c C-x C-v to toggle inline images
+#+startup: show2levels
+
+* Todolist
+
+* ${title}
+
+* Bibliography 
+#+print_bibliography:
