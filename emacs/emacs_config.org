@@ -1115,22 +1115,24 @@ simultaneously activated
 #+end_src
 * Yasnippets
 #+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
-      (add-to-list 'load-path
-                   "~/.config/emacs/plugins/yasnippet")
+  (add-to-list 'load-path
+               "~/.config/emacs/plugins/yasnippet")
 
-      (use-package yasnippet
-        :bind (("C-c y s" . yas-insert-snippet)
-               ("C-c y x" . yas-activate-extra-mode)
-               ("C-c y o" . yas-minor-mode-on)))
+  (use-package yasnippet
+    :ensure t
+    :bind (("C-c y s" . yas-insert-snippet)
+           ("C-c y x" . yas-activate-extra-mode)
+           ("C-c y o" . yas-minor-mode-on))
+    :config
+    (yas-reload-all))
 
-      (yas-reload-all)
-      (add-hook 'prog-mode-hook #'yas-minor-mode)
+  (add-hook 'prog-mode-hook #'yas-minor-mode)
 
-    ;; fundamental-mode loads a set of snippets that are useful in a multi-environment environment and that gets loaded whenever a minor mode is activated
-    (add-hook 'yas-minor-mode-hook (lambda ()
-                                     (yas-activate-extra-mode 'fundamental-mode)))
+  ;; fundamental-mode loads a set of snippets that are useful in a multi-environment environment and that gets loaded whenever a minor mode is activated
+  (add-hook 'yas-minor-mode-hook (lambda ()
+                                   (yas-activate-extra-mode 'fundamental-mode)))
   (add-hook 'latex-mode-hook (lambda ()
-                             (yas-activate-extra-mode 'latex-mode)))
+                               (yas-activate-extra-mode 'latex-mode)))
   (add-hook 'org-mode-hook (lambda ()
                              (yas-activate-extra-mode 'latex-mode)))
 #+end_src
