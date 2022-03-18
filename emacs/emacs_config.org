@@ -1114,16 +1114,22 @@ simultaneously activated
               ))
            (cadr ispell-tex-skip-alists)))
 #+end_src
+** Preview
+#+begin_src emacs-lisp
+  (eval-after-load "preview"
+    '(add-to-list 'preview-default-preamble "\\PreviewEnvironment{tikzpicture}" t)
+    )
+#+end_src
 * Yasnippets
 #+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
   (add-to-list 'load-path
-               "~/.config/emacs/plugins/yasnippet")
+               "~/.config/emacs/snippets/")
 
   (use-package yasnippet
     :ensure t
     :bind (("C-c y s" . yas-insert-snippet)
            ("C-c y x" . yas-activate-extra-mode)
-           ("C-c y o" . yas-minor-mode-on))
+           ("C-c y o" . yas-minor-mode))
     :config
     (yas-reload-all))
 
