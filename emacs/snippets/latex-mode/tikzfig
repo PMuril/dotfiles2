@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: tikz
+# key: /tikz
+# --
+
+\documentclass{article}[a4paper]
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+
+\end{tikzpicture}
+
+\end{document}
