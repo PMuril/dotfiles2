@@ -1,0 +1,22 @@
+# The title is automatically deduced by org-roam 
+#+filetags: %^{keywords} #zotero tags
+#+startup: inlineimages #C-c C-x C-v to toggle inline images
+#+startup: show2levels
+
+#+bibliography: ~/Zotero/zotero_full_lib.bib
+
+#+latex_header: \newtheorem{theorem}{Theorem} 
+#+latex_header: \newtheorem{lemma}{Lemma} 
+#+latex_header: \newtheorem{corollary}{Corollary} 
+#+latex_header: \newtheorem{proof}{Proof}
+#+latex_header: \newtheorem{definition}{Definition}
+#+latex_header: \usepackage[acronym]{glossaries}
+
+* Todolist
+
+* ${title}
+
+* References
+** Links
+** Bibliography
+#+print_bibliography:
