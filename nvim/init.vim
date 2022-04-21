@@ -58,8 +58,60 @@ set t_Co=256
 " press \l to highlight, :match to remove the highlight
 nnoremap <silent> <Leader>l ml:execute 'match Search /\%'.line('.').'l/'<CR>
 
-"specifies the highlighting profile
-highlight CursorLine cterm=NONE ctermbg=darkred ctermfg=white
+" Custom highlighting colors
+highlight RedSearch cterm=NONE ctermbg=darkred ctermfg=white
+
+" enables the Dockerfile syntax highlighting for .dockerfile files
+autocmd BufNewFile,BufRead *.dockerfile set syntax=dockerfile
+
+" FOLDING
+autocmd FileType c,cpp,cs,java set foldmethod=syntax
+
+autocmd FileType xml set foldmethod=indent
+
+if(exists("g:vscode"))
+    " Get folding working with vscode neovim plugin
+    nnoremap <silent> za <Cmd>call VSCodeNotify('editor.toggleFold')<CR>
+    nnoremap <silent> zR <Cmd>call VSCodeNotify('editor.unfoldAll')<CR>
+    nnoremap <silent> zM <Cmd>call VSCodeNotify('editor.foldAll')<CR>
+    nnoremap <silent> zo <Cmd>call VSCodeNotify('editor.unfold')<CR>
+    nnoremap <silent> zO <Cmd>call VSCodeNotify('editor.unfoldRecursively')<CR>
+    nnoremap <silent> zc <Cmd>call VSCodeNotify('editor.fold')<CR>
+    nnoremap <silent> zC <Cmd>call VSCodeNotify('editor.foldRecursively')<CR>
+    " xnoremap <silent> zV <Cmd>call VSCodeNotify('editor.foldAllExcept')<CR>
+
+    nnoremap <silent> z1 <Cmd>call VSCodeNotify('editor.foldLevel1')<CR>
+    nnoremap <silent> z2 <Cmd>call VSCodeNotify('editor.foldLevel2')<CR>
+    nnoremap <silent> z3 <Cmd>call VSCodeNotify('editor.foldLevel3')<CR>
+    nnoremap <silent> z4 <Cmd>call VSCodeNotify('editor.foldLevel4')<CR>
+    nnoremap <silent> z5 <Cmd>call VSCodeNotify('editor.foldLevel5')<CR>
+    nnoremap <silent> z6 <Cmd>call VSCodeNotify('editor.foldLevel6')<CR>
+    nnoremap <silent> z7 <Cmd>call VSCodeNotify('editor.foldLevel7')<CR>
+    
+    nmap j gj
+    nmap k gk
+    
+    " Bookmarks
+    nnoremap <silent> gb <Cmd>call VSCodeNotify('bookmarks.toggle')<CR>
+    nnoremap <silent> glb <Cmd>call VSCodeNotify('bookmarks.toggleLabeled')<CR>
+
+    xmap gc  <Plug>VSCodeCommentary
+    nmap gc  <Plug>VSCodeCommentary
+    omap gc  <Plug>VSCodeCommentary
+    nmap gcc <Plug>VSCodeCommentaryLine
+
+    autocmd FileType json setlocal commentstring=//\ %s
+
+    " fixes the missing highlights in vscode
+    highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+    highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+
+    " ultisnips keybindings
+    " let g:UltiSnipsExpandTrigger="<c-/>"
+    " let g:UltiSnipsJumpForwardTrigger="<c-b>"
+    " let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+endif
+
 
 " Specify the plugins installation directories
 " clang_complete requires to install nvim with python support
