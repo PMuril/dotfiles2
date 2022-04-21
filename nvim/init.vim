@@ -35,6 +35,13 @@ let g:undotree_ShortIndicators = 1
 let g:undotree_HelpLine = 0
 let g:undotree_WindowLayout = 2
 
+" vimgrep useful keybindigs
+set grepprg=internal
+nnoremap [q :cprev<CR>
+nnoremap ]q :cnext<CR>
+nnoremap [<C-q> :cpfile<CR>
+nnoremap ]<C-q> :cnfile<CR>
+
 if has("persistent_undo")
     set undodir=$HOME/.config/nvim/undodir
     set undofile
