@@ -412,7 +412,7 @@ For more informations see the corresponding [[https://github.com/emacs-evil/evil
     (setq prefix-help-command #'embark-prefix-help-command)
 
     :config
-    
+
     ;; Hide the mode line of the Embark live/completions buffers
     (add-to-list 'display-buffer-alist
                  '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
@@ -512,7 +512,7 @@ For more informations see the corresponding [[https://github.com/emacs-evil/evil
        ;;org-mode task list
        )
 
-     
+
    #+end_src
 *** TODOs
 #+begin_src emacs-lisp
@@ -749,6 +749,7 @@ For more informations see the corresponding [[https://github.com/emacs-evil/evil
                 ("proof" "\\begin{proof}\nAUTOLABEL\n?\n\\end{proof}\n" nil)
                 ("lemma" "\\begin{lemma}\nAUTOLABEL\n?\n\\end{lemma}\n" nil)
                 ("corollary" "\\begin{corollary}\nAUTOLABEL\n?\n\\end{corollary}\n" nil)
+                ("definition" "\\begin{definition}\nAUTOLABEL\n?\n\\end{definition}\n" nil)
                 ("tikzpicture" "\\begin{tikzpicture}\nAUTOLABEL\n?\n\\end{tikzpicture}\n" nil)))
 
       ;;adding custom accent to produce the Mathbb style
