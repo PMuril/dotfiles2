@@ -144,28 +144,26 @@ Plug 'honza/vim-snippets'
 "Plug 'https://github.com/christoomey/vim-tmux-navigator'
 call plug#end()
 
-" Plugins Settings
-" Sets the leader key as the key to prepend to the motion symbol to
+" PLUGINS SETTINGS
+" CamelCaseMotion
+" sets the leader key as the key to prepend to the motion symbol to
 " identify inner text objects in the CamelCaseMotion plugin
 let g:camelcasemotion_key = '<leader>'
 
+" VimCommentary
 " enables the // comment style for the programming languages below
 autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
 
-" quick scope
+" Quick-Scope
 " Trigger a highlight in the appropriate direction when pressing these keys:
+"
+set runtimepath+=~/.config/nvim/my-snippets/Ultisnips
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
-" Ultisnips
-" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
-" - https://github.com/Valloric/YouCompleteMe
-" - https://github.com/nvim-lua/completion-nvim
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsListSnippets="<c-tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-set runtimepath+=~/.config/nvim/my-snippets/
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" let g:UltiSnipsListSnippets="<c-q>"
 
 " Custom text objects (requires kana's vim-textobj-user
 " Lines below should be outdated due the CamelCaseMotionPlugin
