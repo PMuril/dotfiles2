@@ -1010,6 +1010,10 @@ simultaneously activated
            (file "~/.config/emacs/orb-templates/default.org")
            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
            :unnarrowed t)
+          ("m" "math" plain
+           (file "~/.config/emacs/orb-templates/math.org")
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+           :unnarrowed t)
           ("r" "ref" plain
            (file "~/.config/emacs/orb-templates/reference.org")
            :if-new
