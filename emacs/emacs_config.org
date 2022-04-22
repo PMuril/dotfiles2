@@ -1026,15 +1026,16 @@ simultaneously activated
 *** Citar
 #+begin_src emacs-lisp
   (use-package citar
-    :bind (("C-c b" . citar-insert-citation)
+    :bind (("C-c c c" . citar-insert-citation)
            :map minibuffer-local-map
            ("M-b" . citar-insert-preset))
     :custom
-    (citar-bibliography '("~/Zotero/zotero_full_lib.bib")))
+    (citar-bibliography '("~/Zotero/paolo_zotero_lib.bib")))
 
   (setq citar-open-note-function 'orb-citar-edit-note)
   (setq citar-notes-paths '("~/Dropbox/myannotations/org-roam"))
 
+  (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
 #+end_src
 ** Org-Roam Ui
 #+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no")
