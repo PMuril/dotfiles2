@@ -918,8 +918,8 @@ simultaneously activated
                ("C-c r g" . 'org-ref-add-glossary-entry)
                ("C-c r a" . 'org-ref-add-acronym-entry)))
 
-      (setq reftex-default-bibliography '("~/Zotero/zotero_full_lib.bib"))
-      (setq org-ref-default-bibliography '("~/Zotero/zotero_full_lib.bib"))
+      (setq reftex-default-bibliography '("~/Zotero/paolo_zotero_lib.bib"))
+      (setq org-ref-default-bibliography '("~/Zotero/paolo_zotero_lib.bib"))
       (setq org-ref-notes-function 'org-ref-notes-function-many-files)
 
       (setq org-ref-notes-directory "~/Dropbox/myannotations/org-roam/Zotero")
@@ -937,9 +937,8 @@ simultaneously activated
       (setq org-ref-open-pdf-function 'efs/org-ref-open-pdf-at-point)
 
       ;;specify that org-latex-pdf-process takes also care of processing the bibliography
-      (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
 
-      ;; since version 3 org-ref no longer provides automatic keybindings the following provides two alternatives for defining org-ref keybindings
+  ;; since version 3 org-ref no longer provides automatic keybindings the following provides two alternatives for defining org-ref keybindings
       ;;gets the behavior of version 2
       ;; (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link)
 
@@ -948,6 +947,46 @@ simultaneously activated
       ;;delegates to hydra
     ;; (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link-hydra/body)
 #+end_src
+*** Org-Ref (new)
+#+begin_src emacs-lisp
+      (use-package org-ref
+         :bind (("C-c r h" . 'org-ref-insert-link-hydra/body)
+                ("C-c r l" . 'org-ref-insert-label-link)
+                ("C-c r c" . 'org-ref-insert-cite-link)
+                ("C-c r g" . 'org-ref-add-glossary-entry)
+                ("C-c r a" . 'org-ref-add-acronym-entry)))
+
+         (setq bibtex-completion-bibliography '("~/Zotero/paolo_zotero_lib.bib")
+               bibtex-completion-pdf-field "file"
+               ;; bibtex-completion-library-path '("~/Zotero/storage")
+                 bibtex-completion-notes-path "~/Dropbox/myannotations/org-roam/Zotero"
+                 bibtex-completion-notes-template-multiple-files "* ${author-or-editor}, ${title}, ${journal}, (${year}) :${=type=}: \n\nSee [[cite:&${=key=}]]\n"
+
+                 bibtex-completion-additional-search-fields '(keywords)
+                 bibtex-completion-display-formats
+                 '((article       . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${journal:40}")
+                   (inbook        . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} Chapter ${chapter:32}")
+                   (incollection  . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
+                   (inproceedings . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
+                   (t             . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*}"))
+                 bibtex-completion-pdf-open-function
+                 (lambda (fpath)
+                   (call-process "open" nil 0 nil fpath)))
+
+        (require 'org-ref-helm)
+       (setq org-ref-insert-link-function 'org-ref-insert-link-hydra/body
+             org-ref-insert-cite-function 'org-ref-cite-insert-helm
+             org-ref-insert-label-function 'org-ref-insert-label-link
+             org-ref-insert-ref-function 'org-ref-insert-ref-link
+             org-ref-cite-onclick-function (lambda (_) (org-ref-citation-hydra/body))) 
+  (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
+
+    ;; (setq org-latex-pdf-process
+    ;;       '("pdflatex -interaction nonstopmode -output-directory %o %f"
+    ;;         "bibtex %b"
+    ;;         "pdflatex -interaction nonstopmode -output-directory %o %f"
+            ;; "pdflatex -interaction nonstopmode -output-directory %o %f"))
+          #+end_src
 
 *** Org-Roam Bibtex
 #+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
