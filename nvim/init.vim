@@ -139,7 +139,7 @@ Plug 'michaeljsmith/vim-indent-object' "treat indentation levels as vim text obj
 Plug 'https://github.com/bkad/CamelCaseMotion' "allows to specify text objects inside CamelCasedStrings and underlined_strings_
 Plug 'wellle/targets.vim' "allows to easily target arguments inside functions
 Plug 'unblevable/quick-scope' "Highlights closest match when finding characters
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 "Plug 'https://github.com/christoomey/vim-tmux-navigator'
 call plug#end()
