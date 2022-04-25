@@ -840,15 +840,19 @@ Following local org-roam-mode is defined so that org-roam keybindings is valid o
     (setq org-roam-graph-viewer "/Applications/Firefox.app/Contents/MacOS/firefox")
 
     #+end_src  
-*** Deft
+** Deft
 #+begin_src emacs-lisp
-  (use-package deft
-    :bind ("<f8>" . deft)
-    :commands(deft)
-    :config(setq deft-directory
-                 deft-extensions '("org")))
+(use-package deft
+  :after org
+  :bind
+  ("C-c n d" . deft)
+  :custom
+  (deft-recursive t)
+  (deft-use-filter-string-for-filename t)
+  (deft-default-extension "org")
+  (deft-directory org-roam-directory))
 #+end_src
-*** Org-Roam Keybindings
+** Org-Roam Keybindings
 #+begin_src emacs-lisp
   (general-define-key
    :states '(normal visual)
