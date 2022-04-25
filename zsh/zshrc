@@ -1,32 +1,41 @@
 # Lines configured by zsh-newuser-install
-HISTFILE=~/.cache/zsh/.histfile
+# Shell history path
+HISTFILE="${HOME}/.cache/zsh/.histfile"
 
 # Basic auto/tab complete:
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 
+#allow tab completion in the middle of a word
+setopt COMPLETE_IN_WORD
+
 #redefines the foleder where the command suggestions are stored
-compinit -d $HOME/.cache/zsh/zcompdump-$ZSH_VERSION
+compinit -d "${HOME}/.cache/zsh/zcompdump-${ZSH_VERSION}"
 _comp_options+=(globdots)		# Include hidden files.
 
-setopt appendhistory extendedglob nomatch
+setopt extendedglob nomatch
+
 unsetopt autocd beep
 
 # browse history with the up and down keys
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 
+# VI MODE SETTINGS
+# enables vi mode
 bindkey -v
 export KEYTIMEOUT=1
 
-# vi mode
 # Use vim keys in tab complete menu:
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
-bindkey -v '^?' backward-delete-char
+# bindkey -v '^?' backward-delete-char
+
+#disables flow control for vim mapping
+stty -ixon
 
 # Change cursor shape for different vi modes.
 function zle-keymap-select {
@@ -43,7 +52,7 @@ function zle-keymap-select {
 
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename "$HOME/.zshrc"
+zstyle :compinstall filename "${HOME}/.zshrc"
 
 autoload -Uz compinit
 compinit
@@ -58,29 +67,31 @@ if [[ -e .termocolors ]]; then
   source .termcolors
 fi
 
-#disables flow control for vim mapping
-stty -ixon
+# maximazes the size of the allowed core dump
+ulimit -c unlimited
 
 # Load shortcuts if the file exists and TMUX is not set
 if
-[[ -f "$HOME/.config/terminal/shortcutrc" ]] && [[ -z "$TMUX" ]]; then
-source "$HOME/.config/terminal/shortcutrc"
+[[ -f "${HOME}/.config/terminal/shortcutrc" ]] && [[ -z "${TMUX}" ]]; then
+source "${HOME}/.config/terminal/shortcutrc"
 fi
-[[ -f "$HOME/.config/terminal/aliasrc" ]] && source "$HOME/.config/terminal/aliasrc"
-[[ -f "$HOME/.config/terminal/functionsrc" ]] && source "$HOME/.config/terminal/functionsrc"
+[[ -f "${HOME}/.config/terminal/aliasrc" ]] && source "${HOME}/.config/terminal/aliasrc"
+[[ -f "${HOME}/.config/terminal/functionsrc" ]] && source "${HOME}/.config/terminal/functionsrc"
 
 
 # PROMPT
 # Loading Powerline settings
-#
-if [[ -e "$HOME/.config/zsh/zsh_powerline_source" ]]; then
-    source "$HOME/.config/zsh/zsh_powerline_source"
-fi
+source "${HOME}/.config/zsh/powerline_setup.sh"
 
+# PLUGINS
 # setting up custom plugins
 # zsh-history-search
-source "$HOME/.config/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh"
+source "${HOME}/.config/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh"
 # zsh-syntax-highlighting
-source "$HOME/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "${HOME}/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 # zsh-autosuggestions
-source "$HOME/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "${HOME}/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+# zsh-vi-mode - Enhancement for zsh 
+source "${HOME}/.config/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
+# zsh-z 
+source "${HOME}/.config/zsh/plugins/zsh-z/zsh-z.plugin.zsh"
