@@ -42,6 +42,10 @@ emacs/org-roam.db
 emacs/projectile-bookmarks.eld
 emacs/.org-id-locations
 emacs/recentf
+emacs/.cache
+emacs/.local
+emacs/.lsp-session-v1
+emacs/*~undo-tree~
 
 //yabai windows manager
 yabai
