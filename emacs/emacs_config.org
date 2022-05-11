@@ -33,7 +33,6 @@ CLOSED: [2022-03-05 Sat 09:13]
 ** TODO Find a way to hook  yas-minor-mode-on to the major modes where this is required
 ** TODO Find a better embodiement of /requires/ expressions within the definitions
 
-
 * Emacs GUI customization
 
   #+begin_src emacs-lisp
@@ -429,6 +428,30 @@ For more informations see the corresponding [[https://github.com/emacs-evil/evil
     :hook
     (embark-collect-mode . consult-preview-at-point-mode))
 
+#+end_src
+* LSP Mode
+#+begin_src emacs-lisp
+  (use-package lsp-mode
+    :commands (lsp lsp-deferred)
+    :init
+    (setq lsp-keymap-prefix "C-c l") ;; Or "C-l", "s-l"
+    :config
+    (lsp-enable-which-key-integration t))
+#+end_src
+** LTex
+In order to be able to properly
+[[https://github.com/emacs-languagetool/lsp-ltex][lsp-tex Official Page]]
+#+begin_src emacs-lisp
+
+  (use-package lsp-ltex
+    :init
+    (setq lsp-ltex-version "15.2.0")
+    (setq lsp-ltex-server-store-path (expand-file-name "~/.emacs.d/.local/etc/.cache/lsp/ltex-ls/"))
+    :hook (text-mode . (lambda ()
+			 (require 'lsp-ltex)
+			 (lsp-deferred))))
+
+  ;; (add-to-list 'load-path lsp-ltex-server-store-path)
 #+end_src
 * General Keybindings Manager
 [[https://www.masteringemacs.org/article/mastering-key-bindings-emacs][mastering emacs]] tips for setting emacs keybindings.
@@ -942,8 +965,8 @@ simultaneously activated
 
       (setq org-ref-open-pdf-function 'efs/org-ref-open-pdf-at-point)
 
-      ;;specify that org-latex-pdf-process takes also care of processing the bibliography
 
+      ;;specify that org-latex-pdf-process takes also care of processing the bibliography
   ;; since version 3 org-ref no longer provides automatic keybindings the following provides two alternatives for defining org-ref keybindings
       ;;gets the behavior of version 2
       ;; (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link)
