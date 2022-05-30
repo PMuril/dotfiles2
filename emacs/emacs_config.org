@@ -331,17 +331,24 @@ It also enables the keybinding "C-r" for redo in Evil mode.
        (evil-collection-init))
 
      ;; vim commentary
-     (evil-commentary-mode)
+     (use-package evil-commentary
+       :ensure t
+       :after evil
+       :config
+       (evil-commentary-mode))
 
      ;; vim matchit
-     (require 'evil-matchit)
-     (global-evil-matchit-mode 1)
+     (use-package evil-matchit
+       :ensure t
+       :after evil
+       :config
+       (global-evil-matchit-mode 1))
 
      ;; vim surround
      (use-package evil-surround
-                  :ensure t
-                  :config
-                  (global-evil-surround-mode 1))
+       :ensure t
+       :config
+       (global-evil-surround-mode 1))
 
    #+end_src
    
