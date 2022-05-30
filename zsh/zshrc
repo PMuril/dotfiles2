@@ -3,7 +3,7 @@
 HISTFILE="${HOME}/.cache/zsh/.histfile"
 
 # Basic auto/tab complete:
-autoload -U compinit
+autoload -Uz compinit                #marks compinit as a function, not external program
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 
@@ -38,7 +38,7 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 stty -ixon
 
 # Change cursor shape for different vi modes.
-function zle-keymap-select {
+zle-keymap-select () {
   if [[ ${KEYMAP} == vicmd ]] ||
      [[ $1 = 'block' ]]; then
     echo -ne '\e[1 q'
@@ -54,7 +54,6 @@ function zle-keymap-select {
 # The following lines were added by compinstall
 zstyle :compinstall filename "${HOME}/.zshrc"
 
-autoload -Uz compinit
 compinit
 
 #----------------------#
@@ -92,6 +91,6 @@ source "${HOME}/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlight
 # zsh-autosuggestions
 source "${HOME}/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # zsh-vi-mode - Enhancement for zsh 
-source "${HOME}/.config/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
+# source "${HOME}/.config/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
 # zsh-z 
 source "${HOME}/.config/zsh/plugins/zsh-z/zsh-z.plugin.zsh"
