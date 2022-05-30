@@ -8,10 +8,8 @@ fi
 #set the size of the terminal rollback memory
 export HISTSIZE=10000
 if [[ "${SHELL}"=="/bin/zsh" ]]; then
-    echo "zsh!"
     export SAVEHIST=10000
 elif [[ "${SHELL}"=="/bin/bash" ]]; then
-    echo "bash!"
     export HISTFILESIZE=10000
 fi
 
