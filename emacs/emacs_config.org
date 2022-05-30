@@ -33,22 +33,6 @@ CLOSED: [2022-03-05 Sat 09:13]
 ** TODO Find a way to hook  yas-minor-mode-on to the major modes where this is required
 ** TODO Find a better embodiement of /requires/ expressions within the definitions
 
-* Emacs GUI customization
-
-  #+begin_src emacs-lisp
-
-    ;; silences the default Emacs startup message
-    (setq inhibit-startup-message t)
-
-    (scroll-bar-mode -1)
-    (tool-bar-mode -1)
-    (tooltip-mode -1)
-    (set-fringe-mode 10)
-
-    (menu-bar-mode -1)
-
-  #+end_src
-  
 * Commands
 #+begin_src emacs-lisp
 
@@ -57,11 +41,6 @@ CLOSED: [2022-03-05 Sat 09:13]
   ;; Disables the double prompt when trying to quit an emacs file
   (setq confirm-kill-emacs nil)
 
-#+end_src
-** xclip-mode
-#+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
-  (use-package xclip
-  :ensure t)
 #+end_src
 * KeyModifiers
 #+begin_src emacs-lisp
@@ -86,8 +65,9 @@ CLOSED: [2022-03-05 Sat 09:13]
 * Package Management System Setup
   #+begin_src emacs-lisp
 
-    (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
     (require 'package)
+    (setq package-enable-at-startup nil)
+
     (setq package-archives '(("org" . "https://elpa.gnu.org/packages/")
                              ("melpa" . "http://melpa.org/packages/")
                              ("melpa-stable" . "http://stable.melpa.org/packages/")))
@@ -108,7 +88,31 @@ CLOSED: [2022-03-05 Sat 09:13]
     ;;whenever this is require but not already installed
     (setq use-package-always-ensure t)
 
+    (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+
   #+end_src
+* Editor
+** Emacs GUI customization
+
+  #+begin_src emacs-lisp
+
+    ;; silences the default Emacs startup message
+    (setq inhibit-startup-message t)
+
+    (scroll-bar-mode -1)
+    (tool-bar-mode -1)
+    (tooltip-mode -1)
+    (set-fringe-mode 10)
+
+    (menu-bar-mode -1)
+
+  #+end_src
+
+** xclip-mode
+#+begin_src emacs-lisp :tangle (if (eq system-type 'darwin) "./init.el" "no" )
+  (use-package xclip
+  :ensure t)
+#+end_src
 * Appearance
 ** Fonts
    #+begin_src emacs-lisp
