@@ -78,10 +78,6 @@ fi
 [[ -f "${HOME}/.config/terminal/functionsrc" ]] && source "${HOME}/.config/terminal/functionsrc"
 
 
-# PROMPT
-# Loading Powerline settings
-source "${HOME}/.config/zsh/powerline_setup.sh"
-
 # PLUGINS
 # setting up custom plugins
 # zsh-history-search
@@ -94,3 +90,9 @@ source "${HOME}/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # source "${HOME}/.config/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
 # zsh-z 
 source "${HOME}/.config/zsh/plugins/zsh-z/zsh-z.plugin.zsh"
+
+
+# PROMPT
+# Loading Starship settings
+eval "$(starship init zsh)"
+# source "${HOME}/.config/zsh/powerline_setup.sh"
