@@ -1,7 +1,14 @@
+#! /bin/sh
 #General Aliases
 alias ls="ls -GH"
 alias ll="ls -l"
 alias lla="ls -la"
+alias llt="ls -lt"    
+alias rf="readlink -f"
+#enables perl regex for grep and colored output
+alias grep="grep --color=auto"
+alias fgrep="fgrep  --color=auto"
+alias egrep="egrep  --color=auto"
 
 alias gdb="sudo gdb"
 
@@ -9,16 +16,21 @@ alias gdb="sudo gdb"
 #the -2 option is to force tmux to always load a screen-256colors terminal
 #on every platform
 alias tmux="tmux -2 -f $HOME/.config/tmux/tmux.conf"
-
+alias lvim="nvim -u $HOME/.config/nvim/init_new.lua"
 alias vim="nvim"
-alias v="nvim"
+alias vi="nvim"
 
-#enables perl regex for grep and colored output
-alias grep="grep -P --color=auto"
-alias fgrep="fgrep  --color=auto"
-alias egrep="egrep  --color=auto"
+#git
+alias gsu="git submodule update --init"
+
+#docker
+alias dockerrun="docker run -it --rm"
 
 # python venvs
 alias vinoenv='source ~/PyEnvs/VinoEnv/bin/activate'
+
 # python packages
 alias compdb='compdb -p build/Debug/ list > compile_commands.json'
+
+# tmux
+alias tkill="tmux kill-server"
