@@ -392,6 +392,19 @@ For more informations see the corresponding [[https://github.com/emacs-evil/evil
 
   #+end_src 
 
+* Org-Projectile
+#+begin_src emacs-lisp
+  (use-package org-projectile
+    :bind (("C-c n p" . org-projectile-project-todo-completing-read))
+    ;;        ("C-c c" . org-capture))
+    :config
+    (progn
+      (setq org-projectile-projects-file
+            "~/Dropbox/myannotations/projects/projects_agenda.org")
+      (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
+      (push (org-projectile-project-todo-entry) org-capture-templates))
+    :ensure t)
+#+end_src
 * Magit
   #+begin_src emacs-lisp
 
@@ -462,6 +475,15 @@ In order to be able to properly
                          (require 'lsp-ltex)
                          (lsp-deferred)))) 
 
+#+end_src
+** LaTeX
+#+begin_src emacs-lisp
+  (use-package lsp-latex
+    :hook
+    ((tek-mode . lsp-deferred)
+     (latex-mode . lsp-deferred))
+    :config
+    (setq lsp-latex-texlab-executable "~/.emacs.d/.cache/lsp/texlab/texlab") )
 #+end_src
 * General Keybindings Manager
 [[https://www.masteringemacs.org/article/mastering-key-bindings-emacs][mastering emacs]] tips for setting emacs keybindings.
