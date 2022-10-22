@@ -139,9 +139,8 @@ Plug 'michaeljsmith/vim-indent-object' "treat indentation levels as vim text obj
 Plug 'https://github.com/bkad/CamelCaseMotion' "allows to specify text objects inside CamelCasedStrings and underlined_strings_
 Plug 'wellle/targets.vim' "allows to easily target arguments inside functions
 Plug 'unblevable/quick-scope' "Highlights closest match when finding characters
-" Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-"Plug 'https://github.com/christoomey/vim-tmux-navigator'
+Plug 'lervag/vimtex'
+Plug 'dhruvasagar/vim-table-mode'
 call plug#end()
 
 " PLUGINS SETTINGS
@@ -159,30 +158,3 @@ autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
 "
 set runtimepath+=~/.config/nvim/my-snippets/Ultisnips
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<c-j>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-" let g:UltiSnipsListSnippets="<c-q>"
-
-" Custom text objects (requires kana's vim-textobj-user
-" Lines below should be outdated due the CamelCaseMotionPlugin
-" call textobj#user#plugin('dashes', {
-" \   'dash-a' : {
-" \      'pattern': '[-][^-]*[-]',
-" \       'select': 'ay',
-" \   },
-" \   'dash-i' : {
-" \      'pattern': '[-]\zs[^-]*\ze[-]',
-" \       'select': 'iy',
-" \   },
-" \   'underscore-a' : {
-" \      'pattern': '[_][^_]*[_]',
-" \      'select': 'aY', 
-" \   },
-" \   'underscore-i' : {
-" \      'pattern': '[_]\zs[^_]*\ze[_]',
-" \      'select': 'iY', 
-" \   },
-" \ })
-"
