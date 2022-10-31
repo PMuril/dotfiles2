@@ -28,6 +28,9 @@ zsh/plugins/*
 //nvim modified files history
 nvim/.netrwhist
 nvim/undodir
+nvim/plugin
+nvim/node_modules
+nvim/package-lock.json
 
 //emacs packages installation folder
 emacs/elpa
