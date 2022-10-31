@@ -41,3 +41,6 @@ export PATH=$PATH:/usr/local/bin:/usr/local/lib
 
 #adds user-defined scripts to PATH
 export PATH=$PATH:/Users/paolobaldan/Dropbox/myscripts/bash
+
+#adds lsp executables to PATH
+export PATH=$PATH:/Users/paolobaldan/workspace/sysconfig/lsp
