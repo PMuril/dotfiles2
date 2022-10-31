@@ -2,21 +2,8 @@ require('muril.options')      -- loads global settings
 require('muril.keybindings')	-- loads all keybindings
 require('muril.plugins')	    -- loads all plugins
 require('muril.completion')   -- loads snippets and completion utilities
--- require('treesitter')	-- loads treesitter plugin settings
+require('muril.treesitter')	-- loads treesitter plugin settings
 require('muril.lsp')		-- loads general lsp settings
-
-
--- -- Undotree settings
--- nnoremap <A-t> :UndotreeToggle<CR>
--- let g:undotree_RelativeTimestamp = 1
--- let g:undotree_ShortIndicators = 1
--- let g:undotree_HelpLine = 0
--- let g:undotree_WindowLayout = 2
-
--- if has("persistent_undo")
---     set undodir=$HOME/.config/nvim/undodir
---     set undofile
--- endif
 
 -- -- enables powerline fonts for the airline plugin (see below)
 -- let g:airline_powerline_fonts = 1
