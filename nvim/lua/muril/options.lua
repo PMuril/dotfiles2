@@ -13,11 +13,12 @@ local options = {
     undodir           = vim.env.HOME .. "/.config/nvim/undodir", -- specifies directory where to store the instructions
 }
 
-
 for k, v in pairs(options) do
     vim.opt[k] = v
 end 
 
+
+vim.g.mapleader = "<Space>" -- leader key
 
 -- PLUGINS SETTINGS
 
