@@ -13,7 +13,10 @@ if not status_ok then
 end
 
 return require('packer').startup(function(use)
-use "wbthomason/packer.nvim" -- Have packer manage itself
+    use "wbthomason/packer.nvim" -- Have packer manage itself
+    
+    -- Lua utility functions
+    use 'nvim-lua/plenary.nvim'
 
     -- text editing
     -- use "tpope/vim-commentary"
@@ -31,11 +34,17 @@ use "wbthomason/packer.nvim" -- Have packer manage itself
      use 'bkad/CamelCaseMotion'             --Enables to specify text objects inside CamelCasedStrings and underlined_strings_
 
     -- airline customization
-      -- use 'vim-airline/vim-airline'
-      -- use 'vim-airline/vim-airline-themes'
+    -- use 'vim-airline/vim-airline'
+    -- use 'vim-airline/vim-airline-themes'
+    -- lualine 
+    -- use {
+    -- 'nvim-lualine/lualine.nvim',
+    -- requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    -- }
+    -- use ' 
     --
     -- git
-    -- 'tpope/vim-fugitive'
+    use "airblade/vim-gitgutter"
     --
     -- snippets
     use "L3MON4D3/LuaSnip" --snippet engine
