@@ -4,6 +4,7 @@ require('muril.plugins')	    -- loads all plugins
 require('muril.completion')   -- loads snippets and completion utilities
 require('muril.treesitter')	-- loads treesitter plugin settings
 require('muril.lsp')		-- loads general lsp settings
+require('muril.telescope')
 
 -- -- enables powerline fonts for the airline plugin (see below)
 -- let g:airline_powerline_fonts = 1
