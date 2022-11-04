@@ -8,7 +8,12 @@ if not snip_status_ok then
   return
 end
 
-require("luasnip/loaders/from_vscode").lazy_load({ paths = { vim.env.HOME .. "workspace/sysconfig/snippets/friendly-snippets" } })
+-- require("luasnip/loaders/from_vscode").lazy_load({ paths = { vim.env.HOME .. "/workspace/sysconfig/snippets/friendly-snippets"} })
+
+require("luasnip/loaders/from_vscode").lazy_load({ paths = {
+    vim.env.HOME .. "/workspace/sysconfig/snippets/friendly-snippets"
+    -- , vim.env.HOME .. "/workspace/sysconfig/snippets/mysnippets" 
+} })
 
 local check_backspace = function()
   local col = vim.fn.col "." - 1
