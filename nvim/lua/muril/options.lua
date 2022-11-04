@@ -15,14 +15,15 @@ local options = {
 
 for k, v in pairs(options) do
     vim.opt[k] = v
-end 
+end
 
 
-vim.g.mapleader = "<Space>" -- leader key
+vim.g.mapleader = " " -- leader key
 
 -- PLUGINS SETTINGS
 
 -- Camel Case Motion Settings
+vim.g.camelcasemotion_key = '<leader>'
 
 -- Undo Tree Options
 vim.g.undotree_RelativeTimestamp = 1
@@ -36,7 +37,7 @@ vim.g.camelcasemotion_key        = "<leader>"
 require('Comment').setup()
 
 require('onedark').setup {
-    -- for configuration refer to the GitHub repository https://github.com/navarasu/onedark.nvim
+    -- for customization refer to the GitHub repository https://github.com/navarasu/onedark.nvim
     style = 'dark'
 }
 require('onedark').load()
