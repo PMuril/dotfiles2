@@ -1,5 +1,5 @@
 local nvim_lsp = require('lspconfig')
-local servers = { 'clangd', 'cmake', 'bashls', 'ltex' }
+local servers = { 'clangd', 'cmake', 'bashls', 'ltex', 'sumneko_lua' }
 
 for _, server in ipairs(servers) do
         nvim_lsp[server].setup {
