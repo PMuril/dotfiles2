@@ -5,6 +5,8 @@ alias ll="ls -l"
 alias lla="ls -la"
 alias llt="ls -lt"    
 alias rf="readlink -f"
+alias rt="reset"
+
 #enables perl regex for grep and colored output
 alias grep="grep --color=auto"
 alias fgrep="fgrep  --color=auto"
