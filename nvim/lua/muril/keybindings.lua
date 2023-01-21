@@ -12,8 +12,7 @@ key_mapper('n', '<Up>', '<Nop>', {noremap = true} )
 key_mapper('n', '<Down>', '<Nop>', {noremap = true} )
 key_mapper('n', '<Left>', '<Nop>', {noremap = true} )
 key_mapper('n', '<Right>', '<Nop>', {noremap = true} )
-
--- Disables arrows keys in Insert Mode
+-- -- Disables arrows keys in Insert Mode
 key_mapper('i', '<Up>', '<Nop>', {noremap = true} )
 key_mapper('i', '<Down>', '<Nop>', {noremap = true} )
 key_mapper('i', '<Left>', '<Nop>', {noremap = true} )
@@ -26,15 +25,42 @@ key_mapper('i', '<Right>', '<Nop>', {noremap = true} )
 -- opts = { noremap=true, silent=true }
 -- key_mapper('', '<Leader>l ', "ml:execute 'match Search /\%'.line('.').'l/'<CR>", opts )
 
--- TELESCOPE
+-- [[ TELESCOPE ]] 
+-- git
+key_mapper('n', '<leader>gc', ':lua require"telescope.builtin".git_commits()<CR>')
+key_mapper('n', '<leader>gs', ':lua require"telescope.builtin".git_status()<CR>')
+key_mapper('n', '<leader>gb', ':lua require"telescope.builtin".git_branches()<CR>')
+-- lsp
+key_mapper('n', '<leader>fd', ':lua require"telescope.builtin".lsp_document_symbols()<CR>')
+key_mapper('n', '<leader>fe', ':lua require"telescope.builtin".diagnostics()<CR>')
+key_mapper('n', '<leader>fw', ':lua require"telescope.builtin".lsp_dynamic_workspace_symbols()<CR>')
+key_mapper('n', '<leader>fr', ':lua require"telescope.builtin".lsp_references()<CR>')
+key_mapper('n', '<leader>fi', ':lua require"telescope.builtin".lsp_incoming_calls()<CR>')
+-- dap 
+key_mapper('n', '<leader>bb', ':lua require"telescope".extensions.dap.list_breakpoints()<CR>')
+key_mapper('n', '<leader>bf', ':lua require"telescope".extensions.dap.frames()<CR>')
+-- bookmarks
+key_mapper('n', '<leader>k', ':lua require"telescope".extensions.vim_bookmarks.all()<CR>') --[[ 'Displays all the boo[k]marks in the current project' ]]
 --
-key_mapper('n', '<C-p>', ':lua require"telescope.builtin".find_files()<CR>')
+-- misc
+key_mapper('n', '<C-p>',       ':lua require"telescope.builtin".find_files()<CR>')
 key_mapper('n', '<leader>fs', ':lua require"telescope.builtin".live_grep()<CR>')
 key_mapper('n', '<leader>fh', ':lua require"telescope.builtin".help_tags()<CR>')
 key_mapper('n', '<leader>fb', ':lua require"telescope.builtin".buffers()<CR>')
-key_mapper('n', '<leader>fg', ':lua require"telescope.builtin".git_status()<CR>')
+key_mapper('n', '<leader>fj', ':lua require"telescope.builtin".jumplist()<CR>')
+key_mapper('n', '<leader>fj', ':lua require"telescope.builtin".jumplist()<CR>')
+key_mapper('n', '<leader>fo', ':lua require"telescope.builtin".oldfiles()<CR>') --[[ Displays all the recent ([o]ld) files opened') ]]
+-- custom pickers
+key_mapper('n', '<leader>fn', ':lua require"telescope".extensions.mypickers.find_notes()<CR>') --[[ Displays all the recent ([o]ld) files opened') ]]
+
 --
--- LSP
+-- [[ LSP ]] 
+key_mapper('n', '<leader>wl', ':lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>')
+key_mapper('n', '<leader>do', ':lua vim.diagnostic.open_float()<CR>')
+key_mapper('n', '[d', ':lua vim.diagnostic.goto_prev()<CR>')
+key_mapper('n', ']d', ':lua vim.diagnostic.goto_next()<CR>')
+key_mapper('n', '[e', ':lua vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR})<CR>')
+key_mapper('n', ']e', ':lua vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR})<CR>')
 key_mapper('n', 'gd', ':lua vim.lsp.buf.definition()<CR>')
 key_mapper('n', 'gD', ':lua vim.lsp.buf.declaration()<CR>')
 key_mapper('n', 'gi', ':lua vim.lsp.buf.implementation()<CR>')
@@ -44,13 +70,61 @@ key_mapper('n', 'gr', ':lua vim.lsp.buf.references()<CR>')
 key_mapper('n', 'gt', ':lua vim.lsp.buf.type_definition()<CR>')
 key_mapper('n', 'K', ':lua vim.lsp.buf.hover()<CR>')
 key_mapper('n', '<c-k>', ':lua vim.lsp.buf.signature_help()<CR>')
-key_mapper('n', '<leader>af', ':lua vim.lsp.buf.code_action()<CR>')
+key_mapper('n', '<C- >', ':lua vim.lsp.buf.code_action()<CR>')
 key_mapper('n', '<leader>rn', ':lua vim.lsp.buf.rename()<CR>')
+key_mapper('n', '<leader>ff', ':lua vim.lsp.buf.format { async = true }<CR>')
+key_mapper('n', '<C-w>gd', ':belowright vsplit | lua vim.lsp.buf.definition()<CR>')
+key_mapper('n', '<C-w>gD', ':belowright vsplit | lua vim.lsp.buf.declaration()<CR>')
+
+
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+--
+key_mapper('n', '<M-o>', ': ClangdSwitchSourceHeader<CR>')
+--
+-- [[ DAP ]] 
+key_mapper('n', '<F5>',  ':lua require"dap".continue()<CR>')
+key_mapper('n', '<F10>', ':lua require"dap".step_over()<CR>')
+key_mapper('n', '<F11>', ':lua require"dap".step_into()<CR>')
+key_mapper('n', '<F12>', ':lua require"dap".step_out()<CR>')
+key_mapper('n', 'gbb', ':lua require"dap".toggle_breakpoint()<CR>')
+key_mapper('n', 'gbB', ':lua require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>')
+key_mapper('n', 'gbl', ':lua require"dap".set_breakpoint(nil, nil, vim.fn.input("Log point message: "))<CR>')
+key_mapper('n', 'gbr', ':lua require"dap".repl.open()<CR>')
+
+-- [[ Completion ]]
+-- Luasnip
+key_mapper({ 'i', 's' }, '<C-e>', function () 
+    if require"luasnip".expand_or_jumpable () then
+        require"luasnip".expand_or_jump()
+    end
+end, { silent = true })
+--
+key_mapper({ 'i', 's' }, '<C-d>', function () 
+    if require"luasnip".jumpable(-1) then
+        require"luasnip".jump(-1)
+    end
+end, { silent = true })
+--
+key_mapper({ 'i', 's' }, '<C-l>', function () 
+    if require"luasnip".choice_active() then
+        require"luasnip".change_choice(1)
+    end
+end, { silent = true })
+
+-- key_mapper('n', '<leader><leader>s', '<cmd>source ~/wo ')
+
+-- [[ Bookmarks ]]
+key_mapper('n', ']k', ': BookmarkNext<CR>')
+key_mapper('n', '[k', ': BookmarkPrev<CR>')
+key_mapper('n', 'gkt', ': BookmarkToggle<CR>')
+key_mapper('n', 'gka', ': BookmarkAnnotate<CR>')
+
 -- 
--- Git-Gutter
-key_mapper('n', '[c', ': GitGutterPrevHunk<CR>')
-key_mapper('n', ']c', ': GitGutterNextHunk<CR>')
-key_mapper('n', '<leader>p', ': GitGutterStageHunk<CR>')
-key_mapper('n', 'ghs', ': GitGutterStageHunk<CR>')
-key_mapper('n', 'ghu', ': GitGutterUndoHunk<CR>')
+-- [[ GitSigns ]]
+ -- Navigation
+key_mapper('n', ']h', ': Gitsigns next_hunk<CR>')
+key_mapper('n', '[h', ': Gitsigns prev_hunk<CR>')
+key_mapper('n', 'ghp', ': Gitsigns preview_hunk<CR>')
+key_mapper('n', 'ghs', ': Gitsigns stage_hunk<CR>')
+key_mapper('n', 'ghu', ': Gitsigns undo_stage_hunk<CR>')
+key_mapper('n', 'ghr', ': Gitsigns reset_hunk<CR>')

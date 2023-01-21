@@ -1,7 +1,7 @@
 local configs = require("nvim-treesitter.configs")
 
 configs.setup {
-ensure_installed = { "c", "cpp", "lua", "python", "bash", "vim", "make", "markdown", "latex", "cmake", "dockerfile", "html" },
+ensure_installed = { "c", "cpp", "lua", "python", "bash", "vim", "make", "markdown", "latex", "cmake", "dockerfile", "html", "json", "yaml", "toml" },
 
   sync_install = false, 
   ignore_install = { "" }, -- List of parsers to ignore installing
@@ -11,6 +11,11 @@ ensure_installed = { "c", "cpp", "lua", "python", "bash", "vim", "make", "markdo
     additional_vim_regex_highlighting = false,
   },
 }
+
+-- since a dedicated xml parser is missing, use the html parser as
+-- a fallback parser for xml files
+local parser_mapping = require("nvim-treesitter.parsers").filetype_to_parsername
+parser_mapping.xml = "html" -- map the html parser to be used when using xml files
 
 require'nvim-treesitter.configs'.setup {
   textobjects = {
@@ -60,6 +65,7 @@ require'nvim-treesitter.configs'.setup {
       set_jumps = true, -- whether to set jumps in the jumplist
       goto_next_start = {
         ["]m"] = "@function.outer",
+        ["]p"] = "@parameter.inner",
         -- ["]]"] = { query = "@class.outer", desc = "Next class start" },
       },
       goto_next_end = {
@@ -68,6 +74,7 @@ require'nvim-treesitter.configs'.setup {
       },
       goto_previous_start = {
         ["[m"] = "@function.outer",
+        ["[p"] = "@parameter.inner",
         -- ["[["] = "@class.outer",
       },
       goto_previous_end = {
@@ -75,7 +82,13 @@ require'nvim-treesitter.configs'.setup {
         -- ["[]"] = "@class.outer",
       },
     },
-
-
+    lsp_interop = {
+          enable = true,
+          border = 'none',
+          peek_definition_code = {
+            ["<leader>df"] = "@function.outer",
+            ["<leader>dc"] = "@class.outer",
+          },
+    },
   },
 }

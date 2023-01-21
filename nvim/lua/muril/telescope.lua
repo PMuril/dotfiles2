@@ -3,7 +3,10 @@ if not status_ok then
   return
 end
 
--- telescope.load_extension('media_files')
+telescope.load_extension('dap')
+telescope.load_extension('luasnip')
+telescope.load_extension('vim_bookmarks')
+telescope.load_extension('mypickers')
 
 local actions = require "telescope.actions"
 
@@ -12,7 +15,7 @@ telescope.setup {
 
     prompt_prefix = "  ",
     selection_caret = "  ",
-    path_display = { "smart" },
+    path_display = { "tail" },
 
     mappings = {
       i = {
@@ -79,6 +82,7 @@ telescope.setup {
       },
     },
   },
+    
   -- pickers = {
     -- Default configuration for builtin pickers goes here:
     -- picker_name = {
