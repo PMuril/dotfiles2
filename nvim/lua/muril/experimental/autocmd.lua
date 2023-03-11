@@ -20,7 +20,7 @@
 --     end
 -- end
 
--- vim.api.nvim_create_autocmd( {"BufReadPost", "FileReadPost"},
+-- vim.api.nvim_create_autocmd( {"BufWinEnter"},
 -- {
 --     pattern = {"*"},
 --     callback = function () vim.api.nvim_command("normal zR") end,

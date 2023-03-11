@@ -4,6 +4,7 @@ local servers = {
     'texlab',
     'marksman',
     'pyright',
+    'ltex',
     --'pylsp',
 }
 
@@ -12,6 +13,7 @@ for _, server in ipairs(servers) do
     }
 end
 
+local on_attach = function(client, bufnr) vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc') end
 
 require('lspconfig').texlab.setup {
     settings = {
@@ -150,6 +152,7 @@ require("clangd_extensions").setup {
 
 
 require('lspconfig').clangd.setup {
+    on_attach = on_attach,
     capabilities = capabilities,
     cmd = {
         "clangd",
@@ -171,7 +174,7 @@ require('lspconfig').bashls.setup {
 }
 
 require('lspconfig').marksman.setup {
-    cmd = { "/home/pbaldan/workspace/sysconfig/lsp/marksman/marksman", "server" }
+    --cmd = { "/home/pbaldan/workspace/sysconfig/lsp/marksman/marksman", "server" }
 }
 
 vim.lsp.set_log_level("info") 

@@ -12,8 +12,10 @@ local options = {
     undodir           = vim.env.HOME .. "/.config/nvim/undodir", -- specifies directory where to store the instructions 
     foldmethod        = "expr",                       -- use custom method for folding
     foldexpr          = "nvim_treesitter#foldexpr()",  -- use treesitter information for folding. Initial view si fully folded by default
+    foldenable        = false,                          -- disable text folding on buffer openinig. Prevents treesitter from arbitrarly folding text
     formatoptions     = "jcql",
     listchars         = { lead = '⋅', trail = '⋅', tab = '→→'},    -- , eol = '↲'
+    grepprg           = vim.fn.executable("rh") and "rg --vimgrep" or vim.opt.grepprg,
 }
 
 for k, v in pairs(options) do
@@ -28,6 +30,9 @@ local abbreviations = {
     dt = "DapTerminate",
     drt = "DapToggleRepl",
     drk = "bdelete! [dap-repl]",
+    vx = "Vexplore",
+    co = "copen",
+    n  = "nohlsearch",
 }
 
 for abb, com in pairs(abbreviations) do
@@ -53,13 +58,4 @@ vim.g.qs_highlight_on_keys = {'f', 'F', 't', 'T'}
 -- Disables default Vim Bookmarks keybindings as they have a great overlap with the defaults
 vim.g.bookmark_no_default_key_mappings = 1
 
--- TODO consider moving the follwing setups into the 'plugins' module
-
-require('Comment').setup()
-require("gitsigns").setup()
-
-require('onedark').setup {
-    -- for customization refer to the GitHub repository https://github.com/navarasu/onedark.nvim
-    style = 'dark'
-}
 require('onedark').load()

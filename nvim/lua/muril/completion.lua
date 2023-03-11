@@ -13,8 +13,8 @@ require("luasnip.loaders.from_vscode").lazy_load({ paths = {
     vim.env.HOME .. "/workspace/sysconfig/snippets/mysnippets" 
 } })
 
-require("luasnip.loaders.from_lua").lazy_load( { paths = {
-    vim.env.HOME .. "/workspace/sysconfing/snippets/mysnippets",
+require("luasnip.loaders.from_lua").load( { paths = {
+    vim.env.HOME .. "/workspace/sysconfig/snippets/mysnippets/luasnippets",
 } } )
 
 local check_backspace = function()
@@ -52,6 +52,13 @@ local kind_icons = {
 }
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
+luasnip.config.set_config(
+    {
+        enable_autosnippets = true,
+        store_selection_keys = "<Tab>",
+    }
+)
+
 cmp.setup {
   snippet = {
     expand = function(args)
@@ -69,6 +76,15 @@ cmp.setup {
     ["<C-e>"] = cmp.mapping {
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
+    },
+    ["<C-u>"] = cmp.mapping {
+        i = function(fallback)
+        if luasnip.choice_active() then
+            require "luasnip.extras.select_choice"()
+        else
+            fallback()
+        end
+        end,
     },
     -- Accept currently selected item. If none selected, `select` first item.
     -- Set `select` to `false` to only confirm explicitly selected items.
@@ -112,6 +128,8 @@ cmp.setup {
         luasnip = "[Snippet]",
         buffer = "[Buffer]",
         path = "[Path]",
+        nvim_lsp = "[LSP]",
+        nvim_lua = "[Nvim]"
       })[entry.source.name]
       return vim_item
     end,
@@ -136,3 +154,22 @@ cmp.setup {
   --   native_menu = true,
   -- },
 }
+
+require("cmp").setup( {
+    enabled = function () 
+    return vim.api.nvim_buf_get_option(0, 'buftype') ~= "prompt"
+        or require("cmp_dap").is_dap_buffer()
+    end
+})
+
+require("cmp").setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+    sources = {
+        { name = "dap" },
+    },
+})
+
+-- Commands
+vim.cmd [[command! LuaSnipLuaEdit :lua require("luasnip.loaders.from_lua").edit_snippet_files()]]
+vim.cmd [[command! LuaSnipVSCodeEdit :lua require("luasnip.loaders.from_vscode").edit_snippet_files()]]
+
+

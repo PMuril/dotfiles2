@@ -17,29 +17,48 @@ if not status_ok then return end return require('packer').startup(function(use)
     use 'michaeljsmith/vim-indent-object' --treat indentation levels as vim text objects
     use 'vim-scripts/ReplaceWithRegister'
 
+    use {
+      "folke/which-key.nvim",
+      config = function()
+        vim.o.timeout = true
+        vim.o.timeoutlen = 300
+        require("which-key").setup() end
+    }
+
+    use 'folke/todo-comments.nvim'
+
     use 'MattesGroeger/vim-bookmarks'
     
     use 'mbbill/undotree'
     use {'glts/vim-radical',                --for istantaneously converting between numerical representations (bin, oct, dec, hex)
         requires = {'glts/vim-magnum'}      --bigint library for VIM 
     }
-    use {'wellle/targets.vim', disable = false} --allows to easily target arguments inside functions
+    use {'wellle/targets.vim', disable = true} --allows to easily target arguments inside functions
     --
     -- text navigation
-    use 'unblevable/quick-scope'        --Highlights closest match when finding characters
+    -- use 'unblevable/quick-scope'            --Highlights closest match when finding characters
     use 'bkad/CamelCaseMotion'             --Enables to specify text objects inside CamelCasedStrings and underlined_strings_
 
     -- airline customization
     -- use 'vim-airline/vim-airline'
     -- use 'vim-airline/vim-airline-themes'
     -- lualine 
-    use 'nvim-lualine/lualine.nvim'
+    use { 'nvim-lualine/lualine.nvim',
+        config = function () require('lualine').setup( { 'filename', path = 2,} ) end
+    }
     --
     -- git
-    use { 'junegunn/gv.vim',
+    -- use { 'junegunn/gv.vim',
+    --     requires = {'tpope/vim-fugitive'}
+    -- }
+    use { 'rbong/vim-flog',
         requires = {'tpope/vim-fugitive'}
     }
-    use "lewis6991/gitsigns.nvim"
+    use { "lewis6991/gitsigns.nvim",
+        config = function () 
+            require("gitsigns").setup()
+        end
+    }
     --
     -- snippets
     use "L3MON4D3/LuaSnip" --snippet engine
@@ -57,6 +76,7 @@ if not status_ok then return end return require('packer').startup(function(use)
             }
     }
 
+
     -- tree-sitter
     use {   
             "nvim-treesitter/nvim-treesitter",
@@ -66,26 +86,49 @@ if not status_ok then return end return require('packer').startup(function(use)
     }
 
     -- use { "numtostr/comment.nvim", after = {"nvim-treesitter"} }
-    use { "numtostr/comment.nvim"}
-    use { "nvim-treesitter/nvim-treesitter-textobjects", after = {"nvim-treesitter"} }
+    use { 
+        "numtostr/comment.nvim",
+        config = function () require('Comment').setup() end
+    }
+    use { "nvim-treesitter/nvim-treesitter-textobjects"}
+    use { "nvim-treesitter/playground"}
+
     
     -- fuzzy-finding
     -- TELESCOPE
     use { 'nvim-lua/telescope.nvim',
         requires = {'nvim-lua/plenary.nvim',                        -- common Lua functions collection
-                    -- 'nvim-telescope/telescope-fzf-native.nvim',     -- native Telescope sorter that increases sorting performances 
-        }        
+                    {
+                    'nvim-telescope/telescope-fzf-native.nvim',     -- native Telescope sorter that increases sorting performances 
+                     run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+                    }
+        }
     }
     -- Telescope extensions
     use 'nvim-telescope/telescope-dap.nvim'
     use 'tom-anders/telescope-vim-bookmarks.nvim'
     use 'benfowler/telescope-luasnip.nvim'
-    -- personal plugins
+    use 'nvim-telescope/telescope-project.nvim'
+    use 'nvim-telescope/telescope-ui-select.nvim'
+    use 'nvim-telescope/telescope-live-grep-args.nvim'
+    use 'debugloop/telescope-undo.nvim'
     use {
-        '~/.config/nvim/lua/muril/mypickers',
-        requires = { 'nvim-lua/telescope.nvim' }
+        'nvim-telescope/telescope-media-files.nvim',
+        requires = {'nvim-lua/popup.nvim'}
     }
 
+    -- personal plugins
+    use {
+         '~/.config/nvim/lua/muril/mypickers',
+         requires = { 'nvim-lua/telescope.nvim' }
+     }
+    use {
+        'danymat/neogen',
+        config = function()
+            require('neogen').setup( { snippet_engine = "luasnip"} )
+        end,
+        requires = "nvim-treesitter/nvim-treesitter",
+    } 
 
     -- latex
     use 'lervag/vimtex'
@@ -96,11 +139,27 @@ if not status_ok then return end return require('packer').startup(function(use)
     -- use 'lervag/wiki.vim'
 
     -- color schemes
-    use 'navarasu/onedark.nvim'
+    use { 'navarasu/onedark.nvim',
+        config = function () require('onedark').setup { style = 'dark' } end,
+        run =  function () require('onedark').load() end,
+    }
     
     -- IDE-like functionalities
     -- lsp
     use "neovim/nvim-lspconfig"
+    use "jose-elias-alvarez/null-ls.nvim"
+
+    use {
+      "folke/trouble.nvim",
+      requires = "nvim-tree/nvim-web-devicons",
+      config = function()
+        require("trouble").setup {
+          -- your configuration comes here
+          -- or leave it empty to use the default settings
+          -- refer to the configuration section below
+        }
+      end
+    }
 
     -- lsp-extensions (language specific)
     use 'p00f/clangd_extensions.nvim'
@@ -108,21 +167,25 @@ if not status_ok then return end return require('packer').startup(function(use)
     -- debugging
     use 'mfussenegger/nvim-dap'
     use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
-    --
+    use { "theHamsta/nvim-dap-virtual-text", requires = {"mfussenegger/nvim-dap"} }
+
     -- testing
+    use { "vim-test/vim-test" }
     use {
         "nvim-neotest/neotest",
         requires = {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
-            "antoinemadec/FixCursorHold.nvim"
+            "antoinemadec/FixCursorHold.nvim",
         }
     }
+
     
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if packer_bootstrap then
         require('packer').sync()
     end
+
 
 end)

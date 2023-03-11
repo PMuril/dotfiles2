@@ -1,23 +1,29 @@
-local configs = require("nvim-treesitter.configs")
-
-configs.setup {
-ensure_installed = { "c", "cpp", "lua", "python", "bash", "vim", "make", "markdown", "latex", "cmake", "dockerfile", "html", "json", "yaml", "toml" },
-
-  sync_install = false, 
-  ignore_install = { "" }, -- List of parsers to ignore installing
-  highlight = {
-    enable = true, -- false will disable the whole extension
-    disable = { "markdown" }, -- list of language that will be disabled
-    additional_vim_regex_highlighting = false,
-  },
-}
-
 -- since a dedicated xml parser is missing, use the html parser as
 -- a fallback parser for xml files
 local parser_mapping = require("nvim-treesitter.parsers").filetype_to_parsername
 parser_mapping.xml = "html" -- map the html parser to be used when using xml files
+-- parser_mapping.xsd = "html" -- map the html parser to be used when using xsd files
 
 require'nvim-treesitter.configs'.setup {
+    ensure_installed = { "c", "cpp", "lua", "python", "bash", "vim", "make", "markdown", "markdown_inline", "rst", "latex", "regex", "cmake", "dockerfile", "html", "llvm", "json", "yaml", "toml", "query", "comment" }, --[[ query parser required from treesitter-playground ]]
+
+    sync_install = false, 
+    ignore_install = { "" }, -- List of parsers to ignore installing
+    highlight = {
+        enable = true, -- false will disable the whole extension
+        -- disable = { "markdown" }, -- list of language that will be disabled
+        additional_vim_regex_highlighting = false,
+    },
+    indent = {enable = true, disable = { 'python'} },
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = '<c-space>',
+          node_incremental = '<c-space>',
+          scope_incremental = '<c-s>',
+          node_decremental = '<c-backspace>',
+        },
+    },--[[  incrementa_slection ]]
   textobjects = {
     select = {
       enable = true,
@@ -90,5 +96,5 @@ require'nvim-treesitter.configs'.setup {
             ["<leader>dc"] = "@class.outer",
           },
     },
-  },
-}
+  },--[[  textobjects ]]
+}--[[  nvim-treesitter.configs ]]

@@ -7,6 +7,12 @@ telescope.load_extension('dap')
 telescope.load_extension('luasnip')
 telescope.load_extension('vim_bookmarks')
 telescope.load_extension('mypickers')
+telescope.load_extension('fzf')
+telescope.load_extension('ui-select')
+telescope.load_extension('project')
+telescope.load_extension('live_grep_args')
+telescope.load_extension('media_files')
+telescope.load_extension('undo')
 
 local actions = require "telescope.actions"
 
@@ -15,7 +21,7 @@ telescope.setup {
 
     prompt_prefix = "  ",
     selection_caret = "  ",
-    path_display = { "tail" },
+    path_display = { "shorten" },
 
     mappings = {
       i = {
@@ -31,7 +37,7 @@ telescope.setup {
         ["<Up>"] = actions.move_selection_previous,
 
         ["<CR>"] = actions.select_default,
-        ["<C-x>"] = actions.select_horizontal,
+        -- ["<C-x>"] = actions.select_horizontal,
         ["<C-v>"] = actions.select_vertical,
         ["<C-t>"] = actions.select_tab,
 
@@ -52,7 +58,7 @@ telescope.setup {
       n = {
         ["<esc>"] = actions.close,
         ["<CR>"] = actions.select_default,
-        ["<C-x>"] = actions.select_horizontal,
+        -- ["<C-x>"] = actions.select_horizontal,
         ["<C-v>"] = actions.select_vertical,
         ["<C-t>"] = actions.select_tab,
 
@@ -83,22 +89,29 @@ telescope.setup {
     },
   },
     
-  -- pickers = {
-    -- Default configuration for builtin pickers goes here:
-    -- picker_name = {
-    --   picker_config_key = value,
-    --   ...
-    -- }
-    -- Now the picker_config_key will be applied every time you call this
-    -- builtin picker
-  -- },
-  -- extensions = {
-  --   media_files = {
-  --       -- filetypes whitelist
-  --       -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-  --       filetypes = {"png", "webp", "jpg", "jpeg"},
-  --       find_cmd = "rg" -- find command (defaults to `fd`)
-  --     }
+  pickers = { 
+        buffers = { 
+            mappings = { 
+                n= { 
+                    ["d"] = require('telescope.actions').delete_buffer,
+                },
+            } 
+        }
+    },
+
+  extensions = {
+        media_files = {
+            filetypes = {'pdf'},
+            find_cmd = "fd",
+        },
+        undo = {
+            side_by_side = true,
+            layout_strategy = "vertical",
+            layout_config = {
+                preview_height = 0.8,
+            },
+        },
+  },
   --   -- Your extension configuration goes here:
   --   -- extension_name = {
   --   --   extension_config_key = value,
