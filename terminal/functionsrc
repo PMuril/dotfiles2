@@ -1,3 +1,68 @@
-#! /bin/bash
+#! /usr/bin/env bash
+
+#########
+# LINUX #
+#########
+
+function swap()         
+{
+    local TMPFILE=tmp.$$
+    mv "$1" $TMPFILE && mv "$2" "$1" && mv $TMPFILE "$2"
+}
+
+lsp_log_clear ()
+{
+    rm "${HOME}/.local/state/nvim/lsp.log"
+}
+
+########
+# TMUX #
+########
+
+getNotesDir ()
+{
+    OS=$(uname -s)
+    if [[ "${OS}" == "Darwin"  ]]; then
+
+    elif [[  "${OS}" == "Linux" ]]; then
+        
+        
+    fi
+}
+
+tmux-default ()
+{
+    # first detach  to prevent session nesting. It does not takes place if already detached
+    \tmux detach
+    # The `-A` flag makes behave `new-session` like `attach-session` if the session name (i.e. default) already exists
+    \tmux -2 -f "${HOME}/.config/tmux/tmux.conf" new-session -A -d -s "default" -n "settings" -c "${HOME}/.config/nvim" 
+    \tmux send-keys -t default:settings "nvim ." Enter
+    \tmux -2 -f "${HOME}/.config/tmux/tmux.conf" new-window -n "annotations" -c "${HOME}/Dropbox/myannotations/dendron/notes"
+    \tmux send-keys -t default:annotations "nvim ." Enter
+    \tmux -2 -f "${HOME}/.config/tmux/tmux.conf" new-window -n "playground" -c "${HOME}/workspace/mycodes/playground"
+    \tmux attach-session -d -t "default"
+}
+
+tmux-coursera ()
+{
+    # first detach  to prevent session nesting. It does not takes place if already detached
+    \tmux detach
+    \tmux -2 -f "${HOME}/.config/tmux/tmux.conf" new-session -A -d -s "Coursera" -n "annotations" -c "${HOME}/Documents/Coursera"
+
+    \tmux -2 -f "${HOME}/.config/tmux/tmux.conf" new-window -n "codes" -c "${HOME}/workspace/mycodes/coursera/"
+    \tmux send-keys -t default:annotations "nvim ." Enter
+}
+
+#############
+## Docker ###
+#############
+
+prun ()
+{
+    sourceVolAbsPath=$(readlink -f "${0}" )
+    mountVolString="-v ${sourceVolAbsPath}:"
+    shellString="/bin/zsh"
+    podman run -it --rm  ${mountVolString} "${shellString}"
+}
 
 
