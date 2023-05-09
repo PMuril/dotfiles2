@@ -52,7 +52,6 @@ key_mapper('n', '<leader>fs', ':lua require"telescope.builtin".grep_string()<CR>
 key_mapper('n', '<leader>lg', ':lua require"telescope".extensions.live_grep_args.live_grep_args()<CR>')
 key_mapper('n', '<leader>fh', ':lua require"telescope.builtin".help_tags()<CR>')
 key_mapper('n', '<leader>fb', ':lua require"telescope.builtin".buffers()<CR>')
-key_mapper('n', '<leader>fj', ':lua require"telescope.builtin".jumplist()<CR>')
 key_mapper('n', '<leader>fo', ':lua require"telescope.builtin".oldfiles()<CR>') --[[ Displays all the recent ([o]ld) files opened') ]]
 -- custom pickers
 key_mapper('n', '<leader>fn', ':lua require"telescope".extensions.mypickers.find_notes()<CR>')
@@ -63,6 +62,7 @@ key_mapper('n', '<C-s>', ':lua require"telescope".extensions.mypickers.nvim_file
 -- [[ LSP ]] 
 
 -- local bufopts = {noremap = true, silent=true, buffer=bufnr }
+key_mapper('n', '<leader>wa', ':lua vim.lsp.buf.add_workspace_folder()<CR>')
 key_mapper('n', '<leader>wl', ':lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>')
 key_mapper('n', '<leader>do', ':lua vim.diagnostic.open_float()<CR>')
 key_mapper('n', '[d'        , ':lua vim.diagnostic.goto_prev()<CR>')

@@ -42,5 +42,5 @@ end
 local handle = io.popen("echo foo")
 local resul = handle:read()
 handle:close()
-
+-- QST
 return M

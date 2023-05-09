@@ -3,9 +3,8 @@
 local parser_mapping = require("nvim-treesitter.parsers").filetype_to_parsername
 parser_mapping.xml = "html" -- map the html parser to be used when using xml files
 -- parser_mapping.xsd = "html" -- map the html parser to be used when using xsd files
-
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = { "c", "cpp", "lua", "python", "bash", "vim", "make", "markdown", "markdown_inline", "rst", "latex", "regex", "cmake", "dockerfile", "html", "llvm", "json", "yaml", "toml", "query", "comment" }, --[[ query parser required from treesitter-playground ]]
+    ensure_installed = { "awk", "c", "cpp", "lua", "python", "bash", "vim", "make", "markdown", "markdown_inline", "rst", "latex", "regex", "cmake", "dockerfile", "html", "llvm", "json", "yaml", "toml", "ini", "query", "comment" }, --[[ query parser required from treesitter-playground ]]
 
     sync_install = false, 
     ignore_install = { "" }, -- List of parsers to ignore installing
@@ -98,3 +97,4 @@ require'nvim-treesitter.configs'.setup {
     },
   },--[[  textobjects ]]
 }--[[  nvim-treesitter.configs ]]
+

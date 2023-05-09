@@ -10,7 +10,7 @@ end
 
 require("luasnip.loaders.from_vscode").lazy_load({ paths = {
     vim.env.HOME .. "/workspace/sysconfig/snippets/friendly-snippets",
-    vim.env.HOME .. "/workspace/sysconfig/snippets/mysnippets" 
+    vim.env.HOME .. "/workspace/sysconfig/snippets/mysnippets"
 } })
 
 require("luasnip.loaders.from_lua").load( { paths = {
@@ -54,7 +54,9 @@ local kind_icons = {
 
 luasnip.config.set_config(
     {
-        enable_autosnippets = true,
+        -- TODO: Create autocommand to enable autosnippets on latex/markdown files alone
+
+        -- enable_autosnippets = true,
         store_selection_keys = "<Tab>",
     }
 )
@@ -67,7 +69,7 @@ cmp.setup {
   },
 
   mapping = {
-    ["<C-k>"] = cmp.mapping.select_prev_item(),
+    ["<C-h>"] = cmp.mapping.select_prev_item(),
     ["<C-j>"] = cmp.mapping.select_next_item(),
     ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
@@ -129,13 +131,13 @@ cmp.setup {
         buffer = "[Buffer]",
         path = "[Path]",
         nvim_lsp = "[LSP]",
-        nvim_lua = "[Nvim]"
+        -- nvim_lua = "[Nvim]"
       })[entry.source.name]
       return vim_item
     end,
   },
   sources = {
-    { name = 'nvim_lua'},   -- we insert this as first becausse neovim recognizes
+    -- { name = 'nvim_lua'},   -- we insert this as first becausse neovim recognizes
                             -- automatically that it is only useful in lua buffers
     { name = "luasnip" },
     { name = 'buffer', keyword_length = 5 },
@@ -156,7 +158,7 @@ cmp.setup {
 }
 
 require("cmp").setup( {
-    enabled = function () 
+    enabled = function ()
     return vim.api.nvim_buf_get_option(0, 'buftype') ~= "prompt"
         or require("cmp_dap").is_dap_buffer()
     end

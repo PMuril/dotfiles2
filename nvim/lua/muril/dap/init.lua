@@ -1,2 +1,2 @@
 require('muril.dap.dap_adapters')
-require('muril.dap.dap_launch')
+require('muril.dap.dap_launch_utils')

@@ -21,7 +21,7 @@ telescope.setup {
 
     prompt_prefix = "  ",
     selection_caret = "  ",
-    path_display = { "shorten" },
+    path_display = { shorten = 2 },
 
     mappings = {
       i = {
@@ -101,11 +101,11 @@ telescope.setup {
 
   extensions = {
         media_files = {
-            filetypes = {'pdf'},
-            find_cmd = "fd",
+            -- filetypes = {'pdf'},
+            find_cmd = "rg",
         },
         undo = {
-            side_by_side = true,
+            side_by_size = true,
             layout_strategy = "vertical",
             layout_config = {
                 preview_height = 0.8,
