@@ -31,6 +31,7 @@ nvim/undodir
 nvim/plugin
 nvim/node_modules
 nvim/package-lock.json
+nvim/lazy-lock.json
 
 //emacs packages installation folder
 emacs/elpa
@@ -59,3 +60,4 @@ flameshot
 git
 
 karabiner
+iterm2
