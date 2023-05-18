@@ -15,8 +15,8 @@ local options = {
     foldenable     = false, -- disable text folding on buffer openinig. Prevents treesitter from arbitrarly folding text
     formatoptions  = "jcql",
     listchars      = { lead = '⋅', trail = '⋅', tab = '→→' }, -- , eol = '↲'
-    grepprg        = vim.fn.executable("rh") and "rg --vimgrep" or vim.opt.grepprg,
-
+    grepprg        = vim.fn.executable("rg") and "rg --vimgrep" or vim.opt.grepprg,
+    -- diffopt        = vim.opt.diffopt + "linematch:60",
 }
 
 for k, v in pairs(options) do
@@ -71,32 +71,21 @@ vim.g.table_mode_motion_right_map=']<Bar>'
 -- Disables default Vim Bookmarks keybindings as they have a great overlap with the defaults
 vim.g.bookmark_no_default_key_mappings = 1
 
-require('onedark').load()
+vim.api.nvim_create_user_command('Vflog', ':vertical Flogsplit', {nargs = 0} )
 
--- TODO remove on next plugins update
-require("todo-comments").setup {
+require("todo-comments").setup({
     keywords = {
         QST = {
             icon = "? ",
             color = "default",
-            alt = { "QUESTION" },
+            alt = {"QUESTION"},
         },
     },
     merge_keywords = true,
-    -- highlight = {
-    --     multiline = true, -- enable multine todo comments
-    --     multiline_pattern = "^.", -- lua pattern to match the next multiline from the start of the matched keyword
-    --     multiline_context = 10, -- extra lines that will be re-evaluated when changing a line
-    --     before = "", -- "fg" or "bg" or empty
-    --     keyword = "wide", -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
-    --     after = "fg", -- "fg" or "bg" or empty
-    --     pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlighting (vim regex)
-    --     comments_only = false, -- uses treesitter to match keywords in comments only
-    --     max_line_len = 400, -- ignore lines longer than this
-    --     exclude = {}, -- list of file types to exclude highlighting
-    -- },
-}
-
-vim.api.nvim_create_user_command('Vflog', ':vertical Flogsplit', {nargs = 0} )
-
--- vim.cmd[[colorscheme tokyonight]]
+    search = {
+        pattern = [[\b(KEYWORDS)\s*(\([^\)]*\))?:]],
+    },
+    highlight = {
+      pattern = [[$^]],
+    },
+})
