@@ -52,24 +52,8 @@ local kind_icons = {
 }
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
-luasnip.config.set_config(
-    {
-        -- TODO: Create autocommand to enable autosnippets on latex/markdown files alone
-
-        -- enable_autosnippets = true,
-        store_selection_keys = "<Tab>",
-    }
-)
-
-cmp.setup {
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body) -- For `luasnip` users.
-    end,
-  },
-
-  mapping = {
-    ["<C-h>"] = cmp.mapping.select_prev_item(),
+local my_cmp_mappings =  {
+    ["<C-k>"] = cmp.mapping.select_prev_item(),
     ["<C-j>"] = cmp.mapping.select_next_item(),
     ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
@@ -83,43 +67,33 @@ cmp.setup {
         i = function(fallback)
         if luasnip.choice_active() then
             require "luasnip.extras.select_choice"()
-        else
-            fallback()
+        else fallback()
         end
         end,
     },
     -- Accept currently selected item. If none selected, `select` first item.
     -- Set `select` to `false` to only confirm explicitly selected items.
     ["<CR>"] = cmp.mapping.confirm { select = true },
-    -- ["<Tab>"] = cmp.mapping(function(fallback)
-    --   if cmp.visible() then
-    --     cmp.select_next_item()
-    --   elseif luasnip.expandable() then
-    --     luasnip.expand()
-    --   elseif luasnip.expand_or_jumpable() then
-    --     luasnip.expand_or_jump()
-    --   elseif check_backspace() then
-    --     fallback()
-    --   else
-    --     fallback()
-    --   end
-    -- end, {
-    --   "i",
-    --   "s",
-    -- }),
-    -- ["<S-Tab>"] = cmp.mapping(function(fallback)
-    --   if cmp.visible() then
-    --     cmp.select_prev_item()
-    --   elseif luasnip.jumpable(-1) then
-    --     luasnip.jump(-1)
-    --   else
-    --     fallback()
-    --   end
-    -- end, {
-    --   "i",
-    --   "s",
-    -- }),
+}
+
+luasnip.config.set_config(
+    {
+        -- TODO: Create autocommand to enable autosnippets on latex/markdown files alone
+
+        enable_autosnippets = false,
+        store_selection_keys = "<Tab>",
+    }
+)
+
+cmp.setup {
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body) -- For `luasnip` users.
+    end,
   },
+
+  mapping = my_cmp_mappings,
+
   formatting = {
     fields = { "kind", "abbr", "menu" },
     format = function(entry, vim_item)
@@ -153,7 +127,7 @@ cmp.setup {
   },
   -- experimental = {
   --   ghost_text = true,
-  --   native_menu = true,
+    -- native_menu = true,
   -- },
 }
 
@@ -169,6 +143,41 @@ require("cmp").setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
         { name = "dap" },
     },
 })
+
+
+-- require("cmp").setup.cmdline(
+--     '/', {
+--         mapping = cmp.mapping.preset.cmdline(my_cmp_mappings),
+--         -- mapping = cmp.mapping.preset.cmdline(my_cmp_mappings), It doesn't work
+--         sources = {
+--         { name = 'buffer' }
+--         } } )
+
+-- require("cmp").setup.cmdline(
+--     ':', {
+--       mapping = cmp.mapping.preset.cmdline(my_cmp_mappings),
+--      -- mapping = cmp.mapping.preset.cmdline(my_cmp_mappings), It doesn't work
+--
+--       sources = cmp.config.sources({
+--         { name = 'path' }
+--       }, {
+--         {
+--           name = 'cmdline',
+--           option = {
+--             ignore_cmds = { 'Man', '!' }
+--           }
+--         }
+--       })
+--     })
+
+-- require("cmp").setup.cmdline(
+--     '@', {
+--        mapping = cmp.mapping.preset.cmdline(my_cmp_mappings),
+--       sources = cmp.config.sources({
+--         { name = 'path' },
+--         { name = 'cmdline'},
+--       }),
+--     })
 
 -- Commands
 vim.cmd [[command! LuaSnipLuaEdit :lua require("luasnip.loaders.from_lua").edit_snippet_files()]]

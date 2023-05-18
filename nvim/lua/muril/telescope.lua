@@ -23,6 +23,8 @@ telescope.setup {
     selection_caret = "  ",
     path_display = { shorten = 2 },
 
+    file_ignore_patterns = { "build*"},
+
     mappings = {
       i = {
         ["<C-n>"] = actions.cycle_history_next,
@@ -88,14 +90,15 @@ telescope.setup {
       },
     },
   },
-    
-  pickers = { 
-        buffers = { 
-            mappings = { 
-                n= { 
+
+  pickers = {
+        buffers = {
+            mappings = {
+                n= {
                     ["d"] = require('telescope.actions').delete_buffer,
+                    -- ["<DEL>"] = require('telescope.actions').delete_buffer,
                 },
-            } 
+            }
         }
     },
 
