@@ -74,16 +74,16 @@ key_mapper('n', 'gD'        , ':lua vim.lsp.buf.declaration()<CR>')
 key_mapper('n', 'gi'        , ':lua vim.lsp.buf.implementation()<CR>')
 key_mapper('n', 'gw'        , ':lua vim.lsp.buf.document_symbol()<CR>')
 key_mapper('n', 'gW'        , ':lua vim.lsp.buf.workspace_symbol()<CR>')
-key_mapper('n', 'gr'        , ':lua vim.lsp.buf.references()<CR>')
+key_mapper('n', 'lcc', ':lua vim.lsp.codelens.clear()<CR>')
+-- key_mapper('n', 'gr'        , ':lua vim.lsp.buf.references()<CR>')
 key_mapper('n', 'gt'        , ':lua vim.lsp.buf.type_definition()<CR>')
 key_mapper('n', 'K'         , ':lua vim.lsp.buf.hover()<CR>')
 key_mapper('n', 'gs'        , ':lua vim.lsp.buf.signature_help()<CR>')
 key_mapper('n', '<leader>ca', ':lua vim.lsp.buf.code_action()<CR>')
 key_mapper('n', '<leader>rn', ':lua vim.lsp.buf.rename()<CR>')
-key_mapper('n', '<leader>ff', ':lua vim.lsp.buf.format { async = true }<CR>')
+key_mapper({'n','v'}, '<leader>ff', ':lua vim.lsp.buf.format { async = true }<CR>')
 key_mapper('n', '<C-w>gd'   , ':belowright vsplit | lua vim.lsp.buf.definition()<CR>')
 key_mapper('n', '<C-w>gD'   , ':belowright vsplit | lua vim.lsp.buf.declaration()<CR>')
-
 
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 --
@@ -140,6 +140,20 @@ key_mapper('n', 'gka', ': BookmarkAnnotate<CR>')
 -- Arglist
 key_mapper('n', ']a', ': next<CR>')
 key_mapper('n', '[a', ': prev<CR>')
+key_mapper('n', ']A', ': first<CR>')
+key_mapper('n', '[A', ': last<CR>')
+
+-- Quickfix list 
+key_mapper('n', ']q', ': cnext<CR>')
+key_mapper('n', '[q', ': cprev<CR>')
+key_mapper('n', ']Q', ': cfirst<CR>')
+key_mapper('n', '[Q', ': clast<CR>')
+
+-- Location list
+key_mapper('n', ']l', ': lnext<CR>')
+key_mapper('n', '[l', ': lprev<CR>')
+key_mapper('n', ']L', ': lfirst<CR>')
+key_mapper('n', '[L', ': llast<CR>')
 
 -- 
 -- [[ GitSigns ]]

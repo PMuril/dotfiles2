@@ -84,7 +84,7 @@ require("clangd_extensions").setup {
             "--enable-config",
             "--all-scopes-completion",
             "--function-arg-placeholders",
-            "--header-insertion=never",
+            "--header-insertion=iwyu",
             "--header-insertion-decorators",
             "--completion-style=detailed",
             "--clang-tidy",  --TODO: check if the clangd-tidy flag is required or if it is sufficient to declare cland-tidy checks in the clangd configuration file
@@ -100,4 +100,4 @@ require('lspconfig').marksman.setup {
     cmd = { "/home/pbaldan/workspace/sysconfig/lsp/marksman/marksman", "server" }
 }
 
-vim.lsp.set_log_level("trace") 
+vim.lsp.set_log_level("INFO")
