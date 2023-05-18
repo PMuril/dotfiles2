@@ -19,15 +19,18 @@ dap.adapters.lldb = {
   name = 'lldb'
 }
 
+-- TODO(pbaldan): add code to extract version number from string and sort by version number
+local vscodeExtDir = vim.env.HOME .. "/.vscode/extensions"
+local cpptoolsDapExe = vim.fn.system("find " .. vscodeExtDir .. " -name 'OpenDebugAD7' | sort -n -r | head -n 1 | cut -d '/' -f 4-")
 
-local vscodeExtDir = vim.env.HOME .. '/.vscode/extensions'
--- local cppToolsDir  = vim.fn.system("find " .. vscodeExtDir .. " -name 'OpenDebugAD7' | sort -n -r | head -n 1") -- Pick most recent
-local cppToolsDir  = "/Users/paolobaldan/.vscode/extensions//ms-vscode.cpptools-1.15.3-darwin-x64/debugAdapters/bin/OpenDebugAD7"
-
-print(dbgAbsPath)
+-- print( type(cpptoolsDapExe) .. ';;' .. cpptoolsDapExe)
+-- print("cpptoolsDapExe: " .. cpptoolsDapExe)
+-- code --list-extensions --show-versions | grep 'ms-vscode.cpptools' | sed -e 's/@/-/g'
+local cppToolsDir = 'ms-vscode.cpptools-1.14.4-linux-x64'
 
 dap.adapters.cppdbg = {
   id = 'cppdbg',
   type = 'executable',
-  command = cppToolsDir,
+  command = vim.env.HOME .. '/.vscode/extensions/' .. cppToolsDir .. '/debugAdapters/bin/OpenDebugAD7',
+  -- command = vim.env.HOME .. '/' .. cpptoolsDapExe
 }
