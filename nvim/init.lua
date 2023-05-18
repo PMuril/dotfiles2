@@ -1,4 +1,4 @@
-require('muril.plugins_lazy')	    -- loads all plugins
+require('muril.plugins')	    -- loads all plugins
 require('muril.options')        -- loads global settings
 require('muril.keybindings')	-- loads all keybindings
 require('muril.completion')     -- loads snippets and completion utilities
