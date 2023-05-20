@@ -81,7 +81,7 @@ key_mapper('n', 'K'         , ':lua vim.lsp.buf.hover()<CR>')
 key_mapper('n', 'gs'        , ':lua vim.lsp.buf.signature_help()<CR>')
 key_mapper('n', '<leader>ca', ':lua vim.lsp.buf.code_action()<CR>')
 key_mapper('n', '<leader>rn', ':lua vim.lsp.buf.rename()<CR>')
-key_mapper({'n','v'}, '<leader>ff', ':lua vim.lsp.buf.format { async = true }<CR>')
+key_mapper('n', '<leader>ff', ':lua vim.lsp.buf.format { async = true }<CR>')
 key_mapper('n', '<C-w>gd'   , ':belowright vsplit | lua vim.lsp.buf.definition()<CR>')
 key_mapper('n', '<C-w>gD'   , ':belowright vsplit | lua vim.lsp.buf.declaration()<CR>')
 
