@@ -89,3 +89,15 @@ require("todo-comments").setup({
       pattern = [[$^]],
     },
 })
+
+-- vimtex
+vim.g.vimtex_view_method = 'sioyek'
+
+-- pandoc markdown
+vim.g['pandoc#biblio#use_bibtool'] = 1
+-- vim.g['pandoc#biblio#bibs'] = vim.env.HOME .. '/Zotero/paolo_zotero_lib.bib'
+vim.g['pandoc#biblio#bibs'] = '/Users/paolobaldan/Zotero/paolo_zotero_lib.bib'
+
+---
+vim.g.python3_host_prog = '/usr/local/bin/python3'
+-- vim.g.loaded_python3_provider = false --disables python integration

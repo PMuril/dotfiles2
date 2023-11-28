@@ -13,6 +13,8 @@ telescope.load_extension('project')
 telescope.load_extension('live_grep_args')
 telescope.load_extension('media_files')
 telescope.load_extension('undo')
+telescope.load_extension('bibtex')
+telescope.load_extension('zk')
 
 local actions = require "telescope.actions"
 
@@ -114,11 +116,15 @@ telescope.setup {
                 preview_height = 0.8,
             },
         },
+
+        bibtex = {
+            global_files = { vim.env.HOME .. "/Zotero/zotero_full_lib.bib", "/Users/paolobaldan/Zotero/zotero_full_lib.bib" },
+        },
   },
+}
   --   -- Your extension configuration goes here:
   --   -- extension_name = {
   --   --   extension_config_key = value,
   --   -- }
   --   -- please take a look at the readme of the extension you want to configure
   -- },
-}

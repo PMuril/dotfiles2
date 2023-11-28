@@ -12,6 +12,18 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup( {
+    -- external dependencies management
+    {
+    "williamboman/mason.nvim",
+    build = ":MasonUpdate", -- :MasonUpdate updates registry contents
+    config = function ()  require('mason').setup() end
+    },
+
+    {
+      'stevearc/oil.nvim',
+      opts = {},
+        config = function ()  require('oil').setup() end
+    },
 
     -- text editing
      {'tpope/vim-abolish', enabled = true},
@@ -77,10 +89,6 @@ require("lazy").setup( {
 		init = function () require('onedark').load() end,
     },
 
-    -- Projects Management
-    -- { 'ahmedkhalf/project.nvim',
-    --     config = function() require("project_nvim").setup {} end,
-    -- },
 
     -- Git
     { 'rbong/vim-flog',
@@ -122,13 +130,16 @@ require("lazy").setup( {
     },
      { "nvim-treesitter/nvim-treesitter-textobjects"},
      { "nvim-treesitter/playground"},
-     -- { "nvim-treesitter/nvim-treesitter-context",
-     --    dependencies = "nvim-treesitter/nvim-treesitter",
-     --    disable = true},
-
-
-    -- fuzzy-finding
-    -- TELESCOPE
+     { "nvim-treesitter/nvim-treesitter-context",
+        dependencies = "nvim-treesitter/nvim-treesitter"
+    },
+    {
+        "ThePrimeagen/refactoring.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+    },
+    }, -- fuzzy-finding TELESCOPE
      { 'nvim-lua/telescope.nvim',
         dependencies = {'nvim-lua/plenary.nvim',                        -- common Lua functions collection
                     {
@@ -145,6 +156,7 @@ require("lazy").setup( {
      'nvim-telescope/telescope-project.nvim',
      'nvim-telescope/telescope-ui-select.nvim',
      'nvim-telescope/telescope-live-grep-args.nvim',
+     'nvim-telescope/telescope-bibtex.nvim',
      'debugloop/telescope-undo.nvim',
      {
         'nvim-telescope/telescope-media-files.nvim',
@@ -164,20 +176,11 @@ require("lazy").setup( {
         dependencies = "nvim-treesitter/nvim-treesitter",
     },
 
-    -- latex
-     'lervag/vimtex',
-    -- markdown
-     'dhruvasagar/vim-table-mode',
-    --
-    -- wikis
-     'lervag/wiki.vim',
-    --  'vimwiki/vimwiki' -- Disabled due to problems with Treesitter markdown parsing
 
 
     -- IDE-like functionalities
     -- lsp
      "neovim/nvim-lspconfig",
-     "jose-elias-alvarez/null-ls.nvim",
 
      {
       "folke/trouble.nvim",
@@ -215,24 +218,45 @@ require("lazy").setup( {
     },
     -- neotest adapters
     -- plenary
-    -- {
-    --     "nvim-neotest/neotest-plenary",
-    --     config = function()
-    --         require("neotest").setup({
-    --             adapters = {
-    --                 require("neotest-plenary").setup({
-    --                     min_init = "./path/to/test_init.lua",
-    --                 }),
-    --             },
-    --         })
-    --     end
-    -- },
+    {
+        "nvim-neotest/neotest-plenary",
+        config = function()
+            require("neotest").setup({
+                adapters = {
+                    require("neotest-plenary").setup({
+                        min_init = "./path/to/test_init.lua",
+                    }),
+                },
+            })
+        end
+    },
 
     -- Filetype-specific plugins
     -- Markdown
-    -- {'iamcco/markdown-preview.nvim'}
+     'dhruvasagar/vim-table-mode',
+    {
+        'iamcco/markdown-preview.nvim',
+        build = function() vim.fn["mkdp#util#install"]() end,
+    },
+
+    'vim-pandoc/vim-pandoc',
+    'vim-pandoc/vim-pandoc-syntax',
 
     -- Latex
+     'lervag/vimtex',
 
+    -- wikis
+    -- 'lervag/wiki.vim',
+    --  'vimwiki/vimwiki' -- Disabled due to problems with Treesitter markdown parsing
+
+    -- note taking
+    {
+        "mickael-menu/zk-nvim",
+        config = function()
+        require("zk").setup({
+        -- See Setup section below
+        })
+    end
+    }
 }
 )
