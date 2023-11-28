@@ -107,7 +107,7 @@ require('lspconfig').bashls.setup {
 }
 
 require('lspconfig').marksman.setup {
-    cmd = { "/home/pbaldan/workspace/sysconfig/lsp/marksman/marksman", "server" }
+    -- cmd = { "/home/pbaldan/workspace/sysconfig/lsp/marksman/marksman", "server" }
 }
 
 vim.lsp.set_log_level("INFO")
