@@ -1,0 +1,2 @@
+[filter]
+math='--tag "math.probability | math.number_theory | math.linear_algebra | math.combinatorics | math.abstract_algebra"'
