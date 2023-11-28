@@ -193,6 +193,10 @@ require("lazy").setup( {
         }
       end
     },
+    
+    -- configuration files for linters/formatters supported by efm lsp
+    "creativenull/efmls-configs-nvim",
+
 
     -- lsp-extensions (language specific)
      'p00f/clangd_extensions.nvim',
