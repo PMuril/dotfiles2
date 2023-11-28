@@ -58,7 +58,17 @@ require('lspconfig').texlab.setup {
         diagnosticsDelay = 300,
         formatterLineLength = 80,
         forwardSearch = {
-          args = {}
+          executable = "sioyek",
+          args = {
+            "--inverse-search",
+            "'nvim' %1 +%2",
+            "--reuse-instance",
+            "--forward-search-file",
+            "%f",
+            "--forward-search-line",
+            "%l",
+            "%p",
+          }
         },
         latexFormatter = "latexindent",
         latexindent = {
